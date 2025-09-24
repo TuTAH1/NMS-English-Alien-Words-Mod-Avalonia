@@ -1,0 +1,1646 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--EXML Created by AMUMSS v.5.5.0.0w-->
+<Data template="cTkLocalisationTable">
+	<Property name="Table">
+		<Property name="Table" value="TkLocalisationEntry">
+			<Property name="Id" value="UI_CONFLICT_LEVEL_LOW_1" />
+			<Property name="English" value="Low" />
+			<Property name="French" value="Faible" />
+			<Property name="Italian" value="Basso" />
+			<Property name="German" value="Niedrig" />
+			<Property name="Spanish" value="Bajo" />
+			<Property name="Russian" value="Низкий" />
+			<Property name="Polish" value="Niski" />
+			<Property name="Dutch" value="Laag" />
+			<Property name="Portuguese" value="Baixo" />
+			<Property name="LatinAmericanSpanish" value="Bajo" />
+			<Property name="BrazilianPortuguese" value="Baixo" />
+			<Property name="SimplifiedChinese" value="低的" />
+			<Property name="TraditionalChinese" value="低的" />
+			<Property name="TencentChinese" value="低的" />
+			<Property name="Korean" value="낮은" />
+			<Property name="Japanese" value="低い" />
+			<Property name="USEnglish" value="Low" />
+		</Property>
+		<Property name="Table" value="TkLocalisationEntry">
+			<Property name="Id" value="UI_CONFLICT_LEVEL_LOW_2" />
+			<Property name="English" value="Low" />
+			<Property name="French" value="Faible" />
+			<Property name="Italian" value="Basso" />
+			<Property name="German" value="Niedrig" />
+			<Property name="Spanish" value="Bajo" />
+			<Property name="Russian" value="Низкий" />
+			<Property name="Polish" value="Niski" />
+			<Property name="Dutch" value="Laag" />
+			<Property name="Portuguese" value="Baixo" />
+			<Property name="LatinAmericanSpanish" value="Bajo" />
+			<Property name="BrazilianPortuguese" value="Baixo" />
+			<Property name="SimplifiedChinese" value="低的" />
+			<Property name="TraditionalChinese" value="低的" />
+			<Property name="TencentChinese" value="低的" />
+			<Property name="Korean" value="낮은" />
+			<Property name="Japanese" value="低い" />
+			<Property name="USEnglish" value="Low" />
+		</Property>
+		<Property name="Table" value="TkLocalisationEntry">
+			<Property name="Id" value="UI_CONFLICT_LEVEL_LOW_3" />
+			<Property name="English" value="Low" />
+			<Property name="French" value="Faible" />
+			<Property name="Italian" value="Basso" />
+			<Property name="German" value="Niedrig" />
+			<Property name="Spanish" value="Bajo" />
+			<Property name="Russian" value="Низкий" />
+			<Property name="Polish" value="Niski" />
+			<Property name="Dutch" value="Laag" />
+			<Property name="Portuguese" value="Baixo" />
+			<Property name="LatinAmericanSpanish" value="Bajo" />
+			<Property name="BrazilianPortuguese" value="Baixo" />
+			<Property name="SimplifiedChinese" value="低的" />
+			<Property name="TraditionalChinese" value="低的" />
+			<Property name="TencentChinese" value="低的" />
+			<Property name="Korean" value="낮은" />
+			<Property name="Japanese" value="低い" />
+			<Property name="USEnglish" value="Low" />
+		</Property>
+		<Property name="Table" value="TkLocalisationEntry">
+			<Property name="Id" value="UI_CONFLICT_LEVEL_LOW_4" />
+			<Property name="English" value="Low" />
+			<Property name="French" value="Faible" />
+			<Property name="Italian" value="Basso" />
+			<Property name="German" value="Niedrig" />
+			<Property name="Spanish" value="Bajo" />
+			<Property name="Russian" value="Низкий" />
+			<Property name="Polish" value="Niski" />
+			<Property name="Dutch" value="Laag" />
+			<Property name="Portuguese" value="Baixo" />
+			<Property name="LatinAmericanSpanish" value="Bajo" />
+			<Property name="BrazilianPortuguese" value="Baixo" />
+			<Property name="SimplifiedChinese" value="低的" />
+			<Property name="TraditionalChinese" value="低的" />
+			<Property name="TencentChinese" value="低的" />
+			<Property name="Korean" value="낮은" />
+			<Property name="Japanese" value="低い" />
+			<Property name="USEnglish" value="Low" />
+		</Property>
+		<Property name="Table" value="TkLocalisationEntry">
+			<Property name="Id" value="UI_CONFLICT_LEVEL_LOW_5" />
+			<Property name="English" value="Low" />
+			<Property name="French" value="Faible" />
+			<Property name="Italian" value="Basso" />
+			<Property name="German" value="Niedrig" />
+			<Property name="Spanish" value="Bajo" />
+			<Property name="Russian" value="Низкий" />
+			<Property name="Polish" value="Niski" />
+			<Property name="Dutch" value="Laag" />
+			<Property name="Portuguese" value="Baixo" />
+			<Property name="LatinAmericanSpanish" value="Bajo" />
+			<Property name="BrazilianPortuguese" value="Baixo" />
+			<Property name="SimplifiedChinese" value="低的" />
+			<Property name="TraditionalChinese" value="低的" />
+			<Property name="TencentChinese" value="低的" />
+			<Property name="Korean" value="낮은" />
+			<Property name="Japanese" value="低い" />
+			<Property name="USEnglish" value="Low" />
+		</Property>
+		<Property name="Table" value="TkLocalisationEntry">
+			<Property name="Id" value="UI_CONFLICT_LEVEL_LOW_6" />
+			<Property name="English" value="Low" />
+			<Property name="French" value="Faible" />
+			<Property name="Italian" value="Basso" />
+			<Property name="German" value="Niedrig" />
+			<Property name="Spanish" value="Bajo" />
+			<Property name="Russian" value="Низкий" />
+			<Property name="Polish" value="Niski" />
+			<Property name="Dutch" value="Laag" />
+			<Property name="Portuguese" value="Baixo" />
+			<Property name="LatinAmericanSpanish" value="Bajo" />
+			<Property name="BrazilianPortuguese" value="Baixo" />
+			<Property name="SimplifiedChinese" value="低的" />
+			<Property name="TraditionalChinese" value="低的" />
+			<Property name="TencentChinese" value="低的" />
+			<Property name="Korean" value="낮은" />
+			<Property name="Japanese" value="低い" />
+			<Property name="USEnglish" value="Low" />
+		</Property>
+		<Property name="Table" value="TkLocalisationEntry">
+			<Property name="Id" value="UI_CONFLICT_LEVEL_LOW_7" />
+			<Property name="English" value="Low" />
+			<Property name="French" value="Faible" />
+			<Property name="Italian" value="Basso" />
+			<Property name="German" value="Niedrig" />
+			<Property name="Spanish" value="Bajo" />
+			<Property name="Russian" value="Низкий" />
+			<Property name="Polish" value="Niski" />
+			<Property name="Dutch" value="Laag" />
+			<Property name="Portuguese" value="Baixo" />
+			<Property name="LatinAmericanSpanish" value="Bajo" />
+			<Property name="BrazilianPortuguese" value="Baixo" />
+			<Property name="SimplifiedChinese" value="低的" />
+			<Property name="TraditionalChinese" value="低的" />
+			<Property name="TencentChinese" value="低的" />
+			<Property name="Korean" value="낮은" />
+			<Property name="Japanese" value="低い" />
+			<Property name="USEnglish" value="Low" />
+		</Property>
+		<Property name="Table" value="TkLocalisationEntry">
+			<Property name="Id" value="UI_CONFLICT_LEVEL_LOW_8" />
+			<Property name="English" value="Low" />
+			<Property name="French" value="Faible" />
+			<Property name="Italian" value="Basso" />
+			<Property name="German" value="Niedrig" />
+			<Property name="Spanish" value="Bajo" />
+			<Property name="Russian" value="Низкий" />
+			<Property name="Polish" value="Niski" />
+			<Property name="Dutch" value="Laag" />
+			<Property name="Portuguese" value="Baixo" />
+			<Property name="LatinAmericanSpanish" value="Bajo" />
+			<Property name="BrazilianPortuguese" value="Baixo" />
+			<Property name="SimplifiedChinese" value="低的" />
+			<Property name="TraditionalChinese" value="低的" />
+			<Property name="TencentChinese" value="低的" />
+			<Property name="Korean" value="낮은" />
+			<Property name="Japanese" value="低い" />
+			<Property name="USEnglish" value="Low" />
+		</Property>
+		<Property name="Table" value="TkLocalisationEntry">
+			<Property name="Id" value="UI_CONFLICT_LEVEL_LOW_9" />
+			<Property name="English" value="Low" />
+			<Property name="French" value="Faible" />
+			<Property name="Italian" value="Basso" />
+			<Property name="German" value="Niedrig" />
+			<Property name="Spanish" value="Bajo" />
+			<Property name="Russian" value="Низкий" />
+			<Property name="Polish" value="Niski" />
+			<Property name="Dutch" value="Laag" />
+			<Property name="Portuguese" value="Baixo" />
+			<Property name="LatinAmericanSpanish" value="Bajo" />
+			<Property name="BrazilianPortuguese" value="Baixo" />
+			<Property name="SimplifiedChinese" value="低的" />
+			<Property name="TraditionalChinese" value="低的" />
+			<Property name="TencentChinese" value="低的" />
+			<Property name="Korean" value="낮은" />
+			<Property name="Japanese" value="低い" />
+			<Property name="USEnglish" value="Low" />
+		</Property>
+		<Property name="Table" value="TkLocalisationEntry">
+			<Property name="Id" value="UI_CONFLICT_LEVEL_LOW_10" />
+			<Property name="English" value="Low" />
+			<Property name="French" value="Faible" />
+			<Property name="Italian" value="Basso" />
+			<Property name="German" value="Niedrig" />
+			<Property name="Spanish" value="Bajo" />
+			<Property name="Russian" value="Низкий" />
+			<Property name="Polish" value="Niski" />
+			<Property name="Dutch" value="Laag" />
+			<Property name="Portuguese" value="Baixo" />
+			<Property name="LatinAmericanSpanish" value="Bajo" />
+			<Property name="BrazilianPortuguese" value="Baixo" />
+			<Property name="SimplifiedChinese" value="低的" />
+			<Property name="TraditionalChinese" value="低的" />
+			<Property name="TencentChinese" value="低的" />
+			<Property name="Korean" value="낮은" />
+			<Property name="Japanese" value="低い" />
+			<Property name="USEnglish" value="Low" />
+		</Property>
+		<Property name="Table" value="TkLocalisationEntry">
+			<Property name="Id" value="UI_CONFLICT_LEVEL_MED_1" />
+			<Property name="English" value="Medium" />
+			<Property name="French" value="Moyen" />
+			<Property name="Italian" value="medio" />
+			<Property name="German" value="Mittel" />
+			<Property name="Spanish" value="Medio" />
+			<Property name="Russian" value="Середина" />
+			<Property name="Polish" value="Średni" />
+			<Property name="Dutch" value="Medium" />
+			<Property name="Portuguese" value="Médio" />
+			<Property name="LatinAmericanSpanish" value="Medio" />
+			<Property name="BrazilianPortuguese" value="Médio" />
+			<Property name="SimplifiedChinese" value="中等的" />
+			<Property name="TraditionalChinese" value="中等的" />
+			<Property name="TencentChinese" value="中等的" />
+			<Property name="Korean" value="중간" />
+			<Property name="Japanese" value="中くらい" />
+			<Property name="USEnglish" value="Medium" />
+		</Property>
+		<Property name="Table" value="TkLocalisationEntry">
+			<Property name="Id" value="UI_CONFLICT_LEVEL_MED_2" />
+			<Property name="English" value="Medium" />
+			<Property name="French" value="Moyen" />
+			<Property name="Italian" value="medio" />
+			<Property name="German" value="Mittel" />
+			<Property name="Spanish" value="Medio" />
+			<Property name="Russian" value="Середина" />
+			<Property name="Polish" value="Średni" />
+			<Property name="Dutch" value="Medium" />
+			<Property name="Portuguese" value="Médio" />
+			<Property name="LatinAmericanSpanish" value="Medio" />
+			<Property name="BrazilianPortuguese" value="Médio" />
+			<Property name="SimplifiedChinese" value="中等的" />
+			<Property name="TraditionalChinese" value="中等的" />
+			<Property name="TencentChinese" value="中等的" />
+			<Property name="Korean" value="중간" />
+			<Property name="Japanese" value="中くらい" />
+			<Property name="USEnglish" value="Medium" />
+		</Property>
+		<Property name="Table" value="TkLocalisationEntry">
+			<Property name="Id" value="UI_CONFLICT_LEVEL_MED_3" />
+			<Property name="English" value="Medium" />
+			<Property name="French" value="Moyen" />
+			<Property name="Italian" value="medio" />
+			<Property name="German" value="Mittel" />
+			<Property name="Spanish" value="Medio" />
+			<Property name="Russian" value="Середина" />
+			<Property name="Polish" value="Średni" />
+			<Property name="Dutch" value="Medium" />
+			<Property name="Portuguese" value="Médio" />
+			<Property name="LatinAmericanSpanish" value="Medio" />
+			<Property name="BrazilianPortuguese" value="Médio" />
+			<Property name="SimplifiedChinese" value="中等的" />
+			<Property name="TraditionalChinese" value="中等的" />
+			<Property name="TencentChinese" value="中等的" />
+			<Property name="Korean" value="중간" />
+			<Property name="Japanese" value="中くらい" />
+			<Property name="USEnglish" value="Medium" />
+		</Property>
+		<Property name="Table" value="TkLocalisationEntry">
+			<Property name="Id" value="UI_CONFLICT_LEVEL_MED_4" />
+			<Property name="English" value="Medium" />
+			<Property name="French" value="Moyen" />
+			<Property name="Italian" value="medio" />
+			<Property name="German" value="Mittel" />
+			<Property name="Spanish" value="Medio" />
+			<Property name="Russian" value="Середина" />
+			<Property name="Polish" value="Średni" />
+			<Property name="Dutch" value="Medium" />
+			<Property name="Portuguese" value="Médio" />
+			<Property name="LatinAmericanSpanish" value="Medio" />
+			<Property name="BrazilianPortuguese" value="Médio" />
+			<Property name="SimplifiedChinese" value="中等的" />
+			<Property name="TraditionalChinese" value="中等的" />
+			<Property name="TencentChinese" value="中等的" />
+			<Property name="Korean" value="중간" />
+			<Property name="Japanese" value="中くらい" />
+			<Property name="USEnglish" value="Medium" />
+		</Property>
+		<Property name="Table" value="TkLocalisationEntry">
+			<Property name="Id" value="UI_CONFLICT_LEVEL_MED_5" />
+			<Property name="English" value="Medium" />
+			<Property name="French" value="Moyen" />
+			<Property name="Italian" value="medio" />
+			<Property name="German" value="Mittel" />
+			<Property name="Spanish" value="Medio" />
+			<Property name="Russian" value="Середина" />
+			<Property name="Polish" value="Średni" />
+			<Property name="Dutch" value="Medium" />
+			<Property name="Portuguese" value="Médio" />
+			<Property name="LatinAmericanSpanish" value="Medio" />
+			<Property name="BrazilianPortuguese" value="Médio" />
+			<Property name="SimplifiedChinese" value="中等的" />
+			<Property name="TraditionalChinese" value="中等的" />
+			<Property name="TencentChinese" value="中等的" />
+			<Property name="Korean" value="중간" />
+			<Property name="Japanese" value="中くらい" />
+			<Property name="USEnglish" value="Medium" />
+		</Property>
+		<Property name="Table" value="TkLocalisationEntry">
+			<Property name="Id" value="UI_CONFLICT_LEVEL_MED_6" />
+			<Property name="English" value="Medium" />
+			<Property name="French" value="Moyen" />
+			<Property name="Italian" value="medio" />
+			<Property name="German" value="Mittel" />
+			<Property name="Spanish" value="Medio" />
+			<Property name="Russian" value="Середина" />
+			<Property name="Polish" value="Średni" />
+			<Property name="Dutch" value="Medium" />
+			<Property name="Portuguese" value="Médio" />
+			<Property name="LatinAmericanSpanish" value="Medio" />
+			<Property name="BrazilianPortuguese" value="Médio" />
+			<Property name="SimplifiedChinese" value="中等的" />
+			<Property name="TraditionalChinese" value="中等的" />
+			<Property name="TencentChinese" value="中等的" />
+			<Property name="Korean" value="중간" />
+			<Property name="Japanese" value="中くらい" />
+			<Property name="USEnglish" value="Medium" />
+		</Property>
+		<Property name="Table" value="TkLocalisationEntry">
+			<Property name="Id" value="UI_CONFLICT_LEVEL_MED_7" />
+			<Property name="English" value="Medium" />
+			<Property name="French" value="Moyen" />
+			<Property name="Italian" value="medio" />
+			<Property name="German" value="Mittel" />
+			<Property name="Spanish" value="Medio" />
+			<Property name="Russian" value="Середина" />
+			<Property name="Polish" value="Średni" />
+			<Property name="Dutch" value="Medium" />
+			<Property name="Portuguese" value="Médio" />
+			<Property name="LatinAmericanSpanish" value="Medio" />
+			<Property name="BrazilianPortuguese" value="Médio" />
+			<Property name="SimplifiedChinese" value="中等的" />
+			<Property name="TraditionalChinese" value="中等的" />
+			<Property name="TencentChinese" value="中等的" />
+			<Property name="Korean" value="중간" />
+			<Property name="Japanese" value="中くらい" />
+			<Property name="USEnglish" value="Medium" />
+		</Property>
+		<Property name="Table" value="TkLocalisationEntry">
+			<Property name="Id" value="UI_CONFLICT_LEVEL_MED_8" />
+			<Property name="English" value="Medium" />
+			<Property name="French" value="Moyen" />
+			<Property name="Italian" value="medio" />
+			<Property name="German" value="Mittel" />
+			<Property name="Spanish" value="Medio" />
+			<Property name="Russian" value="Середина" />
+			<Property name="Polish" value="Średni" />
+			<Property name="Dutch" value="Medium" />
+			<Property name="Portuguese" value="Médio" />
+			<Property name="LatinAmericanSpanish" value="Medio" />
+			<Property name="BrazilianPortuguese" value="Médio" />
+			<Property name="SimplifiedChinese" value="中等的" />
+			<Property name="TraditionalChinese" value="中等的" />
+			<Property name="TencentChinese" value="中等的" />
+			<Property name="Korean" value="중간" />
+			<Property name="Japanese" value="中くらい" />
+			<Property name="USEnglish" value="Medium" />
+		</Property>
+		<Property name="Table" value="TkLocalisationEntry">
+			<Property name="Id" value="UI_CONFLICT_LEVEL_MED_9" />
+			<Property name="English" value="Medium" />
+			<Property name="French" value="Moyen" />
+			<Property name="Italian" value="medio" />
+			<Property name="German" value="Mittel" />
+			<Property name="Spanish" value="Medio" />
+			<Property name="Russian" value="Середина" />
+			<Property name="Polish" value="Średni" />
+			<Property name="Dutch" value="Medium" />
+			<Property name="Portuguese" value="Médio" />
+			<Property name="LatinAmericanSpanish" value="Medio" />
+			<Property name="BrazilianPortuguese" value="Médio" />
+			<Property name="SimplifiedChinese" value="中等的" />
+			<Property name="TraditionalChinese" value="中等的" />
+			<Property name="TencentChinese" value="中等的" />
+			<Property name="Korean" value="중간" />
+			<Property name="Japanese" value="中くらい" />
+			<Property name="USEnglish" value="Medium" />
+		</Property>
+		<Property name="Table" value="TkLocalisationEntry">
+			<Property name="Id" value="UI_CONFLICT_LEVEL_MED_10" />
+			<Property name="English" value="Medium" />
+			<Property name="French" value="Moyen" />
+			<Property name="Italian" value="medio" />
+			<Property name="German" value="Mittel" />
+			<Property name="Spanish" value="Medio" />
+			<Property name="Russian" value="Середина" />
+			<Property name="Polish" value="Średni" />
+			<Property name="Dutch" value="Medium" />
+			<Property name="Portuguese" value="Médio" />
+			<Property name="LatinAmericanSpanish" value="Medio" />
+			<Property name="BrazilianPortuguese" value="Médio" />
+			<Property name="SimplifiedChinese" value="中等的" />
+			<Property name="TraditionalChinese" value="中等的" />
+			<Property name="TencentChinese" value="中等的" />
+			<Property name="Korean" value="중간" />
+			<Property name="Japanese" value="中くらい" />
+			<Property name="USEnglish" value="Medium" />
+		</Property>
+		<Property name="Table" value="TkLocalisationEntry">
+			<Property name="Id" value="UI_CONFLICT_LEVEL_HIGH_1" />
+			<Property name="English" value="High" />
+			<Property name="French" value="Haute" />
+			<Property name="Italian" value="Alto" />
+			<Property name="German" value="Hoch" />
+			<Property name="Spanish" value="Elevado" />
+			<Property name="Russian" value="Высокая" />
+			<Property name="Polish" value="Wysoka" />
+			<Property name="Dutch" value="Hoog" />
+			<Property name="Portuguese" value="Alto" />
+			<Property name="LatinAmericanSpanish" value="Elevado" />
+			<Property name="BrazilianPortuguese" value="Alto" />
+			<Property name="SimplifiedChinese" value="高的" />
+			<Property name="TraditionalChinese" value="高的" />
+			<Property name="TencentChinese" value="高的" />
+			<Property name="Korean" value="높은" />
+			<Property name="Japanese" value="高い" />
+			<Property name="USEnglish" value="High" />
+		</Property>
+		<Property name="Table" value="TkLocalisationEntry">
+			<Property name="Id" value="UI_CONFLICT_LEVEL_HIGH_2" />
+			<Property name="English" value="High" />
+			<Property name="French" value="Haute" />
+			<Property name="Italian" value="Alto" />
+			<Property name="German" value="Hoch" />
+			<Property name="Spanish" value="Elevado" />
+			<Property name="Russian" value="Высокая" />
+			<Property name="Polish" value="Wysoka" />
+			<Property name="Dutch" value="Hoog" />
+			<Property name="Portuguese" value="Alto" />
+			<Property name="LatinAmericanSpanish" value="Elevado" />
+			<Property name="BrazilianPortuguese" value="Alto" />
+			<Property name="SimplifiedChinese" value="高的" />
+			<Property name="TraditionalChinese" value="高的" />
+			<Property name="TencentChinese" value="高的" />
+			<Property name="Korean" value="높은" />
+			<Property name="Japanese" value="高い" />
+			<Property name="USEnglish" value="High" />
+		</Property>
+		<Property name="Table" value="TkLocalisationEntry">
+			<Property name="Id" value="UI_CONFLICT_LEVEL_HIGH_3" />
+			<Property name="English" value="High" />
+			<Property name="French" value="Haute" />
+			<Property name="Italian" value="Alto" />
+			<Property name="German" value="Hoch" />
+			<Property name="Spanish" value="Elevado" />
+			<Property name="Russian" value="Высокая" />
+			<Property name="Polish" value="Wysoka" />
+			<Property name="Dutch" value="Hoog" />
+			<Property name="Portuguese" value="Alto" />
+			<Property name="LatinAmericanSpanish" value="Elevado" />
+			<Property name="BrazilianPortuguese" value="Alto" />
+			<Property name="SimplifiedChinese" value="高的" />
+			<Property name="TraditionalChinese" value="高的" />
+			<Property name="TencentChinese" value="高的" />
+			<Property name="Korean" value="높은" />
+			<Property name="Japanese" value="高い" />
+			<Property name="USEnglish" value="High" />
+		</Property>
+		<Property name="Table" value="TkLocalisationEntry">
+			<Property name="Id" value="UI_CONFLICT_LEVEL_HIGH_4" />
+			<Property name="English" value="High" />
+			<Property name="French" value="Haute" />
+			<Property name="Italian" value="Alto" />
+			<Property name="German" value="Hoch" />
+			<Property name="Spanish" value="Elevado" />
+			<Property name="Russian" value="Высокая" />
+			<Property name="Polish" value="Wysoka" />
+			<Property name="Dutch" value="Hoog" />
+			<Property name="Portuguese" value="Alto" />
+			<Property name="LatinAmericanSpanish" value="Elevado" />
+			<Property name="BrazilianPortuguese" value="Alto" />
+			<Property name="SimplifiedChinese" value="高的" />
+			<Property name="TraditionalChinese" value="高的" />
+			<Property name="TencentChinese" value="高的" />
+			<Property name="Korean" value="높은" />
+			<Property name="Japanese" value="高い" />
+			<Property name="USEnglish" value="High" />
+		</Property>
+		<Property name="Table" value="TkLocalisationEntry">
+			<Property name="Id" value="UI_CONFLICT_LEVEL_HIGH_5" />
+			<Property name="English" value="High" />
+			<Property name="French" value="Haute" />
+			<Property name="Italian" value="Alto" />
+			<Property name="German" value="Hoch" />
+			<Property name="Spanish" value="Elevado" />
+			<Property name="Russian" value="Высокая" />
+			<Property name="Polish" value="Wysoka" />
+			<Property name="Dutch" value="Hoog" />
+			<Property name="Portuguese" value="Alto" />
+			<Property name="LatinAmericanSpanish" value="Elevado" />
+			<Property name="BrazilianPortuguese" value="Alto" />
+			<Property name="SimplifiedChinese" value="高的" />
+			<Property name="TraditionalChinese" value="高的" />
+			<Property name="TencentChinese" value="高的" />
+			<Property name="Korean" value="높은" />
+			<Property name="Japanese" value="高い" />
+			<Property name="USEnglish" value="High" />
+		</Property>
+		<Property name="Table" value="TkLocalisationEntry">
+			<Property name="Id" value="UI_CONFLICT_LEVEL_HIGH_6" />
+			<Property name="English" value="High" />
+			<Property name="French" value="Haute" />
+			<Property name="Italian" value="Alto" />
+			<Property name="German" value="Hoch" />
+			<Property name="Spanish" value="Elevado" />
+			<Property name="Russian" value="Высокая" />
+			<Property name="Polish" value="Wysoka" />
+			<Property name="Dutch" value="Hoog" />
+			<Property name="Portuguese" value="Alto" />
+			<Property name="LatinAmericanSpanish" value="Elevado" />
+			<Property name="BrazilianPortuguese" value="Alto" />
+			<Property name="SimplifiedChinese" value="高的" />
+			<Property name="TraditionalChinese" value="高的" />
+			<Property name="TencentChinese" value="高的" />
+			<Property name="Korean" value="높은" />
+			<Property name="Japanese" value="高い" />
+			<Property name="USEnglish" value="High" />
+		</Property>
+		<Property name="Table" value="TkLocalisationEntry">
+			<Property name="Id" value="UI_CONFLICT_LEVEL_HIGH_7" />
+			<Property name="English" value="High" />
+			<Property name="French" value="Haute" />
+			<Property name="Italian" value="Alto" />
+			<Property name="German" value="Hoch" />
+			<Property name="Spanish" value="Elevado" />
+			<Property name="Russian" value="Высокая" />
+			<Property name="Polish" value="Wysoka" />
+			<Property name="Dutch" value="Hoog" />
+			<Property name="Portuguese" value="Alto" />
+			<Property name="LatinAmericanSpanish" value="Elevado" />
+			<Property name="BrazilianPortuguese" value="Alto" />
+			<Property name="SimplifiedChinese" value="高的" />
+			<Property name="TraditionalChinese" value="高的" />
+			<Property name="TencentChinese" value="高的" />
+			<Property name="Korean" value="높은" />
+			<Property name="Japanese" value="高い" />
+			<Property name="USEnglish" value="High" />
+		</Property>
+		<Property name="Table" value="TkLocalisationEntry">
+			<Property name="Id" value="UI_CONFLICT_LEVEL_HIGH_8" />
+			<Property name="English" value="High" />
+			<Property name="French" value="Haute" />
+			<Property name="Italian" value="Alto" />
+			<Property name="German" value="Hoch" />
+			<Property name="Spanish" value="Elevado" />
+			<Property name="Russian" value="Высокая" />
+			<Property name="Polish" value="Wysoka" />
+			<Property name="Dutch" value="Hoog" />
+			<Property name="Portuguese" value="Alto" />
+			<Property name="LatinAmericanSpanish" value="Elevado" />
+			<Property name="BrazilianPortuguese" value="Alto" />
+			<Property name="SimplifiedChinese" value="高的" />
+			<Property name="TraditionalChinese" value="高的" />
+			<Property name="TencentChinese" value="高的" />
+			<Property name="Korean" value="높은" />
+			<Property name="Japanese" value="高い" />
+			<Property name="USEnglish" value="High" />
+		</Property>
+		<Property name="Table" value="TkLocalisationEntry">
+			<Property name="Id" value="UI_CONFLICT_LEVEL_HIGH_9" />
+			<Property name="English" value="High" />
+			<Property name="French" value="Haute" />
+			<Property name="Italian" value="Alto" />
+			<Property name="German" value="Hoch" />
+			<Property name="Spanish" value="Elevado" />
+			<Property name="Russian" value="Высокая" />
+			<Property name="Polish" value="Wysoka" />
+			<Property name="Dutch" value="Hoog" />
+			<Property name="Portuguese" value="Alto" />
+			<Property name="LatinAmericanSpanish" value="Elevado" />
+			<Property name="BrazilianPortuguese" value="Alto" />
+			<Property name="SimplifiedChinese" value="高的" />
+			<Property name="TraditionalChinese" value="高的" />
+			<Property name="TencentChinese" value="高的" />
+			<Property name="Korean" value="높은" />
+			<Property name="Japanese" value="高い" />
+			<Property name="USEnglish" value="High" />
+		</Property>
+		<Property name="Table" value="TkLocalisationEntry">
+			<Property name="Id" value="UI_CONFLICT_LEVEL_HIGH_10" />
+			<Property name="English" value="High" />
+			<Property name="French" value="Haute" />
+			<Property name="Italian" value="Alto" />
+			<Property name="German" value="Hoch" />
+			<Property name="Spanish" value="Elevado" />
+			<Property name="Russian" value="Высокая" />
+			<Property name="Polish" value="Wysoka" />
+			<Property name="Dutch" value="Hoog" />
+			<Property name="Portuguese" value="Alto" />
+			<Property name="LatinAmericanSpanish" value="Elevado" />
+			<Property name="BrazilianPortuguese" value="Alto" />
+			<Property name="SimplifiedChinese" value="高的" />
+			<Property name="TraditionalChinese" value="高的" />
+			<Property name="TencentChinese" value="高的" />
+			<Property name="Korean" value="높은" />
+			<Property name="Japanese" value="高い" />
+			<Property name="USEnglish" value="High" />
+		</Property>
+		<Property name="Table" value="TkLocalisationEntry">
+			<Property name="Id" value="UI_ECON_LEVEL_LOW_1" />
+			<Property name="English" value="Low" />
+			<Property name="French" value="Faible" />
+			<Property name="Italian" value="Basso" />
+			<Property name="German" value="Niedrig" />
+			<Property name="Spanish" value="Bajo" />
+			<Property name="Russian" value="Низкий" />
+			<Property name="Polish" value="Niski" />
+			<Property name="Dutch" value="Laag" />
+			<Property name="Portuguese" value="Baixo" />
+			<Property name="LatinAmericanSpanish" value="Bajo" />
+			<Property name="BrazilianPortuguese" value="Baixo" />
+			<Property name="SimplifiedChinese" value="低的" />
+			<Property name="TraditionalChinese" value="低的" />
+			<Property name="TencentChinese" value="低的" />
+			<Property name="Korean" value="낮은" />
+			<Property name="Japanese" value="低い" />
+			<Property name="USEnglish" value="Low" />
+		</Property>
+		<Property name="Table" value="TkLocalisationEntry">
+			<Property name="Id" value="UI_ECON_LEVEL_LOW_2" />
+			<Property name="English" value="Low" />
+			<Property name="French" value="Faible" />
+			<Property name="Italian" value="Basso" />
+			<Property name="German" value="Niedrig" />
+			<Property name="Spanish" value="Bajo" />
+			<Property name="Russian" value="Низкий" />
+			<Property name="Polish" value="Niski" />
+			<Property name="Dutch" value="Laag" />
+			<Property name="Portuguese" value="Baixo" />
+			<Property name="LatinAmericanSpanish" value="Bajo" />
+			<Property name="BrazilianPortuguese" value="Baixo" />
+			<Property name="SimplifiedChinese" value="低的" />
+			<Property name="TraditionalChinese" value="低的" />
+			<Property name="TencentChinese" value="低的" />
+			<Property name="Korean" value="낮은" />
+			<Property name="Japanese" value="低い" />
+			<Property name="USEnglish" value="Low" />
+		</Property>
+		<Property name="Table" value="TkLocalisationEntry">
+			<Property name="Id" value="UI_ECON_LEVEL_LOW_3" />
+			<Property name="English" value="Low" />
+			<Property name="French" value="Faible" />
+			<Property name="Italian" value="Basso" />
+			<Property name="German" value="Niedrig" />
+			<Property name="Spanish" value="Bajo" />
+			<Property name="Russian" value="Низкий" />
+			<Property name="Polish" value="Niski" />
+			<Property name="Dutch" value="Laag" />
+			<Property name="Portuguese" value="Baixo" />
+			<Property name="LatinAmericanSpanish" value="Bajo" />
+			<Property name="BrazilianPortuguese" value="Baixo" />
+			<Property name="SimplifiedChinese" value="低的" />
+			<Property name="TraditionalChinese" value="低的" />
+			<Property name="TencentChinese" value="低的" />
+			<Property name="Korean" value="낮은" />
+			<Property name="Japanese" value="低い" />
+			<Property name="USEnglish" value="Low" />
+		</Property>
+		<Property name="Table" value="TkLocalisationEntry">
+			<Property name="Id" value="UI_ECON_LEVEL_LOW_4" />
+			<Property name="English" value="Low" />
+			<Property name="French" value="Faible" />
+			<Property name="Italian" value="Basso" />
+			<Property name="German" value="Niedrig" />
+			<Property name="Spanish" value="Bajo" />
+			<Property name="Russian" value="Низкий" />
+			<Property name="Polish" value="Niski" />
+			<Property name="Dutch" value="Laag" />
+			<Property name="Portuguese" value="Baixo" />
+			<Property name="LatinAmericanSpanish" value="Bajo" />
+			<Property name="BrazilianPortuguese" value="Baixo" />
+			<Property name="SimplifiedChinese" value="低的" />
+			<Property name="TraditionalChinese" value="低的" />
+			<Property name="TencentChinese" value="低的" />
+			<Property name="Korean" value="낮은" />
+			<Property name="Japanese" value="低い" />
+			<Property name="USEnglish" value="Low" />
+		</Property>
+		<Property name="Table" value="TkLocalisationEntry">
+			<Property name="Id" value="UI_ECON_LEVEL_LOW_5" />
+			<Property name="English" value="Low" />
+			<Property name="French" value="Faible" />
+			<Property name="Italian" value="Basso" />
+			<Property name="German" value="Niedrig" />
+			<Property name="Spanish" value="Bajo" />
+			<Property name="Russian" value="Низкий" />
+			<Property name="Polish" value="Niski" />
+			<Property name="Dutch" value="Laag" />
+			<Property name="Portuguese" value="Baixo" />
+			<Property name="LatinAmericanSpanish" value="Bajo" />
+			<Property name="BrazilianPortuguese" value="Baixo" />
+			<Property name="SimplifiedChinese" value="低的" />
+			<Property name="TraditionalChinese" value="低的" />
+			<Property name="TencentChinese" value="低的" />
+			<Property name="Korean" value="낮은" />
+			<Property name="Japanese" value="低い" />
+			<Property name="USEnglish" value="Low" />
+		</Property>
+		<Property name="Table" value="TkLocalisationEntry">
+			<Property name="Id" value="UI_ECON_LEVEL_LOW_6" />
+			<Property name="English" value="Low" />
+			<Property name="French" value="Faible" />
+			<Property name="Italian" value="Basso" />
+			<Property name="German" value="Niedrig" />
+			<Property name="Spanish" value="Bajo" />
+			<Property name="Russian" value="Низкий" />
+			<Property name="Polish" value="Niski" />
+			<Property name="Dutch" value="Laag" />
+			<Property name="Portuguese" value="Baixo" />
+			<Property name="LatinAmericanSpanish" value="Bajo" />
+			<Property name="BrazilianPortuguese" value="Baixo" />
+			<Property name="SimplifiedChinese" value="低的" />
+			<Property name="TraditionalChinese" value="低的" />
+			<Property name="TencentChinese" value="低的" />
+			<Property name="Korean" value="낮은" />
+			<Property name="Japanese" value="低い" />
+			<Property name="USEnglish" value="Low" />
+		</Property>
+		<Property name="Table" value="TkLocalisationEntry">
+			<Property name="Id" value="UI_ECON_LEVEL_LOW_7" />
+			<Property name="English" value="Low" />
+			<Property name="French" value="Faible" />
+			<Property name="Italian" value="Basso" />
+			<Property name="German" value="Niedrig" />
+			<Property name="Spanish" value="Bajo" />
+			<Property name="Russian" value="Низкий" />
+			<Property name="Polish" value="Niski" />
+			<Property name="Dutch" value="Laag" />
+			<Property name="Portuguese" value="Baixo" />
+			<Property name="LatinAmericanSpanish" value="Bajo" />
+			<Property name="BrazilianPortuguese" value="Baixo" />
+			<Property name="SimplifiedChinese" value="低的" />
+			<Property name="TraditionalChinese" value="低的" />
+			<Property name="TencentChinese" value="低的" />
+			<Property name="Korean" value="낮은" />
+			<Property name="Japanese" value="低い" />
+			<Property name="USEnglish" value="Low" />
+		</Property>
+		<Property name="Table" value="TkLocalisationEntry">
+			<Property name="Id" value="UI_ECON_LEVEL_LOW_8" />
+			<Property name="English" value="Low" />
+			<Property name="French" value="Faible" />
+			<Property name="Italian" value="Basso" />
+			<Property name="German" value="Niedrig" />
+			<Property name="Spanish" value="Bajo" />
+			<Property name="Russian" value="Низкий" />
+			<Property name="Polish" value="Niski" />
+			<Property name="Dutch" value="Laag" />
+			<Property name="Portuguese" value="Baixo" />
+			<Property name="LatinAmericanSpanish" value="Bajo" />
+			<Property name="BrazilianPortuguese" value="Baixo" />
+			<Property name="SimplifiedChinese" value="低的" />
+			<Property name="TraditionalChinese" value="低的" />
+			<Property name="TencentChinese" value="低的" />
+			<Property name="Korean" value="낮은" />
+			<Property name="Japanese" value="低い" />
+			<Property name="USEnglish" value="Low" />
+		</Property>
+		<Property name="Table" value="TkLocalisationEntry">
+			<Property name="Id" value="UI_ECON_LEVEL_MED_1" />
+			<Property name="English" value="Medium" />
+			<Property name="French" value="Moyen" />
+			<Property name="Italian" value="medio" />
+			<Property name="German" value="Mittel" />
+			<Property name="Spanish" value="Medio" />
+			<Property name="Russian" value="Середина" />
+			<Property name="Polish" value="Średni" />
+			<Property name="Dutch" value="Medium" />
+			<Property name="Portuguese" value="Médio" />
+			<Property name="LatinAmericanSpanish" value="Medio" />
+			<Property name="BrazilianPortuguese" value="Médio" />
+			<Property name="SimplifiedChinese" value="中等的" />
+			<Property name="TraditionalChinese" value="中等的" />
+			<Property name="TencentChinese" value="中等的" />
+			<Property name="Korean" value="중간" />
+			<Property name="Japanese" value="中くらい" />
+			<Property name="USEnglish" value="Medium" />
+		</Property>
+		<Property name="Table" value="TkLocalisationEntry">
+			<Property name="Id" value="UI_ECON_LEVEL_MED_2" />
+			<Property name="English" value="Medium" />
+			<Property name="French" value="Moyen" />
+			<Property name="Italian" value="medio" />
+			<Property name="German" value="Mittel" />
+			<Property name="Spanish" value="Medio" />
+			<Property name="Russian" value="Середина" />
+			<Property name="Polish" value="Średni" />
+			<Property name="Dutch" value="Medium" />
+			<Property name="Portuguese" value="Médio" />
+			<Property name="LatinAmericanSpanish" value="Medio" />
+			<Property name="BrazilianPortuguese" value="Médio" />
+			<Property name="SimplifiedChinese" value="中等的" />
+			<Property name="TraditionalChinese" value="中等的" />
+			<Property name="TencentChinese" value="中等的" />
+			<Property name="Korean" value="중간" />
+			<Property name="Japanese" value="中くらい" />
+			<Property name="USEnglish" value="Medium" />
+		</Property>
+		<Property name="Table" value="TkLocalisationEntry">
+			<Property name="Id" value="UI_ECON_LEVEL_MED_3" />
+			<Property name="English" value="Medium" />
+			<Property name="French" value="Moyen" />
+			<Property name="Italian" value="medio" />
+			<Property name="German" value="Mittel" />
+			<Property name="Spanish" value="Medio" />
+			<Property name="Russian" value="Середина" />
+			<Property name="Polish" value="Średni" />
+			<Property name="Dutch" value="Medium" />
+			<Property name="Portuguese" value="Médio" />
+			<Property name="LatinAmericanSpanish" value="Medio" />
+			<Property name="BrazilianPortuguese" value="Médio" />
+			<Property name="SimplifiedChinese" value="中等的" />
+			<Property name="TraditionalChinese" value="中等的" />
+			<Property name="TencentChinese" value="中等的" />
+			<Property name="Korean" value="중간" />
+			<Property name="Japanese" value="中くらい" />
+			<Property name="USEnglish" value="Medium" />
+		</Property>
+		<Property name="Table" value="TkLocalisationEntry">
+			<Property name="Id" value="UI_ECON_LEVEL_MED_4" />
+			<Property name="English" value="Medium" />
+			<Property name="French" value="Moyen" />
+			<Property name="Italian" value="medio" />
+			<Property name="German" value="Mittel" />
+			<Property name="Spanish" value="Medio" />
+			<Property name="Russian" value="Середина" />
+			<Property name="Polish" value="Średni" />
+			<Property name="Dutch" value="Medium" />
+			<Property name="Portuguese" value="Médio" />
+			<Property name="LatinAmericanSpanish" value="Medio" />
+			<Property name="BrazilianPortuguese" value="Médio" />
+			<Property name="SimplifiedChinese" value="中等的" />
+			<Property name="TraditionalChinese" value="中等的" />
+			<Property name="TencentChinese" value="中等的" />
+			<Property name="Korean" value="중간" />
+			<Property name="Japanese" value="中くらい" />
+			<Property name="USEnglish" value="Medium" />
+		</Property>
+		<Property name="Table" value="TkLocalisationEntry">
+			<Property name="Id" value="UI_ECON_LEVEL_MED_5" />
+			<Property name="English" value="Medium" />
+			<Property name="French" value="Moyen" />
+			<Property name="Italian" value="medio" />
+			<Property name="German" value="Mittel" />
+			<Property name="Spanish" value="Medio" />
+			<Property name="Russian" value="Середина" />
+			<Property name="Polish" value="Średni" />
+			<Property name="Dutch" value="Medium" />
+			<Property name="Portuguese" value="Médio" />
+			<Property name="LatinAmericanSpanish" value="Medio" />
+			<Property name="BrazilianPortuguese" value="Médio" />
+			<Property name="SimplifiedChinese" value="中等的" />
+			<Property name="TraditionalChinese" value="中等的" />
+			<Property name="TencentChinese" value="中等的" />
+			<Property name="Korean" value="중간" />
+			<Property name="Japanese" value="中くらい" />
+			<Property name="USEnglish" value="Medium" />
+		</Property>
+		<Property name="Table" value="TkLocalisationEntry">
+			<Property name="Id" value="UI_ECON_LEVEL_MED_6" />
+			<Property name="English" value="Medium" />
+			<Property name="French" value="Moyen" />
+			<Property name="Italian" value="medio" />
+			<Property name="German" value="Mittel" />
+			<Property name="Spanish" value="Medio" />
+			<Property name="Russian" value="Середина" />
+			<Property name="Polish" value="Średni" />
+			<Property name="Dutch" value="Medium" />
+			<Property name="Portuguese" value="Médio" />
+			<Property name="LatinAmericanSpanish" value="Medio" />
+			<Property name="BrazilianPortuguese" value="Médio" />
+			<Property name="SimplifiedChinese" value="中等的" />
+			<Property name="TraditionalChinese" value="中等的" />
+			<Property name="TencentChinese" value="中等的" />
+			<Property name="Korean" value="중간" />
+			<Property name="Japanese" value="中くらい" />
+			<Property name="USEnglish" value="Medium" />
+		</Property>
+		<Property name="Table" value="TkLocalisationEntry">
+			<Property name="Id" value="UI_ECON_LEVEL_MED_7" />
+			<Property name="English" value="Medium" />
+			<Property name="French" value="Moyen" />
+			<Property name="Italian" value="medio" />
+			<Property name="German" value="Mittel" />
+			<Property name="Spanish" value="Medio" />
+			<Property name="Russian" value="Середина" />
+			<Property name="Polish" value="Średni" />
+			<Property name="Dutch" value="Medium" />
+			<Property name="Portuguese" value="Médio" />
+			<Property name="LatinAmericanSpanish" value="Medio" />
+			<Property name="BrazilianPortuguese" value="Médio" />
+			<Property name="SimplifiedChinese" value="中等的" />
+			<Property name="TraditionalChinese" value="中等的" />
+			<Property name="TencentChinese" value="中等的" />
+			<Property name="Korean" value="중간" />
+			<Property name="Japanese" value="中くらい" />
+			<Property name="USEnglish" value="Medium" />
+		</Property>
+		<Property name="Table" value="TkLocalisationEntry">
+			<Property name="Id" value="UI_ECON_LEVEL_MED_8" />
+			<Property name="English" value="Medium" />
+			<Property name="French" value="Moyen" />
+			<Property name="Italian" value="medio" />
+			<Property name="German" value="Mittel" />
+			<Property name="Spanish" value="Medio" />
+			<Property name="Russian" value="Середина" />
+			<Property name="Polish" value="Średni" />
+			<Property name="Dutch" value="Medium" />
+			<Property name="Portuguese" value="Médio" />
+			<Property name="LatinAmericanSpanish" value="Medio" />
+			<Property name="BrazilianPortuguese" value="Médio" />
+			<Property name="SimplifiedChinese" value="中等的" />
+			<Property name="TraditionalChinese" value="中等的" />
+			<Property name="TencentChinese" value="中等的" />
+			<Property name="Korean" value="중간" />
+			<Property name="Japanese" value="中くらい" />
+			<Property name="USEnglish" value="Medium" />
+		</Property>
+		<Property name="Table" value="TkLocalisationEntry">
+			<Property name="Id" value="UI_ECON_LEVEL_HIGH_1" />
+			<Property name="English" value="High" />
+			<Property name="French" value="Haute" />
+			<Property name="Italian" value="Alto" />
+			<Property name="German" value="Hoch" />
+			<Property name="Spanish" value="Elevado" />
+			<Property name="Russian" value="Высокая" />
+			<Property name="Polish" value="Wysoka" />
+			<Property name="Dutch" value="Hoog" />
+			<Property name="Portuguese" value="Alto" />
+			<Property name="LatinAmericanSpanish" value="Elevado" />
+			<Property name="BrazilianPortuguese" value="Alto" />
+			<Property name="SimplifiedChinese" value="高的" />
+			<Property name="TraditionalChinese" value="高的" />
+			<Property name="TencentChinese" value="高的" />
+			<Property name="Korean" value="높은" />
+			<Property name="Japanese" value="高い" />
+			<Property name="USEnglish" value="High" />
+		</Property>
+		<Property name="Table" value="TkLocalisationEntry">
+			<Property name="Id" value="UI_ECON_LEVEL_HIGH_2" />
+			<Property name="English" value="High" />
+			<Property name="French" value="Haute" />
+			<Property name="Italian" value="Alto" />
+			<Property name="German" value="Hoch" />
+			<Property name="Spanish" value="Elevado" />
+			<Property name="Russian" value="Высокая" />
+			<Property name="Polish" value="Wysoka" />
+			<Property name="Dutch" value="Hoog" />
+			<Property name="Portuguese" value="Alto" />
+			<Property name="LatinAmericanSpanish" value="Elevado" />
+			<Property name="BrazilianPortuguese" value="Alto" />
+			<Property name="SimplifiedChinese" value="高的" />
+			<Property name="TraditionalChinese" value="高的" />
+			<Property name="TencentChinese" value="高的" />
+			<Property name="Korean" value="높은" />
+			<Property name="Japanese" value="高い" />
+			<Property name="USEnglish" value="High" />
+		</Property>
+		<Property name="Table" value="TkLocalisationEntry">
+			<Property name="Id" value="UI_ECON_LEVEL_HIGH_3" />
+			<Property name="English" value="High" />
+			<Property name="French" value="Haute" />
+			<Property name="Italian" value="Alto" />
+			<Property name="German" value="Hoch" />
+			<Property name="Spanish" value="Elevado" />
+			<Property name="Russian" value="Высокая" />
+			<Property name="Polish" value="Wysoka" />
+			<Property name="Dutch" value="Hoog" />
+			<Property name="Portuguese" value="Alto" />
+			<Property name="LatinAmericanSpanish" value="Elevado" />
+			<Property name="BrazilianPortuguese" value="Alto" />
+			<Property name="SimplifiedChinese" value="高的" />
+			<Property name="TraditionalChinese" value="高的" />
+			<Property name="TencentChinese" value="高的" />
+			<Property name="Korean" value="높은" />
+			<Property name="Japanese" value="高い" />
+			<Property name="USEnglish" value="High" />
+		</Property>
+		<Property name="Table" value="TkLocalisationEntry">
+			<Property name="Id" value="UI_ECON_LEVEL_HIGH_4" />
+			<Property name="English" value="High" />
+			<Property name="French" value="Haute" />
+			<Property name="Italian" value="Alto" />
+			<Property name="German" value="Hoch" />
+			<Property name="Spanish" value="Elevado" />
+			<Property name="Russian" value="Высокая" />
+			<Property name="Polish" value="Wysoka" />
+			<Property name="Dutch" value="Hoog" />
+			<Property name="Portuguese" value="Alto" />
+			<Property name="LatinAmericanSpanish" value="Elevado" />
+			<Property name="BrazilianPortuguese" value="Alto" />
+			<Property name="SimplifiedChinese" value="高的" />
+			<Property name="TraditionalChinese" value="高的" />
+			<Property name="TencentChinese" value="高的" />
+			<Property name="Korean" value="높은" />
+			<Property name="Japanese" value="高い" />
+			<Property name="USEnglish" value="High" />
+		</Property>
+		<Property name="Table" value="TkLocalisationEntry">
+			<Property name="Id" value="UI_ECON_LEVEL_HIGH_5" />
+			<Property name="English" value="High" />
+			<Property name="French" value="Haute" />
+			<Property name="Italian" value="Alto" />
+			<Property name="German" value="Hoch" />
+			<Property name="Spanish" value="Elevado" />
+			<Property name="Russian" value="Высокая" />
+			<Property name="Polish" value="Wysoka" />
+			<Property name="Dutch" value="Hoog" />
+			<Property name="Portuguese" value="Alto" />
+			<Property name="LatinAmericanSpanish" value="Elevado" />
+			<Property name="BrazilianPortuguese" value="Alto" />
+			<Property name="SimplifiedChinese" value="高的" />
+			<Property name="TraditionalChinese" value="高的" />
+			<Property name="TencentChinese" value="高的" />
+			<Property name="Korean" value="높은" />
+			<Property name="Japanese" value="高い" />
+			<Property name="USEnglish" value="High" />
+		</Property>
+		<Property name="Table" value="TkLocalisationEntry">
+			<Property name="Id" value="UI_ECON_LEVEL_HIGH_6" />
+			<Property name="English" value="High" />
+			<Property name="French" value="Haute" />
+			<Property name="Italian" value="Alto" />
+			<Property name="German" value="Hoch" />
+			<Property name="Spanish" value="Elevado" />
+			<Property name="Russian" value="Высокая" />
+			<Property name="Polish" value="Wysoka" />
+			<Property name="Dutch" value="Hoog" />
+			<Property name="Portuguese" value="Alto" />
+			<Property name="LatinAmericanSpanish" value="Elevado" />
+			<Property name="BrazilianPortuguese" value="Alto" />
+			<Property name="SimplifiedChinese" value="高的" />
+			<Property name="TraditionalChinese" value="高的" />
+			<Property name="TencentChinese" value="高的" />
+			<Property name="Korean" value="높은" />
+			<Property name="Japanese" value="高い" />
+			<Property name="USEnglish" value="High" />
+		</Property>
+		<Property name="Table" value="TkLocalisationEntry">
+			<Property name="Id" value="UI_ECON_LEVEL_HIGH_7" />
+			<Property name="English" value="High" />
+			<Property name="French" value="Haute" />
+			<Property name="Italian" value="Alto" />
+			<Property name="German" value="Hoch" />
+			<Property name="Spanish" value="Elevado" />
+			<Property name="Russian" value="Высокая" />
+			<Property name="Polish" value="Wysoka" />
+			<Property name="Dutch" value="Hoog" />
+			<Property name="Portuguese" value="Alto" />
+			<Property name="LatinAmericanSpanish" value="Elevado" />
+			<Property name="BrazilianPortuguese" value="Alto" />
+			<Property name="SimplifiedChinese" value="高的" />
+			<Property name="TraditionalChinese" value="高的" />
+			<Property name="TencentChinese" value="高的" />
+			<Property name="Korean" value="높은" />
+			<Property name="Japanese" value="高い" />
+			<Property name="USEnglish" value="High" />
+		</Property>
+		<Property name="Table" value="TkLocalisationEntry">
+			<Property name="Id" value="UI_ECON_LEVEL_HIGH_8" />
+			<Property name="English" value="High" />
+			<Property name="French" value="Haute" />
+			<Property name="Italian" value="Alto" />
+			<Property name="German" value="Hoch" />
+			<Property name="Spanish" value="Elevado" />
+			<Property name="Russian" value="Высокая" />
+			<Property name="Polish" value="Wysoka" />
+			<Property name="Dutch" value="Hoog" />
+			<Property name="Portuguese" value="Alto" />
+			<Property name="LatinAmericanSpanish" value="Elevado" />
+			<Property name="BrazilianPortuguese" value="Alto" />
+			<Property name="SimplifiedChinese" value="高的" />
+			<Property name="TraditionalChinese" value="高的" />
+			<Property name="TencentChinese" value="高的" />
+			<Property name="Korean" value="높은" />
+			<Property name="Japanese" value="高い" />
+			<Property name="USEnglish" value="High" />
+		</Property>
+		<Property name="Table" value="TkLocalisationEntry">
+			<Property name="Id" value="UI_ECON_CLASS_TECH_1" />
+			<Property name="English" value="Technology" />
+			<Property name="French" value="La technologie" />
+			<Property name="Italian" value="Tecnologia" />
+			<Property name="German" value="Technologie" />
+			<Property name="Spanish" value="Tecnología" />
+			<Property name="Russian" value="Технология" />
+			<Property name="Polish" value="Technologia" />
+			<Property name="Dutch" value="Technologie" />
+			<Property name="Portuguese" value="Tecnologia" />
+			<Property name="LatinAmericanSpanish" value="Tecnología" />
+			<Property name="BrazilianPortuguese" value="Tecnologia" />
+			<Property name="SimplifiedChinese" value="技术" />
+			<Property name="TraditionalChinese" value="技术" />
+			<Property name="TencentChinese" value="技术" />
+			<Property name="Korean" value="기술" />
+			<Property name="Japanese" value="テクノロジー" />
+			<Property name="USEnglish" value="Technology" />
+		</Property>
+		<Property name="Table" value="TkLocalisationEntry">
+			<Property name="Id" value="UI_ECON_CLASS_TECH_2" />
+			<Property name="English" value="Technology" />
+			<Property name="French" value="La technologie" />
+			<Property name="Italian" value="Tecnologia" />
+			<Property name="German" value="Technologie" />
+			<Property name="Spanish" value="Tecnología" />
+			<Property name="Russian" value="Технология" />
+			<Property name="Polish" value="Technologia" />
+			<Property name="Dutch" value="Technologie" />
+			<Property name="Portuguese" value="Tecnologia" />
+			<Property name="LatinAmericanSpanish" value="Tecnología" />
+			<Property name="BrazilianPortuguese" value="Tecnologia" />
+			<Property name="SimplifiedChinese" value="技术" />
+			<Property name="TraditionalChinese" value="技术" />
+			<Property name="TencentChinese" value="技术" />
+			<Property name="Korean" value="기술" />
+			<Property name="Japanese" value="テクノロジー" />
+			<Property name="USEnglish" value="Technology" />
+		</Property>
+		<Property name="Table" value="TkLocalisationEntry">
+			<Property name="Id" value="UI_ECON_CLASS_TECH_3" />
+			<Property name="English" value="Technology" />
+			<Property name="French" value="La technologie" />
+			<Property name="Italian" value="Tecnologia" />
+			<Property name="German" value="Technologie" />
+			<Property name="Spanish" value="Tecnología" />
+			<Property name="Russian" value="Технология" />
+			<Property name="Polish" value="Technologia" />
+			<Property name="Dutch" value="Technologie" />
+			<Property name="Portuguese" value="Tecnologia" />
+			<Property name="LatinAmericanSpanish" value="Tecnología" />
+			<Property name="BrazilianPortuguese" value="Tecnologia" />
+			<Property name="SimplifiedChinese" value="技术" />
+			<Property name="TraditionalChinese" value="技术" />
+			<Property name="TencentChinese" value="技术" />
+			<Property name="Korean" value="기술" />
+			<Property name="Japanese" value="テクノロジー" />
+			<Property name="USEnglish" value="Technology" />
+		</Property>
+		<Property name="Table" value="TkLocalisationEntry">
+			<Property name="Id" value="UI_ECON_CLASS_TECH_4" />
+			<Property name="English" value="Technology" />
+			<Property name="French" value="La technologie" />
+			<Property name="Italian" value="Tecnologia" />
+			<Property name="German" value="Technologie" />
+			<Property name="Spanish" value="Tecnología" />
+			<Property name="Russian" value="Технология" />
+			<Property name="Polish" value="Technologia" />
+			<Property name="Dutch" value="Technologie" />
+			<Property name="Portuguese" value="Tecnologia" />
+			<Property name="LatinAmericanSpanish" value="Tecnología" />
+			<Property name="BrazilianPortuguese" value="Tecnologia" />
+			<Property name="SimplifiedChinese" value="技术" />
+			<Property name="TraditionalChinese" value="技术" />
+			<Property name="TencentChinese" value="技术" />
+			<Property name="Korean" value="기술" />
+			<Property name="Japanese" value="テクノロジー" />
+			<Property name="USEnglish" value="Technology" />
+		</Property>
+		<Property name="Table" value="TkLocalisationEntry">
+			<Property name="Id" value="UI_ECON_CLASS_MINING_1" />
+			<Property name="English" value="Mining" />
+			<Property name="French" value="Exploitation minière" />
+			<Property name="Italian" value="Estrazione" />
+			<Property name="German" value="Bergbau" />
+			<Property name="Spanish" value="Minería" />
+			<Property name="Russian" value="Добыча" />
+			<Property name="Polish" value="Górnictwo" />
+			<Property name="Dutch" value="Mijnbouw" />
+			<Property name="Portuguese" value="Mineração" />
+			<Property name="LatinAmericanSpanish" value="Minería" />
+			<Property name="BrazilianPortuguese" value="Mineração" />
+			<Property name="SimplifiedChinese" value="矿业" />
+			<Property name="TraditionalChinese" value="矿业" />
+			<Property name="TencentChinese" value="矿业" />
+			<Property name="Korean" value="채광" />
+			<Property name="Japanese" value="採掘" />
+			<Property name="USEnglish" value="Mining" />
+		</Property>
+		<Property name="Table" value="TkLocalisationEntry">
+			<Property name="Id" value="UI_ECON_CLASS_MINING_2" />
+			<Property name="English" value="Mining" />
+			<Property name="French" value="Exploitation minière" />
+			<Property name="Italian" value="Estrazione" />
+			<Property name="German" value="Bergbau" />
+			<Property name="Spanish" value="Minería" />
+			<Property name="Russian" value="Добыча" />
+			<Property name="Polish" value="Górnictwo" />
+			<Property name="Dutch" value="Mijnbouw" />
+			<Property name="Portuguese" value="Mineração" />
+			<Property name="LatinAmericanSpanish" value="Minería" />
+			<Property name="BrazilianPortuguese" value="Mineração" />
+			<Property name="SimplifiedChinese" value="矿业" />
+			<Property name="TraditionalChinese" value="矿业" />
+			<Property name="TencentChinese" value="矿业" />
+			<Property name="Korean" value="채광" />
+			<Property name="Japanese" value="採掘" />
+			<Property name="USEnglish" value="Mining" />
+		</Property>
+		<Property name="Table" value="TkLocalisationEntry">
+			<Property name="Id" value="UI_ECON_CLASS_MINING_3" />
+			<Property name="English" value="Mining" />
+			<Property name="French" value="Exploitation minière" />
+			<Property name="Italian" value="Estrazione" />
+			<Property name="German" value="Bergbau" />
+			<Property name="Spanish" value="Minería" />
+			<Property name="Russian" value="Добыча" />
+			<Property name="Polish" value="Górnictwo" />
+			<Property name="Dutch" value="Mijnbouw" />
+			<Property name="Portuguese" value="Mineração" />
+			<Property name="LatinAmericanSpanish" value="Minería" />
+			<Property name="BrazilianPortuguese" value="Mineração" />
+			<Property name="SimplifiedChinese" value="矿业" />
+			<Property name="TraditionalChinese" value="矿业" />
+			<Property name="TencentChinese" value="矿业" />
+			<Property name="Korean" value="채광" />
+			<Property name="Japanese" value="採掘" />
+			<Property name="USEnglish" value="Mining" />
+		</Property>
+		<Property name="Table" value="TkLocalisationEntry">
+			<Property name="Id" value="UI_ECON_CLASS_MINING_4" />
+			<Property name="English" value="Mining" />
+			<Property name="French" value="Exploitation minière" />
+			<Property name="Italian" value="Estrazione" />
+			<Property name="German" value="Bergbau" />
+			<Property name="Spanish" value="Minería" />
+			<Property name="Russian" value="Добыча" />
+			<Property name="Polish" value="Górnictwo" />
+			<Property name="Dutch" value="Mijnbouw" />
+			<Property name="Portuguese" value="Mineração" />
+			<Property name="LatinAmericanSpanish" value="Minería" />
+			<Property name="BrazilianPortuguese" value="Mineração" />
+			<Property name="SimplifiedChinese" value="矿业" />
+			<Property name="TraditionalChinese" value="矿业" />
+			<Property name="TencentChinese" value="矿业" />
+			<Property name="Korean" value="채광" />
+			<Property name="Japanese" value="採掘" />
+			<Property name="USEnglish" value="Mining" />
+		</Property>
+		<Property name="Table" value="TkLocalisationEntry">
+			<Property name="Id" value="UI_ECON_CLASS_TRADE_1" />
+			<Property name="English" value="Trading" />
+			<Property name="French" value="Commerce" />
+			<Property name="Italian" value="Commercio" />
+			<Property name="German" value="Handel" />
+			<Property name="Spanish" value="Comercio" />
+			<Property name="Russian" value="торговый" />
+			<Property name="Polish" value="Handlowy" />
+			<Property name="Dutch" value="Handel" />
+			<Property name="Portuguese" value="Negociação" />
+			<Property name="LatinAmericanSpanish" value="Comercio" />
+			<Property name="BrazilianPortuguese" value="Negociação" />
+			<Property name="SimplifiedChinese" value="贸易" />
+			<Property name="TraditionalChinese" value="贸易" />
+			<Property name="TencentChinese" value="贸易" />
+			<Property name="Korean" value="거래" />
+			<Property name="Japanese" value="取引" />
+			<Property name="USEnglish" value="Trading" />
+		</Property>
+		<Property name="Table" value="TkLocalisationEntry">
+			<Property name="Id" value="UI_ECON_CLASS_TRADE_2" />
+			<Property name="English" value="Trading" />
+			<Property name="French" value="Commerce" />
+			<Property name="Italian" value="Commercio" />
+			<Property name="German" value="Handel" />
+			<Property name="Spanish" value="Comercio" />
+			<Property name="Russian" value="торговый" />
+			<Property name="Polish" value="Handlowy" />
+			<Property name="Dutch" value="Handel" />
+			<Property name="Portuguese" value="Negociação" />
+			<Property name="LatinAmericanSpanish" value="Comercio" />
+			<Property name="BrazilianPortuguese" value="Negociação" />
+			<Property name="SimplifiedChinese" value="贸易" />
+			<Property name="TraditionalChinese" value="贸易" />
+			<Property name="TencentChinese" value="贸易" />
+			<Property name="Korean" value="거래" />
+			<Property name="Japanese" value="取引" />
+			<Property name="USEnglish" value="Trading" />
+		</Property>
+		<Property name="Table" value="TkLocalisationEntry">
+			<Property name="Id" value="UI_ECON_CLASS_TRADE_3" />
+			<Property name="English" value="Trading" />
+			<Property name="French" value="Commerce" />
+			<Property name="Italian" value="Commercio" />
+			<Property name="German" value="Handel" />
+			<Property name="Spanish" value="Comercio" />
+			<Property name="Russian" value="торговый" />
+			<Property name="Polish" value="Handlowy" />
+			<Property name="Dutch" value="Handel" />
+			<Property name="Portuguese" value="Negociação" />
+			<Property name="LatinAmericanSpanish" value="Comercio" />
+			<Property name="BrazilianPortuguese" value="Negociação" />
+			<Property name="SimplifiedChinese" value="贸易" />
+			<Property name="TraditionalChinese" value="贸易" />
+			<Property name="TencentChinese" value="贸易" />
+			<Property name="Korean" value="거래" />
+			<Property name="Japanese" value="取引" />
+			<Property name="USEnglish" value="Trading" />
+		</Property>
+		<Property name="Table" value="TkLocalisationEntry">
+			<Property name="Id" value="UI_ECON_CLASS_TRADE_4" />
+			<Property name="English" value="Trading" />
+			<Property name="French" value="Commerce" />
+			<Property name="Italian" value="Commercio" />
+			<Property name="German" value="Handel" />
+			<Property name="Spanish" value="Comercio" />
+			<Property name="Russian" value="торговый" />
+			<Property name="Polish" value="Handlowy" />
+			<Property name="Dutch" value="Handel" />
+			<Property name="Portuguese" value="Negociação" />
+			<Property name="LatinAmericanSpanish" value="Comercio" />
+			<Property name="BrazilianPortuguese" value="Negociação" />
+			<Property name="SimplifiedChinese" value="贸易" />
+			<Property name="TraditionalChinese" value="贸易" />
+			<Property name="TencentChinese" value="贸易" />
+			<Property name="Korean" value="거래" />
+			<Property name="Japanese" value="取引" />
+			<Property name="USEnglish" value="Trading" />
+		</Property>
+		<Property name="Table" value="TkLocalisationEntry">
+			<Property name="Id" value="UI_ECON_CLASS_MANUFACT_1" />
+			<Property name="English" value="Manufacturing" />
+			<Property name="French" value="Fabrication" />
+			<Property name="Italian" value="Produzione" />
+			<Property name="German" value="Herstellung" />
+			<Property name="Spanish" value="Fabricación" />
+			<Property name="Russian" value="Производство" />
+			<Property name="Polish" value="Produkcja" />
+			<Property name="Dutch" value="Productie" />
+			<Property name="Portuguese" value="Fabricação" />
+			<Property name="LatinAmericanSpanish" value="Fabricación" />
+			<Property name="BrazilianPortuguese" value="Fabricação" />
+			<Property name="SimplifiedChinese" value="制造业" />
+			<Property name="TraditionalChinese" value="制造业" />
+			<Property name="TencentChinese" value="制造业" />
+			<Property name="Korean" value="조작" />
+			<Property name="Japanese" value="加工" />
+			<Property name="USEnglish" value="Manufacturing" />
+		</Property>
+		<Property name="Table" value="TkLocalisationEntry">
+			<Property name="Id" value="UI_ECON_CLASS_MANUFACT_2" />
+			<Property name="English" value="Manufacturing" />
+			<Property name="French" value="Fabrication" />
+			<Property name="Italian" value="Produzione" />
+			<Property name="German" value="Herstellung" />
+			<Property name="Spanish" value="Fabricación" />
+			<Property name="Russian" value="Производство" />
+			<Property name="Polish" value="Produkcja" />
+			<Property name="Dutch" value="Productie" />
+			<Property name="Portuguese" value="Fabricação" />
+			<Property name="LatinAmericanSpanish" value="Fabricación" />
+			<Property name="BrazilianPortuguese" value="Fabricação" />
+			<Property name="SimplifiedChinese" value="制造业" />
+			<Property name="TraditionalChinese" value="制造业" />
+			<Property name="TencentChinese" value="制造业" />
+			<Property name="Korean" value="조작" />
+			<Property name="Japanese" value="加工" />
+			<Property name="USEnglish" value="Manufacturing" />
+		</Property>
+		<Property name="Table" value="TkLocalisationEntry">
+			<Property name="Id" value="UI_ECON_CLASS_MANUFACT_3" />
+			<Property name="English" value="Manufacturing" />
+			<Property name="French" value="Fabrication" />
+			<Property name="Italian" value="Produzione" />
+			<Property name="German" value="Herstellung" />
+			<Property name="Spanish" value="Fabricación" />
+			<Property name="Russian" value="Производство" />
+			<Property name="Polish" value="Produkcja" />
+			<Property name="Dutch" value="Productie" />
+			<Property name="Portuguese" value="Fabricação" />
+			<Property name="LatinAmericanSpanish" value="Fabricación" />
+			<Property name="BrazilianPortuguese" value="Fabricação" />
+			<Property name="SimplifiedChinese" value="制造业" />
+			<Property name="TraditionalChinese" value="制造业" />
+			<Property name="TencentChinese" value="制造业" />
+			<Property name="Korean" value="조작" />
+			<Property name="Japanese" value="加工" />
+			<Property name="USEnglish" value="Manufacturing" />
+		</Property>
+		<Property name="Table" value="TkLocalisationEntry">
+			<Property name="Id" value="UI_ECON_CLASS_MANUFACT_4" />
+			<Property name="English" value="Manufacturing" />
+			<Property name="French" value="Fabrication" />
+			<Property name="Italian" value="Produzione" />
+			<Property name="German" value="Herstellung" />
+			<Property name="Spanish" value="Fabricación" />
+			<Property name="Russian" value="Производство" />
+			<Property name="Polish" value="Produkcja" />
+			<Property name="Dutch" value="Productie" />
+			<Property name="Portuguese" value="Fabricação" />
+			<Property name="LatinAmericanSpanish" value="Fabricación" />
+			<Property name="BrazilianPortuguese" value="Fabricação" />
+			<Property name="SimplifiedChinese" value="制造业" />
+			<Property name="TraditionalChinese" value="制造业" />
+			<Property name="TencentChinese" value="制造业" />
+			<Property name="Korean" value="조작" />
+			<Property name="Japanese" value="加工" />
+			<Property name="USEnglish" value="Manufacturing" />
+		</Property>
+		<Property name="Table" value="TkLocalisationEntry">
+			<Property name="Id" value="UI_ECON_CLASS_ALLOY_1" />
+			<Property name="English" value="Advanced Materials" />
+			<Property name="French" value="Matériaux avancés" />
+			<Property name="Italian" value="Materiale avanzato" />
+			<Property name="German" value="Fortgeschrittene Werkstoffe" />
+			<Property name="Spanish" value="Materiales avanzados" />
+			<Property name="Russian" value="Современные материалы" />
+			<Property name="Polish" value="Zaawansowane materiały" />
+			<Property name="Dutch" value="Geavanceerde materialen" />
+			<Property name="Portuguese" value="Materiais avançados" />
+			<Property name="LatinAmericanSpanish" value="Materiales avanzados" />
+			<Property name="BrazilianPortuguese" value="Materiais avançados" />
+			<Property name="SimplifiedChinese" value="先进材料" />
+			<Property name="TraditionalChinese" value="先进材料" />
+			<Property name="TencentChinese" value="先进材料" />
+			<Property name="Korean" value="고급 재료" />
+			<Property name="Japanese" value="先端材料" />
+			<Property name="USEnglish" value="Advanced Materials" />
+		</Property>
+		<Property name="Table" value="TkLocalisationEntry">
+			<Property name="Id" value="UI_ECON_CLASS_ALLOY_2" />
+			<Property name="English" value="Advanced Materials" />
+			<Property name="French" value="Matériaux avancés" />
+			<Property name="Italian" value="Materiale avanzato" />
+			<Property name="German" value="Fortgeschrittene Werkstoffe" />
+			<Property name="Spanish" value="Materiales avanzados" />
+			<Property name="Russian" value="Современные материалы" />
+			<Property name="Polish" value="Zaawansowane materiały" />
+			<Property name="Dutch" value="Geavanceerde materialen" />
+			<Property name="Portuguese" value="Materiais avançados" />
+			<Property name="LatinAmericanSpanish" value="Materiales avanzados" />
+			<Property name="BrazilianPortuguese" value="Materiais avançados" />
+			<Property name="SimplifiedChinese" value="先进材料" />
+			<Property name="TraditionalChinese" value="先进材料" />
+			<Property name="TencentChinese" value="先进材料" />
+			<Property name="Korean" value="고급 재료" />
+			<Property name="Japanese" value="先端材料" />
+			<Property name="USEnglish" value="Advanced Materials" />
+		</Property>
+		<Property name="Table" value="TkLocalisationEntry">
+			<Property name="Id" value="UI_ECON_CLASS_ALLOY_3" />
+			<Property name="English" value="Advanced Materials" />
+			<Property name="French" value="Matériaux avancés" />
+			<Property name="Italian" value="Materiale avanzato" />
+			<Property name="German" value="Fortgeschrittene Werkstoffe" />
+			<Property name="Spanish" value="Materiales avanzados" />
+			<Property name="Russian" value="Современные материалы" />
+			<Property name="Polish" value="Zaawansowane materiały" />
+			<Property name="Dutch" value="Geavanceerde materialen" />
+			<Property name="Portuguese" value="Materiais avançados" />
+			<Property name="LatinAmericanSpanish" value="Materiales avanzados" />
+			<Property name="BrazilianPortuguese" value="Materiais avançados" />
+			<Property name="SimplifiedChinese" value="先进材料" />
+			<Property name="TraditionalChinese" value="先进材料" />
+			<Property name="TencentChinese" value="先进材料" />
+			<Property name="Korean" value="고급 재료" />
+			<Property name="Japanese" value="先端材料" />
+			<Property name="USEnglish" value="Advanced Materials" />
+		</Property>
+		<Property name="Table" value="TkLocalisationEntry">
+			<Property name="Id" value="UI_ECON_CLASS_ALLOY_4" />
+			<Property name="English" value="Advanced Materials" />
+			<Property name="French" value="Matériaux avancés" />
+			<Property name="Italian" value="Materiale avanzato" />
+			<Property name="German" value="Fortgeschrittene Werkstoffe" />
+			<Property name="Spanish" value="Materiales avanzados" />
+			<Property name="Russian" value="Современные материалы" />
+			<Property name="Polish" value="Zaawansowane materiały" />
+			<Property name="Dutch" value="Geavanceerde materialen" />
+			<Property name="Portuguese" value="Materiais avançados" />
+			<Property name="LatinAmericanSpanish" value="Materiales avanzados" />
+			<Property name="BrazilianPortuguese" value="Materiais avançados" />
+			<Property name="SimplifiedChinese" value="先进材料" />
+			<Property name="TraditionalChinese" value="先进材料" />
+			<Property name="TencentChinese" value="先进材料" />
+			<Property name="Korean" value="고급 재료" />
+			<Property name="Japanese" value="先端材料" />
+			<Property name="USEnglish" value="Advanced Materials" />
+		</Property>
+		<Property name="Table" value="TkLocalisationEntry">
+			<Property name="Id" value="UI_ECON_CLASS_SCIENCE_1" />
+			<Property name="English" value="Scientific" />
+			<Property name="French" value="Scientifique" />
+			<Property name="Italian" value="Scientifico" />
+			<Property name="German" value="Wissenschaftlich" />
+			<Property name="Spanish" value="Científico" />
+			<Property name="Russian" value="научный" />
+			<Property name="Polish" value="Naukowy" />
+			<Property name="Dutch" value="Wetenschappelijk" />
+			<Property name="Portuguese" value="Científico" />
+			<Property name="LatinAmericanSpanish" value="Científico" />
+			<Property name="BrazilianPortuguese" value="Científico" />
+			<Property name="SimplifiedChinese" value="科学" />
+			<Property name="TraditionalChinese" value="科学" />
+			<Property name="TencentChinese" value="科学" />
+			<Property name="Korean" value="과학적인" />
+			<Property name="Japanese" value="科学的" />
+			<Property name="USEnglish" value="Scientific" />
+		</Property>
+		<Property name="Table" value="TkLocalisationEntry">
+			<Property name="Id" value="UI_ECON_CLASS_SCIENCE_2" />
+			<Property name="English" value="Scientific" />
+			<Property name="French" value="Scientifique" />
+			<Property name="Italian" value="Scientifico" />
+			<Property name="German" value="Wissenschaftlich" />
+			<Property name="Spanish" value="Científico" />
+			<Property name="Russian" value="научный" />
+			<Property name="Polish" value="Naukowy" />
+			<Property name="Dutch" value="Wetenschappelijk" />
+			<Property name="Portuguese" value="Científico" />
+			<Property name="LatinAmericanSpanish" value="Científico" />
+			<Property name="BrazilianPortuguese" value="Científico" />
+			<Property name="SimplifiedChinese" value="科学" />
+			<Property name="TraditionalChinese" value="科学" />
+			<Property name="TencentChinese" value="科学" />
+			<Property name="Korean" value="과학적인" />
+			<Property name="Japanese" value="科学的" />
+			<Property name="USEnglish" value="Scientific" />
+		</Property>
+		<Property name="Table" value="TkLocalisationEntry">
+			<Property name="Id" value="UI_ECON_CLASS_SCIENCE_3" />
+			<Property name="English" value="Scientific" />
+			<Property name="French" value="Scientifique" />
+			<Property name="Italian" value="Scientifico" />
+			<Property name="German" value="Wissenschaftlich" />
+			<Property name="Spanish" value="Científico" />
+			<Property name="Russian" value="научный" />
+			<Property name="Polish" value="Naukowy" />
+			<Property name="Dutch" value="Wetenschappelijk" />
+			<Property name="Portuguese" value="Científico" />
+			<Property name="LatinAmericanSpanish" value="Científico" />
+			<Property name="BrazilianPortuguese" value="Científico" />
+			<Property name="SimplifiedChinese" value="科学" />
+			<Property name="TraditionalChinese" value="科学" />
+			<Property name="TencentChinese" value="科学" />
+			<Property name="Korean" value="과학적인" />
+			<Property name="Japanese" value="科学的" />
+			<Property name="USEnglish" value="Scientific" />
+		</Property>
+		<Property name="Table" value="TkLocalisationEntry">
+			<Property name="Id" value="UI_ECON_CLASS_SCIENCE_4" />
+			<Property name="English" value="Scientific" />
+			<Property name="French" value="Scientifique" />
+			<Property name="Italian" value="Scientifico" />
+			<Property name="German" value="Wissenschaftlich" />
+			<Property name="Spanish" value="Científico" />
+			<Property name="Russian" value="научный" />
+			<Property name="Polish" value="Naukowy" />
+			<Property name="Dutch" value="Wetenschappelijk" />
+			<Property name="Portuguese" value="Científico" />
+			<Property name="LatinAmericanSpanish" value="Científico" />
+			<Property name="BrazilianPortuguese" value="Científico" />
+			<Property name="SimplifiedChinese" value="科学" />
+			<Property name="TraditionalChinese" value="科学" />
+			<Property name="TencentChinese" value="科学" />
+			<Property name="Korean" value="과학적인" />
+			<Property name="Japanese" value="科学的" />
+			<Property name="USEnglish" value="Scientific" />
+		</Property>
+		<Property name="Table" value="TkLocalisationEntry">
+			<Property name="Id" value="UI_ECON_CLASS_POWER_1" />
+			<Property name="English" value="Power Generation" />
+			<Property name="French" value="La production d'énergie" />
+			<Property name="Italian" value="Produzione di energia" />
+			<Property name="German" value="Energieerzeugung" />
+			<Property name="Spanish" value="Generación de Energía" />
+			<Property name="Russian" value="Выработка энергии" />
+			<Property name="Polish" value="Wytwarzanie energii" />
+			<Property name="Dutch" value="Stroomopwekking" />
+			<Property name="Portuguese" value="Geração de energia" />
+			<Property name="LatinAmericanSpanish" value="Generación de Energía" />
+			<Property name="BrazilianPortuguese" value="Geração de energia" />
+			<Property name="SimplifiedChinese" value="发电" />
+			<Property name="TraditionalChinese" value="发电" />
+			<Property name="TencentChinese" value="发电" />
+			<Property name="Korean" value="발전" />
+			<Property name="Japanese" value="発電" />
+			<Property name="USEnglish" value="Power Generation" />
+		</Property>
+		<Property name="Table" value="TkLocalisationEntry">
+			<Property name="Id" value="UI_ECON_CLASS_POWER_2" />
+			<Property name="English" value="Power Generation" />
+			<Property name="French" value="La production d'énergie" />
+			<Property name="Italian" value="Produzione di energia" />
+			<Property name="German" value="Energieerzeugung" />
+			<Property name="Spanish" value="Generación de Energía" />
+			<Property name="Russian" value="Выработка энергии" />
+			<Property name="Polish" value="Wytwarzanie energii" />
+			<Property name="Dutch" value="Stroomopwekking" />
+			<Property name="Portuguese" value="Geração de energia" />
+			<Property name="LatinAmericanSpanish" value="Generación de Energía" />
+			<Property name="BrazilianPortuguese" value="Geração de energia" />
+			<Property name="SimplifiedChinese" value="发电" />
+			<Property name="TraditionalChinese" value="发电" />
+			<Property name="TencentChinese" value="发电" />
+			<Property name="Korean" value="발전" />
+			<Property name="Japanese" value="発電" />
+			<Property name="USEnglish" value="Power Generation" />
+		</Property>
+		<Property name="Table" value="TkLocalisationEntry">
+			<Property name="Id" value="UI_ECON_CLASS_POWER_3" />
+			<Property name="English" value="Power Generation" />
+			<Property name="French" value="La production d'énergie" />
+			<Property name="Italian" value="Produzione di energia" />
+			<Property name="German" value="Energieerzeugung" />
+			<Property name="Spanish" value="Generación de Energía" />
+			<Property name="Russian" value="Выработка энергии" />
+			<Property name="Polish" value="Wytwarzanie energii" />
+			<Property name="Dutch" value="Stroomopwekking" />
+			<Property name="Portuguese" value="Geração de energia" />
+			<Property name="LatinAmericanSpanish" value="Generación de Energía" />
+			<Property name="BrazilianPortuguese" value="Geração de energia" />
+			<Property name="SimplifiedChinese" value="发电" />
+			<Property name="TraditionalChinese" value="发电" />
+			<Property name="TencentChinese" value="发电" />
+			<Property name="Korean" value="발전" />
+			<Property name="Japanese" value="発電" />
+			<Property name="USEnglish" value="Power Generation" />
+		</Property>
+		<Property name="Table" value="TkLocalisationEntry">
+			<Property name="Id" value="UI_ECON_CLASS_POWER_4" />
+			<Property name="English" value="Power Generation" />
+			<Property name="French" value="La production d'énergie" />
+			<Property name="Italian" value="Produzione di energia" />
+			<Property name="German" value="Energieerzeugung" />
+			<Property name="Spanish" value="Generación de Energía" />
+			<Property name="Russian" value="Выработка энергии" />
+			<Property name="Polish" value="Wytwarzanie energii" />
+			<Property name="Dutch" value="Stroomopwekking" />
+			<Property name="Portuguese" value="Geração de energia" />
+			<Property name="LatinAmericanSpanish" value="Generación de Energía" />
+			<Property name="BrazilianPortuguese" value="Geração de energia" />
+			<Property name="SimplifiedChinese" value="发电" />
+			<Property name="TraditionalChinese" value="发电" />
+			<Property name="TencentChinese" value="发电" />
+			<Property name="Korean" value="발전" />
+			<Property name="Japanese" value="発電" />
+			<Property name="USEnglish" value="Power Generation" />
+		</Property>
+	</Property>
+</Data>

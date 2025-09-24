@@ -1,0 +1,17 @@
+English
+French
+Italian
+German
+Spanish
+Russian
+Polish
+Dutch
+Portuguese
+LatinAmericanSpanish
+BrazilianPortuguese
+SimplifiedChinese
+TraditionalChinese
+TencentChinese
+Korean
+Japanese
+USEnglish

@@ -1,0 +1,18 @@
+#first column for filename, secont for Property name (usually, it's the same, but exceptions are possible)
+ENGLISH	English
+FRENCH	French
+ITALIAN	Italian
+GERMAN	German
+SPANISH	Spanish
+RUSSIAN	Russian
+POLISH	Polish
+DUTCH	Dutch
+PORTUGUESE	Portuguese
+LATINAMERICANSPANISH	LatinAmericanSpanish
+BRAZILIANPORTUGUESE	BrazilianPortuguese
+SIMPLIFIEDCHINESE	SimplifiedChinese
+TRADITIONALCHINESE	TraditionalChinese
+TENCENTCHINESE	TencentChinese
+KOREAN	Korean
+JAPANESE	Japanese
+USENGLISH	USEnglish
