@@ -40,6 +40,7 @@ namespace NMS_EnglishAlienWordsMod_Avalonia.Windows
 								  SelectedVersion == null ? "Select MBINCompiler version" :
 								  MbinCompilerManager.IsDownloaded(SelectedVersion.VersionName) ? "Create mod" : "Download MBINCompiler";
 
+		public string NMSPath => AppProperties.CurrentSettings.NoMansSkyGamePath;
 		public MainWindowViewModel()
 		{
 			// Если нужно, можно инициализировать коллекции, флаги и прочее
@@ -170,7 +171,7 @@ namespace NMS_EnglishAlienWordsMod_Avalonia.Windows
 					AddOrUpdateVersion(
 						new VersionItem(
 					release.TagName,
-					release.Assets.Where(a => a.Name.EndsWith(AppProperties.Settings.MbinCompilerAssetName)).FirstOrDefault()?.BrowserDownloadUrl ?? string.Empty,
+					release.Assets.Where(a => a.Name.EndsWith(AppProperties.CurrentSettings.MbinCompilerAssetName)).FirstOrDefault()?.BrowserDownloadUrl ?? string.Empty,
 					AvailabilityStatus.NotDownloaded
 						)
 					);

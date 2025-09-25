@@ -14,5 +14,13 @@
 	</Design.DataContext>
 
 	<!-- bind your target object to DataContext -->
-	<apc:PropertyGrid DataContext="{Binding Target}"></apc:PropertyGrid>
+	<Grid>
+		<apc:PropertyGrid x:Name="SettingsGrid" 
+						  IsTitleVisible="False"
+                          NameWidth="200"
+                          Margin="10"
+                          IsQuickFilterVisible="False"
+						  CustomPropertyDescriptorFilter="OnCustomPropertyDescriptorFilter"
+                          DataContext="{Binding Target}"/>
+	</Grid>
 </UserControl>

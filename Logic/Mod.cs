@@ -22,7 +22,7 @@ namespace NMS_EnglishAlienWordsMod_Avalonia.Logic
 		private string[] GetLanguagesList() => File.ReadAllLines(languagesListPath);
 		private string[] SetLanguagesList() => _languagesList??= GetLanguagesList();
 
-
+		
 
 	}
 }

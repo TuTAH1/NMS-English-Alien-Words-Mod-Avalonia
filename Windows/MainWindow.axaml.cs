@@ -18,6 +18,10 @@ namespace NMS_EnglishAlienWordsMod_Avalonia
 		public MainWindow()
 		{
 			InitializeComponent();	
+			
+			DataContext = AppProperties.SettingsModel;
+			SettingsGrid.IsCategoryVisible = false;
+			SettingsGrid.IsQuickFilterVisible = false;
 		}
 
 		protected override void OnOpened(EventArgs e)

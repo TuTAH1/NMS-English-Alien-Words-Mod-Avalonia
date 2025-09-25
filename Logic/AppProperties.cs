@@ -9,7 +9,7 @@ namespace NMS_EnglishAlienWordsMod_Avalonia.Logic
 {
 	public static class AppProperties
 	{
-		private static SettingsViewModel _currentSettings = new();
-        public static SettingsObject Settings => _currentSettings.Target;
+		public static SettingsViewModel SettingsModel = new();
+        public static SettingsObject CurrentSettings => SettingsModel.Target;
 	}
 }
