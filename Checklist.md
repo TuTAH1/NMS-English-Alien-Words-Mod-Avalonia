@@ -3,8 +3,8 @@
 - [x] Make "Create" button disabled if MBIN compiler version is not selected
 - [x] Add settings window
 - [x] Add classes and styles for different AvailabilityStatus
-- [ ] Add settings categories
-- [ ] Add progressbar/spinner when downloading MBINC
+- [x] Add settings categories
+- [x] Add progressbar/spinner when downloading MBINC
 
 # Functionality
 - [x] Download MBIN compiler when clicking Create

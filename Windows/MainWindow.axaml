@@ -6,10 +6,13 @@
 		xmlns:local="clr-namespace:NMS_EnglishAlienWordsMod_Avalonia.Windows"
 		x:Class="NMS_EnglishAlienWordsMod_Avalonia.MainWindow"
 		x:DataType="local:MainWindowViewModel"
+		xmlns:w="clr-namespace:NMS_EnglishAlienWordsMod_Avalonia.Windows;assembly=NMS_EnglishAlienWordsMod_Avalonia"
 		xmlns:fa="clr-namespace:FluentAvalonia.UI.Controls;assembly=FluentAvalonia"
 		xmlns:c="using:LoadingIndicators.Avalonia"
 		xmlns:dialogs="using:AvaloniaDialogs.Views"
 		xmlns:conv="using:NMS_EnglishAlienWordsMod_Avalonia.Windows.Converters"
+		xmlns:apc="clr-namespace:Avalonia.PropertyGrid.Controls;assembly=Avalonia.PropertyGrid"
+
 
 		
 		Title="NMS English Alien Words Mod" Width="800" Height="450">
@@ -17,11 +20,10 @@
 	<Window.Resources>
 		<conv:EnumEqualsConverter x:Key="EnumEq"/>
 	</Window.Resources>
-
 	
 		<Grid>
 		
-			<Grid>
+			<Grid x:Name="gridWindowContent">
 
 
 				<Grid.RowDefinitions>
@@ -103,20 +105,16 @@
 				</Grid>
 			
 				<!--Essential settings-->
-				<StackPanel x:Name="spEssentialSettings" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Stretch" Margin="5">
-					<Grid x:Name="essNoMansSkyPath">
-						<Grid.ColumnDefinitions>
-							<ColumnDefinition Width="Auto"/>
-							<ColumnDefinition Width="*"/>
-							<ColumnDefinition Width="Auto"/>
-						</Grid.ColumnDefinitions>
-							
-						<Label Grid.Column="0" Content="No mans sky path" VerticalAlignment="Center" />
-						<TextBox Grid.Column="1" x:Name="tbNoMansSkyPath" Margin="5 0" Text="{Binding NMSPath}"/>
-						<Button Grid.Column="2" x:Name="btnNoMansSkyPathBrowse" Content="Browse" VerticalAlignment="Stretch" Margin="2 0"/>
-					</Grid>
-					
-				</StackPanel>
+				<Grid x:Name="spEssentialSettings" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Stretch" Margin="5">
+					<apc:PropertyGrid x:Name="SettingsGrid"
+				  IsTitleVisible="False"
+				  IsCategoryVisible="False"
+                  IsQuickFilterVisible="False"
+				  IsHeaderVisible="False"
+				  CustomPropertyDescriptorFilter="OnCustomPropertyDescriptorFilter"
+                  DataContext="{Binding Settings}"/>
+
+				</Grid>
 				<Grid Grid.Row="2" x:Name="gProgress">
 					<ProgressBar Margin="5" Height="20" IsVisible="False"></ProgressBar>
 				</Grid>

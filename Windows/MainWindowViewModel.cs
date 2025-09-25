@@ -2,6 +2,7 @@ using Avalonia.Controls;
 using Avalonia.Media;
 using AvaloniaDialogs.Views;
 using NMS_EnglishAlienWordsMod_Avalonia.Logic;
+using NMSEnglishAlienWordsMod_Avalonia.Properties;
 using Octokit;
 using System;
 using System.Collections.Generic;
@@ -40,7 +41,7 @@ namespace NMS_EnglishAlienWordsMod_Avalonia.Windows
 								  SelectedVersion == null ? "Select MBINCompiler version" :
 								  MbinCompilerManager.IsDownloaded(SelectedVersion.VersionName) ? "Create mod" : "Download MBINCompiler";
 
-		public string NMSPath => AppProperties.CurrentSettings.NoMansSkyGamePath;
+		public SettingsObject Settings => AppProperties.CurrentSettings;
 		public MainWindowViewModel()
 		{
 			// Если нужно, можно инициализировать коллекции, флаги и прочее

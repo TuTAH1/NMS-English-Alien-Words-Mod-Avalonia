@@ -13,8 +13,6 @@ public partial class Settings : Window
 	{
 		InitializeComponent();
 		DataContext = AppProperties.SettingsModel;
-		SettingsGrid.IsCategoryVisible = false;
-		SettingsGrid.IsQuickFilterVisible = false;
 	}
 
 	 private void OnCustomPropertyDescriptorFilter(object sender, RoutedEventArgs args)

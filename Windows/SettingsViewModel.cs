@@ -18,7 +18,7 @@ namespace NMS_EnglishAlienWordsMod_Avalonia.Windows
 
 	public class SettingsObject : ReactiveObject
 	{
-		[Category("General")]
+		[Category("Essential")]
 		[DisplayName("No Man's Sky Game Path")]
 		[Description("Path to the No Man's Sky game directory.")]
 		[PathBrowsable(PathBrowsableType.Directory)]

@@ -17,6 +17,7 @@
 	<Grid>
 		<apc:PropertyGrid x:Name="SettingsGrid" 
 						  IsTitleVisible="False"
+						  IsCategoryVisible="False"
                           NameWidth="200"
                           Margin="10"
                           IsQuickFilterVisible="False"
