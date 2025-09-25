@@ -7,6 +7,8 @@ using NMS_EnglishAlienWordsMod_Avalonia.Logic;
 using NMS_EnglishAlienWordsMod_Avalonia.Windows;
 using Octokit;
 using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 using Titanium;
 using static NMS_EnglishAlienWordsMod_Avalonia.Windows.MainWindowViewModel;
@@ -40,7 +42,7 @@ namespace NMS_EnglishAlienWordsMod_Avalonia
 		
 		}
 
-			// Loads the available versions of MBINCompiler when the window is loaded.
+		// Loads the available versions of MBINCompiler when the window is loaded.
 		private async void OnLoadedAsync(object sender, EventArgs e)
 		{
 			try
@@ -166,7 +168,6 @@ namespace NMS_EnglishAlienWordsMod_Avalonia
 		#endregion ControlsEventHandlers
 
 		private VersionItem MbincSelectedVersion => ((cbMBINCompilerVersion.SelectedItem) as VersionItem);
-	
-	
+			
 	}
 }

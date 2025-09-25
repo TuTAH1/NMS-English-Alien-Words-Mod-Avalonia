@@ -15,6 +15,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using Titanium;
+using CommunityToolkit.Mvvm;
 
 
 namespace NMS_EnglishAlienWordsMod_Avalonia.Windows
@@ -22,7 +23,26 @@ namespace NMS_EnglishAlienWordsMod_Avalonia.Windows
 
 	public class MainWindowViewModel : INotifyPropertyChanged
 	{
+		public MainWindowViewModel()
+		{
+			// Если нужно, можно инициализировать коллекции, флаги и прочее
+			VersionList = new ObservableCollection<VersionItem>();
+		}
+
+		#region Field and properties
+
 		public Action<string>? ShowErrorMessage;
+
+		public string CreateButtonText => IsDownloadingMbinc ? "Downloading..." :
+								  SelectedVersion == null ? "Select MBINCompiler version" :
+								  MbinCompilerManager.IsDownloaded(SelectedVersion.VersionName) ? "Create mod" : "Download MBINCompiler";
+
+		public SettingsObject Settings => AppProperties.CurrentSettings;
+
+		#endregion Field and properties
+		
+
+		#region Version droplist
 		public ObservableCollection<VersionItem> VersionList { get; } = new();
 		private VersionItem _selectedVersion;
 		public VersionItem SelectedVersion
@@ -37,18 +57,6 @@ namespace NMS_EnglishAlienWordsMod_Avalonia.Windows
 				}
 			}
 		}
-		public string CreateButtonText => IsDownloadingMbinc ? "Downloading..." :
-								  SelectedVersion == null ? "Select MBINCompiler version" :
-								  MbinCompilerManager.IsDownloaded(SelectedVersion.VersionName) ? "Create mod" : "Download MBINCompiler";
-
-		public SettingsObject Settings => AppProperties.CurrentSettings;
-		public MainWindowViewModel()
-		{
-			// Если нужно, можно инициализировать коллекции, флаги и прочее
-			VersionList = new ObservableCollection<VersionItem>();
-		}
-
-		#region Version droplist
 		public class VersionItem
 		{
 			public string VersionName { get; set; }
@@ -63,7 +71,6 @@ namespace NMS_EnglishAlienWordsMod_Avalonia.Windows
 			
 			}
 		}
-
 
 		public enum AvailabilityStatus
 		{

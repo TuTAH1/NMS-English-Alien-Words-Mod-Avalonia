@@ -5,6 +5,7 @@
 - [x] Add classes and styles for different AvailabilityStatus
 - [x] Add settings categories
 - [x] Add progressbar/spinner when downloading MBINC
+- [ ] Validate game path
 
 # Functionality
 - [x] Download MBIN compiler when clicking Create
@@ -21,3 +22,4 @@
 	- [ ] language *class*, _fields_: `filename` /*is needed?*/ `languagename?`
 
 # On release
+- [ ]
