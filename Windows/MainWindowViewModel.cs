@@ -74,7 +74,7 @@ namespace NMS_EnglishAlienWordsMod_Avalonia.Windows
 			}
 		}
 
-		public bool IsProgressbarVisible => true;
+		public bool IsProgressbarVisible => Progress > 0;
 
 		#endregion Field and properties
 

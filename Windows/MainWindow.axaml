@@ -134,7 +134,13 @@
 				<Grid Grid.Row="2" x:Name="gProgress">
 					<StackPanel Orientation="Vertical">
 						<Label x:Name="lbProgress" Content="{Binding ProgressText}" HorizontalAlignment="Center" Foreground="Blue" IsVisible="{Binding IsProgressbarVisible}"/>
-						<ProgressBar x:Name="ProgressBar" Margin="5" Height="20" IsVisible="{Binding IsProgressbarVisible}" Value="{Binding Progress}" Maximum="100"/>
+						<ProgressBar x:Name="ProgressBar" Margin="5" Height="20" IsVisible="{Binding IsProgressbarVisible}" Value="{Binding Progress}" Maximum="200" >
+						<ProgressBar.Transitions>
+							<Transitions>
+								<DoubleTransition Property="Value" Duration="0:0:0.1" Easing="CubicEaseInOut"/>
+							</Transitions>
+							</ProgressBar.Transitions>
+						</ProgressBar>
 					</StackPanel>
 				</Grid>
 				<!--Cons-->
@@ -149,22 +155,8 @@
 						<Border BorderBrush="{DynamicResource BorderColor}" BorderThickness="2" CornerRadius="4" Margin="5" Padding="5" Grid.Row="1">
 							<Grid Grid.Row="1">
 								<md:MarkdownScrollViewer xml:space="preserve" x:Name="Console">
-									## %{color:red}red test%
-									&lt;hr/&gt;
-									&lt;details&gt;
-										&lt;summary&gt;Нажми, чтобы развернуть спойлер&lt;/summary&gt;
-										Это скрытый текст, который виден только после клика.
-										- Пункт 1
-										- Пункт 2
-										&lt;details&gt;
-										&lt;summary&gt;Нажми, чтобы развернуть спойлер&lt;/summary&gt;
-										Это скрытый текст, который виден только после клика.
-										- Пункт 1
-										- Пункт 2
-									&lt;/details&gt;
-									&lt;/details&gt;
-							
-									</md:MarkdownScrollViewer>
+																
+								</md:MarkdownScrollViewer>
 							</Grid>
 						</Border>
 					</Grid>

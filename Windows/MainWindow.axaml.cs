@@ -115,9 +115,9 @@ namespace NMS_EnglishAlienWordsMod_Avalonia
 
 		private void ClearConsole()
 		{
-			#if  !DEBUG
+			//#if  !DEBUG
 			Console.Markdown = "";
-			#endif
+			//#endif
 		}
 
 		#endregion Initialization Methods

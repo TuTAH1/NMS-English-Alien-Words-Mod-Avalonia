@@ -52,17 +52,17 @@ namespace NMS_EnglishAlienWordsMod_Avalonia.Logic
 				await AddProgressMessage("Listing pak content", percent: 0);
 
 				await HgpakTool.ListPakContents();
-				await AddProgressMessage("Pak contents listed", 10);
+				await AddProgressMessage("Pak contents listed", 0);
 				if (App.CurrentSettings.StopAfter <=SettingsObject.DebugStopPoint.FilelistJson) return;
 			
 				await AddProgressMessage("Filtering Json Filelist");
 				await HgpakTool.CreateFilteredJsonFilelist();
-				await AddProgressMessage("Filtered Json Filelist Created", 10);
+				await AddProgressMessage("Filtered Json Filelist Created", 2);
 				if (App.CurrentSettings.StopAfter <= SettingsObject.DebugStopPoint.changedFilelistJson) return;
 			
 				await AddProgressMessage("Unpacking Bin files");
 				await HgpakTool.UnpackBin();
-				await AddProgressMessage("Bin unpacked", 20);
+				await AddProgressMessage("Bin unpacked", 2);
 				if (App.CurrentSettings.StopAfter <= SettingsObject.DebugStopPoint.UnpackBin) return;
 			}
 					
@@ -84,10 +84,7 @@ namespace NMS_EnglishAlienWordsMod_Avalonia.Logic
 				RedirectStandardError = true,
 				UseShellExecute = false
 			};
-
-			/// <summary>
-			/// Uses HGPakTool to create a "filenames.json" file of the contents in a pak file.
-			/// </summary>
+	
 			public static async Task ListPakContents()
 			{
 				await Task.Run(async () => 
@@ -98,10 +95,10 @@ namespace NMS_EnglishAlienWordsMod_Avalonia.Logic
 					toolStartInfo.Arguments = $"-L \"{_pakPath}\"";
 					var process = Process.Start(toolStartInfo)!;
 			
-					await LogProcessAsync(process, "Reading pak file");
+					await LogProcessAsync(process, 5);
 				});
 			}
-
+	
 			public static async Task CreateFilteredJsonFilelist()
 			{
 				await Task.Run(async () => 
@@ -110,28 +107,31 @@ namespace NMS_EnglishAlienWordsMod_Avalonia.Logic
 						await ListPakContents();
 				
 					if (!File.Exists(filelistJsonPath) && !File.Exists(filteredFilelistJsonPath))
-						throw new FileNotFoundException("filenames.json wasn't created by HGPakTool. I don't know why. Try creating filteredFilenames.json manually");
+						throw new FileNotFoundException("filenames.json wasn't created by HGPakTool. Try creating filteredFilenames.json manually");
 			
 					try {
-						// Сообщаем о прогрессе
-						ReportProgress("Reading JSON file", 12);
+						// Обновляем прогресс без сообщений
+						await AddProgressMessage(null, 2);
 				
 						var json = await File.ReadAllTextAsync(filelistJsonPath);
 						var files = JsonConvert.DeserializeObject<Dictionary<string, List<string>>>(json);
 						List<string>? filesOfThePak = files?.First().Value;
 				
 						if(filesOfThePak == null)
-							throw new NullReferenceException("filesOfThePak is null. Probably, something is wrong with your Regex.");
+							throw new NullReferenceException("filesOfThePak is null. Something is wrong with your Regex.");
 				
-						ReportProgress("Filtering files", 14);
-						List<string> filteredFiles = filesOfThePak.Where(file => Regex.IsMatch(file, _languagesRegex)).ToList();
+						// Обновляем прогресс без сообщений
+						await AddProgressMessage(null, 3);
+				
+						List<string> filteredFiles = filesOfThePak.Where(file => 
+							Regex.IsMatch(file, _languagesRegex)).ToList();
 						files.Remove(files.Keys.First());
 						files.Add("FilteredFiles", filteredFiles);
 				
-						ReportProgress("Saving filtered list", 16);
-						await File.WriteAllTextAsync(filteredFilelistJsonPath, JsonConvert.SerializeObject(files));
+						// Обновляем прогресс без сообщений
+						await AddProgressMessage(null, 3);
 				
-						ReportProgress("Filtered list saved", 18);
+						await File.WriteAllTextAsync(filteredFilelistJsonPath, JsonConvert.SerializeObject(files));
 					}
 					catch (Exception ex) {
 						throw new Exception("Error while creating filteredFilenames.json", ex);
@@ -142,7 +142,7 @@ namespace NMS_EnglishAlienWordsMod_Avalonia.Logic
 					}
 				});
 			}
-
+	
 			public static async Task UnpackBin()
 			{
 				await Task.Run(async () => 
@@ -153,32 +153,41 @@ namespace NMS_EnglishAlienWordsMod_Avalonia.Logic
 					toolStartInfo.Arguments = $"-j \"{filteredFilelistJsonPath}\" -U \"{_pakPath}\"";
 					var process = Process.Start(toolStartInfo)!;
 			
-					await LogProcessAsync(process, "Unpacking bin files");
+					await LogProcessAsync(process, 10);
 				});
 			}
 
-			private static async Task LogProcessAsync(Process process, string operationName)
+			/// <summary>
+			/// Log the output and error streams of a process asynchronously, updating progress periodically.
+			/// </summary>
+			/// <param name="process"> The process to log. </param>
+			/// <param name="progressPercent"> The total percentage of progress to allocate for this process. </param>
+			/// <returns></returns>
+			private static async Task LogProcessAsync(Process process, int progressPercent)
 			{
-				// Создаем задачи для асинхронного чтения потоков вывода
+				//. Reading console output
 				var outputTask = process.StandardOutput.ReadToEndAsync();
 				var errorTask = process.StandardError.ReadToEndAsync();
 		
-				// Отслеживаем прогресс во время выполнения процесса
-				int progressCounter = 0;
-				while (!process.HasExited)
+				const int totalSteps = 20;
+				double incrementPerStep = progressPercent / (double)totalSteps;
+
+				//. Progress animation while waiting for process to exit
+				int currentStep = 0;
+				while (!process.HasExited && currentStep < totalSteps)
 				{
-					// Периодически обновляем прогресс
-					ReportProgress($"{operationName}... {progressCounter}%");
+					await AddProgressMessage(null, (int)Math.Ceiling(incrementPerStep));
+
+					//. Give UI thread a breath
+					await Task.Delay(50);
 			
-					// Даем процессу поработать 100мс перед следующей проверкой
-					if (await Task.WhenAny(Task.Delay(100), Task.Run(() => process.WaitForExit(100))) == Task.CompletedTask)
-						break;
-				
-					// Увеличиваем счетчик прогресса (просто для визуализации)
-					progressCounter = (progressCounter + 1) % 100;
+					currentStep++;
 				}
-		
-				// Получаем результаты асинхронного чтения
+
+				//. Ensure we reach the full allocated progress
+				await AddProgressMessage(null,(int)Math.Ceiling((double)(totalSteps-currentStep)));
+
+				//. Get results
 				string output = await outputTask;
 				string error = await errorTask;
 		
@@ -186,21 +195,9 @@ namespace NMS_EnglishAlienWordsMod_Avalonia.Logic
 				if (!string.IsNullOrEmpty(error))
 					App.MessageBuffer.AddLine(error, App.MessageBuffer.MessageType.Error);
 			}
-	
-			// Вспомогательный метод для отчета о прогрессе
-			private static void ReportProgress(string message, int? percent = null)
-			{
-				var progress = App.ProgressContext.Current;
-				if (progress != null)
-				{
-					progress.Report(new ProgressReport { 
-						Message = message, 
-						Percent = percent,
-						Increment = percent.HasValue ? null : 1
-					});
-				}
-			}
 		}
+
+
 
 
 	}
