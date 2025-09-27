@@ -71,91 +71,137 @@ namespace NMS_EnglishAlienWordsMod_Avalonia.Logic
 
 		private static class HgpakTool
 		{
-			static string _toolPath = "HGPakTool.exe";
-			static string _workingDir = "Content";
-			static string _toolFullPath = Path.Combine(_workingDir,_toolPath);
-			static string _filelistJsonPath = $"{_workingDir}/filenames.json";
-			static string _filteredFilelistJsonPath = $"{_workingDir}/FilteredFilenames.json";
+			static string toolPath = "HGPakTool.exe";
+			static string workingDir = "Content";
+			static string toolFullPath = Path.Combine(workingDir, toolPath);
+			static string filelistJsonPath = $"{workingDir}/filenames.json";
+			static string filteredFilelistJsonPath = $"{workingDir}/FilteredFilenames.json";
 			static ProcessStartInfo toolStartInfo = new ProcessStartInfo()
 			{
-				FileName =  _toolFullPath,
-				WorkingDirectory = _workingDir,
+				FileName = toolFullPath,
+				WorkingDirectory = workingDir,
 				RedirectStandardOutput = true,
 				RedirectStandardError = true,
 				UseShellExecute = false
 			};
-			 
-
 
 			/// <summary>
-			/// Uses HGPakTool to create a "filenames.json" file of the contents in a pak file.	
+			/// Uses HGPakTool to create a "filenames.json" file of the contents in a pak file.
 			/// </summary>
-			static public Task ListPakContents()
+			public static async Task ListPakContents()
 			{
-				if(!File.Exists(_toolFullPath))
-					throw new FileNotFoundException("HGPakTool not found.");
+				await Task.Run(async () => 
+				{
+					if(!File.Exists(toolFullPath))
+						throw new FileNotFoundException("HGPakTool not found.");
+				
+					toolStartInfo.Arguments = $"-L \"{_pakPath}\"";
+					var process = Process.Start(toolStartInfo)!;
+			
+					await LogProcessAsync(process, "Reading pak file");
+				});
+			}
+
+			public static async Task CreateFilteredJsonFilelist()
+			{
+				await Task.Run(async () => 
+				{
+					if (!File.Exists(filelistJsonPath))
+						await ListPakContents();
+				
+					if (!File.Exists(filelistJsonPath) && !File.Exists(filteredFilelistJsonPath))
+						throw new FileNotFoundException("filenames.json wasn't created by HGPakTool. I don't know why. Try creating filteredFilenames.json manually");
+			
+					try {
+						// Сообщаем о прогрессе
+						ReportProgress("Reading JSON file", 12);
+				
+						var json = await File.ReadAllTextAsync(filelistJsonPath);
+						var files = JsonConvert.DeserializeObject<Dictionary<string, List<string>>>(json);
+						List<string>? filesOfThePak = files?.First().Value;
+				
+						if(filesOfThePak == null)
+							throw new NullReferenceException("filesOfThePak is null. Probably, something is wrong with your Regex.");
+				
+						ReportProgress("Filtering files", 14);
+						List<string> filteredFiles = filesOfThePak.Where(file => Regex.IsMatch(file, _languagesRegex)).ToList();
+						files.Remove(files.Keys.First());
+						files.Add("FilteredFiles", filteredFiles);
+				
+						ReportProgress("Saving filtered list", 16);
+						await File.WriteAllTextAsync(filteredFilelistJsonPath, JsonConvert.SerializeObject(files));
+				
+						ReportProgress("Filtered list saved", 18);
+					}
+					catch (Exception ex) {
+						throw new Exception("Error while creating filteredFilenames.json", ex);
+					}
+					finally {
+						if(File.Exists(filelistJsonPath))
+							File.Delete(filelistJsonPath);
+					}
+				});
+			}
+
+			public static async Task UnpackBin()
+			{
+				await Task.Run(async () => 
+				{
+					if(!File.Exists(Path.Combine(workingDir, toolPath)))
+						throw new FileNotFoundException("HGPakTool not found.");
 					
-				toolStartInfo.Arguments = $"-L \"{_pakPath}\"";
-				var process = Process.Start(toolStartInfo)!;
-				LogProcess(process);
-				process.WaitForExit();			
-				
-				return Task.CompletedTask;
+					toolStartInfo.Arguments = $"-j \"{filteredFilelistJsonPath}\" -U \"{_pakPath}\"";
+					var process = Process.Start(toolStartInfo)!;
+			
+					await LogProcessAsync(process, "Unpacking bin files");
+				});
 			}
 
-			static public Task CreateFilteredJsonFilelist()
+			private static async Task LogProcessAsync(Process process, string operationName)
 			{
-				if (!File.Exists(_filelistJsonPath))
-					ListPakContents();
-				if (!File.Exists(_filelistJsonPath) && !File.Exists(_filteredFilelistJsonPath)) //. filteredFilelistJsonPath left as a possibility for user to fix it manually
-					throw new FileNotFoundException("filenames.json wasn't created by HGPakTool. I don't know why. Try creating filteredFilenames.json manually");
-				
-				try {
-					var json = File.ReadAllText(_filelistJsonPath);
-					var files = JsonConvert.DeserializeObject<Dictionary<string, List<string>>>(json);
-					List<string>? filesOfThePak = files?.First().Value;
-					if(filesOfThePak == null)
-						throw new NullReferenceException("filesOfThePak is null. Probably, something is wrong with your Regex.");
-					List<string> filteredFiles = filesOfThePak.Where(file => Regex.IsMatch(file, _languagesRegex)).ToList();
-					files.Remove(files.Keys.First());
-					files.Add("FilteredFiles", filteredFiles);
-					//\ App.MessageBuffer.AddLine($"Debug: 7th file is {filesOfThePak[6]}, regex is {_languagesRegex}, is match: {Regex.IsMatch(filesOfThePak[6], _languagesRegex)}");
-					File.WriteAllText(_filteredFilelistJsonPath, JsonConvert.SerializeObject(files));
-				}
-				catch (Exception ex) {
-					throw new Exception("Error while creating filteredFilenames.json", ex);
-				}
-				finally {
-					if(File.Exists(_filelistJsonPath))
-						File.Delete(_filelistJsonPath);
-				}
-
-				return Task.CompletedTask;
-			}
-
-			static public Task UnpackBin()
-			{
-				if(!File.Exists(Path.Combine(_workingDir,_toolPath)))
-					throw new FileNotFoundException("HGPakTool not found.");
-						
-				toolStartInfo.Arguments = $"-j \"{_filteredFilelistJsonPath}\" -U \"{_pakPath}\"";
-				var process = Process.Start(toolStartInfo)!;
-				LogProcess(process);
-				process.WaitForExit();	
-
-				return Task.CompletedTask;
-			}
-
-			private static void LogProcess(Process process)
-			{
-				string output = process.StandardOutput.ReadToEnd();
-				string error = process.StandardError.ReadToEnd();
-				App.MessageBuffer.AddLine(output);
-				App.MessageBuffer.AddLine(error, App.MessageBuffer.MessageType.Error);
-				process.WaitForExit();	
-			}
+				// Создаем задачи для асинхронного чтения потоков вывода
+				var outputTask = process.StandardOutput.ReadToEndAsync();
+				var errorTask = process.StandardError.ReadToEndAsync();
 		
+				// Отслеживаем прогресс во время выполнения процесса
+				int progressCounter = 0;
+				while (!process.HasExited)
+				{
+					// Периодически обновляем прогресс
+					ReportProgress($"{operationName}... {progressCounter}%");
+			
+					// Даем процессу поработать 100мс перед следующей проверкой
+					if (await Task.WhenAny(Task.Delay(100), Task.Run(() => process.WaitForExit(100))) == Task.CompletedTask)
+						break;
+				
+					// Увеличиваем счетчик прогресса (просто для визуализации)
+					progressCounter = (progressCounter + 1) % 100;
+				}
+		
+				// Получаем результаты асинхронного чтения
+				string output = await outputTask;
+				string error = await errorTask;
+		
+				App.MessageBuffer.AddLine(output);
+				if (!string.IsNullOrEmpty(error))
+					App.MessageBuffer.AddLine(error, App.MessageBuffer.MessageType.Error);
+			}
+	
+			// Вспомогательный метод для отчета о прогрессе
+			private static void ReportProgress(string message, int? percent = null)
+			{
+				var progress = App.ProgressContext.Current;
+				if (progress != null)
+				{
+					progress.Report(new ProgressReport { 
+						Message = message, 
+						Percent = percent,
+						Increment = percent.HasValue ? null : 1
+					});
+				}
+			}
 		}
+
 
 	}
 }
