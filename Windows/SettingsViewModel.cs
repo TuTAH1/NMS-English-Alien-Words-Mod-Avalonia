@@ -81,10 +81,15 @@ namespace NMS_EnglishAlienWordsMod_Avalonia.Windows
 			 Path.Combine(NoMansSkyGamePath, PakTargetPath, PakTargetName);  
 		
 		public string MbinCompilerAssetName { get; set; } = "MBINCompiler.exe";
+		private string _languagesRegex;
 		[Category("GeneratorSettings")]
-		[DisplayName("LanguagesBinFilesRegex")]
-		[Description("Regex for finding LANGUAGE .BIN files in the  pak.")]  
-		public string languagesRegex { get; set; }  = @"LANGUAGE\/NMS_(LOC|UPDATE)\d{1,2}_ENGLISH\.BIN";
+		[DisplayName("Languages .mbin files Regex")]
+		[Description("Regular expression for finding LANGUAGE .MBIN files in the  pak. Not case-sensitive")]  
+		public string languagesRegex 
+		{
+			get => _languagesRegex ?? $@"LANGUAGE\/NMS_(LOC|UPDATE)\d{{1,2}}_{TargetLanguage}\.MBIN";
+			set => _languagesRegex = value;
+		}
 		
 		[Category("GeneratorSettings")]
 		[DisplayName("Target Language")]

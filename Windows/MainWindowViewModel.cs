@@ -3,7 +3,6 @@ using Avalonia.Media;
 using AvaloniaDialogs.Views;
 using CommunityToolkit.Mvvm;
 using NMS_EnglishAlienWordsMod_Avalonia.Logic;
-using NMSEnglishAlienWordsMod_Avalonia.Properties;
 using Octokit;
 using System;
 using System.Collections.Generic;
@@ -39,16 +38,46 @@ namespace NMS_EnglishAlienWordsMod_Avalonia.Windows
 								  MbinCompilerManager.IsDownloaded(SelectedVersion.VersionName) ? "Create mod" : "Download MBINCompiler";
 		public bool ButtonActive => SelectedVersion != null && isGamePathValid;
 		private bool isGamePathValid => !Validator.TryValidateProperty(
-        AppProperties.CurrentSettings.NoMansSkyGamePath,
-        new ValidationContext(AppProperties.CurrentSettings) { MemberName = nameof(AppProperties.CurrentSettings.NoMansSkyGamePath) },
+		Logic.App.CurrentSettings.NoMansSkyGamePath,
+        new ValidationContext(Logic.App.CurrentSettings) { MemberName = nameof(Logic.App.CurrentSettings.NoMansSkyGamePath) },
         new List<ValidationResult>());
 
 
-		public SettingsObject Settings  => AppProperties.CurrentSettings;
-		public int Progress { get; set; } = 0;
+		public SettingsObject Settings  => Logic.App.CurrentSettings;
+
+		private int _progress;
+		public int Progress
+		{
+			get => _progress;
+			set
+			{
+				if (_progress != value)
+				{
+					_progress = value;
+					OnPropertyChanged(nameof(Progress));
+					OnPropertyChanged(nameof(IsProgressbarVisible));
+				}
+			}
+		}
+
+		private string _progressText = string.Empty;
+		public string ProgressText
+		{
+			get => _progressText;
+		    set
+			{
+				if (_progressText != value)
+				{
+					_progressText = value;
+					OnPropertyChanged(nameof(ProgressText));
+				}
+			}
+		}
+
+		public bool IsProgressbarVisible => true;
 
 		#endregion Field and properties
-		
+
 
 		#region Version droplist
 		public ObservableCollection<VersionItem> VersionList { get; } = new();
@@ -187,7 +216,7 @@ namespace NMS_EnglishAlienWordsMod_Avalonia.Windows
 					AddOrUpdateVersion(
 						new VersionItem(
 					release.TagName,
-					release.Assets.Where(a => a.Name.EndsWith(AppProperties.CurrentSettings.MbinCompilerAssetName)).FirstOrDefault()?.BrowserDownloadUrl ?? string.Empty,
+					release.Assets.Where(a => a.Name.EndsWith(Logic.App.CurrentSettings.MbinCompilerAssetName)).FirstOrDefault()?.BrowserDownloadUrl ?? string.Empty,
 					AvailabilityStatus.NotDownloaded
 						)
 					);
@@ -198,7 +227,8 @@ namespace NMS_EnglishAlienWordsMod_Avalonia.Windows
 			}
 			catch (Exception ex) {
 				SingleActionDialog dialog = new() { Message = $"Error getting MBINCompiler versions: {ex.Message}", ButtonText = "Ok" };
-				await dialog.ShowAsync();
+				Logic.App.ErrorWindow = dialog;
+				Logic.App.MessageBuffer.AddLine(ex);
 			}
 			finally {
 				IsLoadingVersionList = false; //. UI spinner off

@@ -14,7 +14,7 @@ namespace NMS_EnglishAlienWordsMod_Avalonia.Logic
 	internal class MbinCompilerManager
 	{
 		public static string MbinCompilerPath = "MbinCompilers\\";
-		public static string MbinCompilerAssetName = AppProperties.CurrentSettings.MbinCompilerAssetName;
+		public static string MbinCompilerAssetName = App.CurrentSettings.MbinCompilerAssetName;
 		public string versionName;
 		public static async Task DownloadAsync(string versionName, string downloadUri)
 		{

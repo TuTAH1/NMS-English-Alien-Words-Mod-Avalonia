@@ -12,7 +12,7 @@ public partial class Settings : Window
 	public Settings()
 	{
 		InitializeComponent();
-		DataContext = AppProperties.SettingsModel;
+		DataContext = Logic.App.SettingsModel;
 		SettingsGrid.DefaultOptionsButton.IsVisible = false;
 		SetWindowMinSize();
 	}

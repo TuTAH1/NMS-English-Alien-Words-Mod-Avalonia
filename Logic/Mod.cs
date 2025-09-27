@@ -6,34 +6,65 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
-using static NMS_EnglishAlienWordsMod_Avalonia.Logic.AppProperties;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace NMS_EnglishAlienWordsMod_Avalonia.Logic
 {
+	
+
 	internal class Mod
 	{
-		static string _languagesRegex = CurrentSettings.languagesRegex;
+		static string _languagesRegex = App.CurrentSettings.languagesRegex.ToLower();
 		static string[] _languagesList;
-		static List<string> _LanguagesList => CurrentSettings.Languages; //. List of Property names of languages
+		static List<string> _LanguagesList => App.CurrentSettings.Languages; //. List of Property names of languages
 		//string languagesListPath = "Content/LanguagesList.txt";
 
 		//private string[] SetLanguagesList() => _languagesList??= GetLanguagesList();
 		//private string[] GetLanguagesList() => File.ReadAllLines(languagesListPath);
-		static string _pakPath = CurrentSettings.GetPakTargetFullPath();
-
-		public static void Create()
+		static string _pakPath = App.CurrentSettings.GetPakTargetFullPath();
+		private static async Task AddProgressMessage(string message = null, int increment = 0, int? percent = null)
 		{
-			HgpakTool.ListPakContents();
-			CurrentState.MessageBuffer.AddText("## "); CurrentState.MessageBuffer.AddLine("Pak contents listed", CurrentState.MessageBuffer.MessageType.Good);
-			if (CurrentSettings.StopAfter <=SettingsObject.DebugStopPoint.FilelistJson) return;
+			if (message !=null) {
+				App.MessageBuffer.AddText("## ");
+				App.MessageBuffer.AddLine(message, App.MessageBuffer.MessageType.Good);
+			}
 
-			HgpakTool.CreateFilteredJsonFilelist();
-			CurrentState.MessageBuffer.AddText("## "); CurrentState.MessageBuffer.AddLine("Filtered Json Filelist Created", CurrentState.MessageBuffer.MessageType.Good);
-			if (CurrentSettings.StopAfter <= SettingsObject.DebugStopPoint.changedFilelistJson) return;
+			// Репортим в текущий контекст, если он задан
+			var progress = App.ProgressContext.Current;
+			if (progress == null) return;
+
+			var report = new ProgressReport
+			{
+				Message = message,
+				Increment = increment,
+				Percent = percent
+			};
+
+			progress.Report(report);
+			await Task.Yield(); //Let the UI thread process the report
+		}
+		public static async Task Create(IProgress<ProgressReport>? Progress = null, CancellationToken Ct = default)
+		{
+			using (var _ = App.ProgressContext.Set(Progress))
+			{
+
+				await AddProgressMessage("Listing pak content", percent: 0);
+
+				await HgpakTool.ListPakContents();
+				await AddProgressMessage("Pak contents listed", 10);
+				if (App.CurrentSettings.StopAfter <=SettingsObject.DebugStopPoint.FilelistJson) return;
 			
-			HgpakTool.UnpackBin();
-			CurrentState.MessageBuffer.AddText("## "); CurrentState.MessageBuffer.AddLine("Bin unpacked", CurrentState.MessageBuffer.MessageType.Good);
-			if (CurrentSettings.StopAfter <= SettingsObject.DebugStopPoint.UnpackBin) return;
+				await AddProgressMessage("Filtering Json Filelist");
+				await HgpakTool.CreateFilteredJsonFilelist();
+				await AddProgressMessage("Filtered Json Filelist Created", 10);
+				if (App.CurrentSettings.StopAfter <= SettingsObject.DebugStopPoint.changedFilelistJson) return;
+			
+				await AddProgressMessage("Unpacking Bin files");
+				await HgpakTool.UnpackBin();
+				await AddProgressMessage("Bin unpacked", 20);
+				if (App.CurrentSettings.StopAfter <= SettingsObject.DebugStopPoint.UnpackBin) return;
+			}
 					
 		}
 
@@ -59,21 +90,20 @@ namespace NMS_EnglishAlienWordsMod_Avalonia.Logic
 			/// <summary>
 			/// Uses HGPakTool to create a "filenames.json" file of the contents in a pak file.	
 			/// </summary>
-			static public void ListPakContents()
+			static public Task ListPakContents()
 			{
 				if(!File.Exists(_toolFullPath))
 					throw new FileNotFoundException("HGPakTool not found.");
 					
 				toolStartInfo.Arguments = $"-L \"{_pakPath}\"";
 				var process = Process.Start(toolStartInfo)!;
-				string output = process.StandardOutput.ReadToEnd();
-				string error = process.StandardError.ReadToEnd();
-				CurrentState.MessageBuffer.AddLine(output);
-				CurrentState.MessageBuffer.AddLine(error, CurrentState.MessageBuffer.MessageType.Error);
-				process.WaitForExit();					
+				LogProcess(process);
+				process.WaitForExit();			
+				
+				return Task.CompletedTask;
 			}
 
-			static public void CreateFilteredJsonFilelist()
+			static public Task CreateFilteredJsonFilelist()
 			{
 				if (!File.Exists(_filelistJsonPath))
 					ListPakContents();
@@ -82,12 +112,15 @@ namespace NMS_EnglishAlienWordsMod_Avalonia.Logic
 				
 				try {
 					var json = File.ReadAllText(_filelistJsonPath);
-					var files = JsonConvert.DeserializeObject<PakFiles>(json);
-					List<string>? filesOfThePak = files?.Files.First().Value;
+					var files = JsonConvert.DeserializeObject<Dictionary<string, List<string>>>(json);
+					List<string>? filesOfThePak = files?.First().Value;
 					if(filesOfThePak == null)
 						throw new NullReferenceException("filesOfThePak is null. Probably, something is wrong with your Regex.");
-					var filteredFiles = filesOfThePak.Where(file => Regex.IsMatch(file, _languagesRegex));
-					File.WriteAllText(_filteredFilelistJsonPath, JsonConvert.SerializeObject(filteredFiles));
+					List<string> filteredFiles = filesOfThePak.Where(file => Regex.IsMatch(file, _languagesRegex)).ToList();
+					files.Remove(files.Keys.First());
+					files.Add("FilteredFiles", filteredFiles);
+					//\ App.MessageBuffer.AddLine($"Debug: 7th file is {filesOfThePak[6]}, regex is {_languagesRegex}, is match: {Regex.IsMatch(filesOfThePak[6], _languagesRegex)}");
+					File.WriteAllText(_filteredFilelistJsonPath, JsonConvert.SerializeObject(files));
 				}
 				catch (Exception ex) {
 					throw new Exception("Error while creating filteredFilenames.json", ex);
@@ -96,23 +129,33 @@ namespace NMS_EnglishAlienWordsMod_Avalonia.Logic
 					if(File.Exists(_filelistJsonPath))
 						File.Delete(_filelistJsonPath);
 				}
+
+				return Task.CompletedTask;
 			}
 
-			static public void UnpackBin()
+			static public Task UnpackBin()
 			{
 				if(!File.Exists(Path.Combine(_workingDir,_toolPath)))
 					throw new FileNotFoundException("HGPakTool not found.");
 						
-				toolStartInfo.Arguments = $"-j {_filteredFilelistJsonPath} -U {_pakPath}";
+				toolStartInfo.Arguments = $"-j \"{_filteredFilelistJsonPath}\" -U \"{_pakPath}\"";
 				var process = Process.Start(toolStartInfo)!;
-				process.WaitForExit();
+				LogProcess(process);
+				process.WaitForExit();	
+
+				return Task.CompletedTask;
+			}
+
+			private static void LogProcess(Process process)
+			{
+				string output = process.StandardOutput.ReadToEnd();
+				string error = process.StandardError.ReadToEnd();
+				App.MessageBuffer.AddLine(output);
+				App.MessageBuffer.AddLine(error, App.MessageBuffer.MessageType.Error);
+				process.WaitForExit();	
 			}
 		
 		}
 
-		public class PakFiles
-		{
-			public Dictionary<string, List<string>> Files { get; set; }
-		}
 	}
 }

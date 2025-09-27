@@ -26,6 +26,7 @@
 - [x] Check for existing MBIN compiler before downloading
 - [ ] Settings save
 - [ ] Settings reset (create default settings on start)
+- [ ] Add cancel button and realize cancellation token
 
 # On release
 - [ ]

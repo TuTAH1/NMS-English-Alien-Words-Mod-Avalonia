@@ -6,7 +6,10 @@ using AvaloniaDialogs.Views;
 using NMS_EnglishAlienWordsMod_Avalonia.Logic;
 using NMS_EnglishAlienWordsMod_Avalonia.Windows;
 using System;
-using static NMS_EnglishAlienWordsMod_Avalonia.Logic.AppProperties;
+using System.Diagnostics;
+using System.Threading;
+using System.Threading.Tasks;
+using static NMS_EnglishAlienWordsMod_Avalonia.Logic.App;
 using static NMS_EnglishAlienWordsMod_Avalonia.Windows.MainWindowViewModel;
 
 namespace NMS_EnglishAlienWordsMod_Avalonia
@@ -24,12 +27,12 @@ namespace NMS_EnglishAlienWordsMod_Avalonia
 
 		#region Window Events
 
-		protected override void OnOpened(EventArgs e)
+		protected override async void OnOpened(EventArgs e)
 		{
 			base.OnOpened(e);
 			if (Design.IsDesignMode) return; //skip logic if in design mode
 		
-			InitializeEverything();
+			await InitializeEverything();
 			this.Loaded += OnLoadedAsync;
 		
 		}
@@ -64,7 +67,7 @@ namespace NMS_EnglishAlienWordsMod_Avalonia
 
 		#region Initialization Methods
 		//. Initializes everything. What do you mean it's not how you name methods??
-		private void InitializeEverything()
+		private async Task InitializeEverything()
 		{
 			InitializeDebugTools();
 			CreateErrorDialogHost();
@@ -120,52 +123,80 @@ namespace NMS_EnglishAlienWordsMod_Avalonia
 		#endregion Initialization Methods
 
 		#region ControlsEventHandlers
-		private void btnMBINC_CheckUpdates_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+		private void btnMBINC_CheckUpdates_Click(object? sender, RoutedEventArgs e)
 		{
 			_vm.UpdateReleasesOnlineAsync();
 		}
 
-		private async void ButtonCreate_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+		private CancellationTokenSource? _cts;
+		private async void ButtonCreate_Click(object? sender, RoutedEventArgs e)
 		{
+			Console.Markdown = "";
+			_cts = new CancellationTokenSource();
+			Task modCreation = Task.CompletedTask;
+
+			var progress = new Progress<ProgressReport>(report =>
+			{
+				if (report.Percent.HasValue)
+					_vm.Progress = report.Percent.Value;
+				else if (report.Increment.HasValue)
+					_vm.Progress = Math.Clamp(_vm.Progress + report.Increment.Value, 0, 100);
+
+				if (!string.IsNullOrEmpty(report.Message))
+					_vm.ProgressText = report.Message;
+
+				var chunk = MessageBuffer.GetAndClear();
+				if (!string.IsNullOrEmpty(chunk))
+					Console.Markdown += chunk;
+
+			});
+
 			try {
-				//: Check if MBINCompiler version is not selected
 				if (cbMBINCompilerVersion.SelectedItem == null) {
 					SingleActionDialog dialog = new() { Message = "Please select a version of MBINCompiler", ButtonText = "Ok" };
 					return;
 				}
-				//: check if selected MBINCompiler version is not downloaded
+
 				if(!MbinCompilerManager.IsDownloaded(MbincSelectedVersion.VersionName))
-				{ //? NOT downloaded
-					try
-					{
+				{
+					try {
 						_vm.IsDownloadingMbinc = true;
 						await MbinCompilerManager.DownloadAsync(MbincSelectedVersion.VersionName, MbincSelectedVersion.DownloadUri);
 					}
-					catch(Exception ex)
-					{
+					catch(Exception ex) {
 						_vm.ShowErrorMessage?.Invoke($"Failed to download MBINCompiler: {ex.Message}");
 					}
-					finally
-					{
+					finally {
 						_vm.IsDownloadingMbinc = false;
 					}
-
 					return;
 				}
 
-				Mod.Create();
+			//### Creating mod
+				modCreation = Mod.Create(progress, _cts.Token);
 
 			} catch (Exception ex) {
 				_vm.IsDownloadingMbinc = false;
-				SingleActionDialog dialog  = new() { Message = $"Error: {ex.Message}", ButtonText = "Ok" };
-				await dialog.ShowAsync();
+				MessageBuffer.AddLine(ex);
+				Logic.App.ErrorWindow = new() { Message = $"Error: {ex.Message}", ButtonText = "Ok" };
 			}
 			finally {
-				Console.Markdown = CurrentState.MessageBuffer.GetAndClear();
+				try {
+					await modCreation;
+				}
+				catch (OperationCanceledException) {
+					MessageBuffer.AddLine("Cancelled");
+				}
+				catch (Exception ex) {
+					MessageBuffer.AddLine($"Error: {ex.Message}");
+				}
+				Console.Markdown += MessageBuffer.GetAndClear();
+
+				ShowError();
 			}
 		}
 
-		private void btnSettings_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+		private void btnSettings_Click(object? sender, RoutedEventArgs e)
 		{
 			Settings settings = new();
 			settings.Show();
