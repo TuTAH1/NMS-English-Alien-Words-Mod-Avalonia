@@ -155,7 +155,7 @@
 						<Border BorderBrush="{DynamicResource BorderColor}" BorderThickness="2" CornerRadius="4" Margin="5" Padding="5" Grid.Row="1">
 							<Grid Grid.Row="1">
 								<md:MarkdownScrollViewer xml:space="preserve" x:Name="Console">
-																
+									Markdown was here							
 								</md:MarkdownScrollViewer>
 							</Grid>
 						</Border>
