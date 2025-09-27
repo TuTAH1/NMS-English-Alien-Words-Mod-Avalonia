@@ -13,19 +13,28 @@ public partial class Settings : Window
 	{
 		InitializeComponent();
 		DataContext = AppProperties.SettingsModel;
+		SettingsGrid.DefaultOptionsButton.IsVisible = false;
+		SetWindowMinSize();
 	}
 
-	 private void OnCustomPropertyDescriptorFilter(object sender, RoutedEventArgs args)
+	// Display only GeneratorSettings category
+	private void OnCustomPropertyDescriptorFilter(object sender, RoutedEventArgs args)
 	{
 		if (args is CustomPropertyDescriptorFilterEventArgs { TargetObject: SettingsObject} e)
 		{
 			if (e.PropertyDescriptor.Category == "GeneratorSettings") {
 				e.IsVisible = true;
 			} else {
-				 e.IsVisible = false;
+				e.IsVisible = false;
 			}
 			e.Handled = true;
 		}
+	}
+	private void SetWindowMinSize()
+	{
+		//probably may be calculated, но мне лень
+		this.MinWidth = 655;
+		this.MinHeight = 520;
 	}
 	
 }

@@ -1,6 +1,7 @@
 using Avalonia.Controls;
 using Avalonia.Media;
 using AvaloniaDialogs.Views;
+using CommunityToolkit.Mvvm;
 using NMS_EnglishAlienWordsMod_Avalonia.Logic;
 using NMSEnglishAlienWordsMod_Avalonia.Properties;
 using Octokit;
@@ -8,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -15,7 +17,6 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using Titanium;
-using CommunityToolkit.Mvvm;
 
 
 namespace NMS_EnglishAlienWordsMod_Avalonia.Windows
@@ -36,15 +37,22 @@ namespace NMS_EnglishAlienWordsMod_Avalonia.Windows
 		public string CreateButtonText => IsDownloadingMbinc ? "Downloading..." :
 								  SelectedVersion == null ? "Select MBINCompiler version" :
 								  MbinCompilerManager.IsDownloaded(SelectedVersion.VersionName) ? "Create mod" : "Download MBINCompiler";
+		public bool ButtonActive => SelectedVersion != null && isGamePathValid;
+		private bool isGamePathValid => !Validator.TryValidateProperty(
+        AppProperties.CurrentSettings.NoMansSkyGamePath,
+        new ValidationContext(AppProperties.CurrentSettings) { MemberName = nameof(AppProperties.CurrentSettings.NoMansSkyGamePath) },
+        new List<ValidationResult>());
 
-		public SettingsObject Settings => AppProperties.CurrentSettings;
+
+		public SettingsObject Settings  => AppProperties.CurrentSettings;
+		public int Progress { get; set; } = 0;
 
 		#endregion Field and properties
 		
 
 		#region Version droplist
 		public ObservableCollection<VersionItem> VersionList { get; } = new();
-		private VersionItem _selectedVersion;
+				private VersionItem _selectedVersion;
 		public VersionItem SelectedVersion
 		{
 			get => _selectedVersion;

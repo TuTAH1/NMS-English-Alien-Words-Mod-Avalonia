@@ -5,21 +5,27 @@
 - [x] Add classes and styles for different AvailabilityStatus
 - [x] Add settings categories
 - [x] Add progressbar/spinner when downloading MBINC
-- [ ] Validate game path
+- [x] Validate game path
+- [x] Add console output
+	- [x] In markdown style
+	- [ ] Add exception description (and recursive inner exception handling) in console
 
 # Functionality
+- [ ] Unpack specific game PAK file using HGPAK tool
+	- [x] Look for MetadataEtc.pak
+	- [ ] extract `LANGUAGE\/NMS_(LOC|UPDATE)\d{1,2}_ENGLISH\.BIN` (regex)
+	- [ ] Unpack only needed files
+		- [0] get filelist json
+		- [0] make new filelist json using regex
+		- [ ] unback bin using new filelist json
+
+- [ ] Search for words in English text files, 
+
+- [x] Add editable languages list
 - [x] Download MBIN compiler when clicking Create
 - [x] Check for existing MBIN compiler before downloading
 - [ ] Settings save
 - [ ] Settings reset (create default settings on start)
-- [ ] Unpack specific game BIN file using HGPAK tool
-	- [ ] Look for MetadataEtc.pak
-	- [ ] extract `LANGUAGE\/NMS_(LOC|UPDATE)\d{1,2}_ENGLISH\.BIN` (regex)
-	- [ ] Unpack only needed files
-- [ ] Search for words in English text files, 
-
-- [ ] Add editable languages list – txt file?
-	- [ ] language *class*, _fields_: `filename` /*is needed?*/ `languagename?`
 
 # On release
 - [ ]

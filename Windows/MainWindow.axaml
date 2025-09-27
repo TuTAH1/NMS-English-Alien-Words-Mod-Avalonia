@@ -2,16 +2,18 @@
 		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-		mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 		xmlns:local="clr-namespace:NMS_EnglishAlienWordsMod_Avalonia.Windows"
-		x:Class="NMS_EnglishAlienWordsMod_Avalonia.MainWindow"
-		x:DataType="local:MainWindowViewModel"
 		xmlns:w="clr-namespace:NMS_EnglishAlienWordsMod_Avalonia.Windows;assembly=NMS_EnglishAlienWordsMod_Avalonia"
 		xmlns:fa="clr-namespace:FluentAvalonia.UI.Controls;assembly=FluentAvalonia"
 		xmlns:c="using:LoadingIndicators.Avalonia"
 		xmlns:dialogs="using:AvaloniaDialogs.Views"
 		xmlns:conv="using:NMS_EnglishAlienWordsMod_Avalonia.Windows.Converters"
 		xmlns:apc="clr-namespace:Avalonia.PropertyGrid.Controls;assembly=Avalonia.PropertyGrid"
+		xmlns:md="https://github.com/whistyun/Markdown.Avalonia"
+		
+		mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+		x:Class="NMS_EnglishAlienWordsMod_Avalonia.MainWindow"
+		x:DataType="local:MainWindowViewModel"
 
 
 		
@@ -109,23 +111,40 @@
 					<apc:PropertyGrid x:Name="SettingsGrid"
 				  IsTitleVisible="False"
 				  IsCategoryVisible="False"
-                  IsQuickFilterVisible="False"
+				  IsQuickFilterVisible="False"
 				  IsHeaderVisible="False"
 				  CustomPropertyDescriptorFilter="OnCustomPropertyDescriptorFilter"
-                  DataContext="{Binding Settings}"/>
-
+				  DataContext="{Binding Settings}"/>
 				</Grid>
 				<Grid Grid.Row="2" x:Name="gProgress">
-					<ProgressBar Margin="5" Height="20" IsVisible="False"></ProgressBar>
+					<ProgressBar x:Name="ProgressBar" Margin="5" Height="20" IsVisible="False" Value="{Binding Progress}" Maximum="100"/>
 				</Grid>
-				<Grid Grid.Row="3" x:Name="Console" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+				<!--Cons-->
+				<Grid Grid.Row="3" x:Name="gridConsole" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
 					<Grid.RowDefinitions>
 						<RowDefinition Height="Auto" />
 						<RowDefinition Height="*" />
 					</Grid.RowDefinitions>
 					<Label Content="Debug text:"></Label>
-					<TextBlock Grid.Row="1" Background="Black" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-					</TextBlock>
+					<Grid Grid.Row="1">
+						<md:MarkdownScrollViewer xml:space="preserve" x:Name="Console">
+							## %{color:red}red test%
+							&lt;hr/&gt;
+							&lt;details&gt;
+							  &lt;summary&gt;Нажми, чтобы развернуть спойлер&lt;/summary&gt;
+							  Это скрытый текст, который виден только после клика.
+							  - Пункт 1
+							  - Пункт 2
+							  &lt;details&gt;
+							  &lt;summary&gt;Нажми, чтобы развернуть спойлер&lt;/summary&gt;
+							  Это скрытый текст, который виден только после клика.
+							  - Пункт 1
+							  - Пункт 2
+							&lt;/details&gt;
+							&lt;/details&gt;
+							
+						  </md:MarkdownScrollViewer>
+					</Grid>
 				</Grid>
 			</Grid>
 		<ContentControl x:Name="DialogHostPlaceholder"/>

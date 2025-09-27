@@ -4,17 +4,65 @@
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 xmlns:apc="clr-namespace:Avalonia.PropertyGrid.Controls;assembly=Avalonia.PropertyGrid"
 			 xmlns:w="clr-namespace:NMS_EnglishAlienWordsMod_Avalonia.Windows;assembly=NMS_EnglishAlienWordsMod_Avalonia"
+			 xmlns:fa="clr-namespace:FluentAvalonia.UI.Controls;assembly=FluentAvalonia"
+
 			 mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 			 x:Class="NMS_EnglishAlienWordsMod_Avalonia.Windows.Settings"
 			 x:DataType="w:SettingsViewModel">
+	<Window.Resources>
+		<!-- Ресурсы для тем, использующие системные кисти FluentAvalonia -->
+		<ResourceDictionary>
+			<ResourceDictionary.ThemeDictionaries>
+				<!-- Светлая тема -->
+				<ResourceDictionary x:Key="Light">
+					<SolidColorBrush x:Key="WarningBackgroundBrush" Color="#FFF4D4"/>
+					<SolidColorBrush x:Key="WarningBorderBrush" Color="#FFA000"/>
+					<SolidColorBrush x:Key="WarningTextBrush" Color="#E67E22"/>
+					<SolidColorBrush x:Key="WarningIconBrush" Color="#D32F2F"/>
+				</ResourceDictionary>
+				<!-- Тёмная тема -->
+				<ResourceDictionary x:Key="Dark">
+					<SolidColorBrush x:Key="WarningBackgroundBrush" Color="#4B3A00"/>
+					<SolidColorBrush x:Key="WarningBorderBrush" Color="#806600"/>
+					<SolidColorBrush x:Key="WarningTextBrush" Color="#FFB74D"/>
+					<SolidColorBrush x:Key="WarningIconBrush" Color="#E63939"/>
+				</ResourceDictionary>
+			</ResourceDictionary.ThemeDictionaries>
+		</ResourceDictionary>
+	</Window.Resources>
 	<Design.DataContext>
 		<!-- This only sets the DataContext for the previewer in an IDE,
 		 to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
 		<w:SettingsViewModel/>
 	</Design.DataContext>
+	
 
-	<!-- bind your target object to DataContext -->
-	<Grid>
+
+	<StackPanel>
+	<!-- Warning banner -->
+		<Border Name="WarningBanner"
+                Background="{DynamicResource WarningBackgroundBrush}"
+                BorderBrush="{DynamicResource WarningBorderBrush}"
+                BorderThickness="1"
+                CornerRadius="4"
+                Margin="10,10,10,20"
+                Padding="12">
+			<Grid ColumnDefinitions="Auto,*">
+				<!-- Warning Icon -->
+				<fa:SymbolIcon Symbol="ImportantFilled"
+                              Foreground="{DynamicResource WarningIconBrush}"
+                              FontSize="20"/>
+				<!-- Warning Text -->
+				<TextBlock Grid.Column="1"
+                           Text="Warning! Changing these parameters may and will cause errors. Use only if program needs adjustments and doesn't work with default parameters."
+                           TextWrapping="Wrap"
+                           VerticalAlignment="Center"
+                           Foreground="{DynamicResource WarningTextBrush}"
+                           FontWeight="Medium"
+                           Margin="8,0,0,0"/>
+			</Grid>
+		</Border>
+	<!-- Settings -->
 		<apc:PropertyGrid x:Name="SettingsGrid" 
 						  IsTitleVisible="False"
 						  IsCategoryVisible="False"
@@ -23,5 +71,5 @@
                           IsQuickFilterVisible="False"
 						  CustomPropertyDescriptorFilter="OnCustomPropertyDescriptorFilter"
                           DataContext="{Binding Target}"/>
-	</Grid>
+	</StackPanel>
 </UserControl>

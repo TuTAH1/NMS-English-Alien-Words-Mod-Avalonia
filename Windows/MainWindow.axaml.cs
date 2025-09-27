@@ -5,12 +5,8 @@ using Avalonia.PropertyGrid.Controls;
 using AvaloniaDialogs.Views;
 using NMS_EnglishAlienWordsMod_Avalonia.Logic;
 using NMS_EnglishAlienWordsMod_Avalonia.Windows;
-using Octokit;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Threading.Tasks;
-using Titanium;
+using static NMS_EnglishAlienWordsMod_Avalonia.Logic.AppProperties;
 using static NMS_EnglishAlienWordsMod_Avalonia.Windows.MainWindowViewModel;
 
 namespace NMS_EnglishAlienWordsMod_Avalonia
@@ -23,7 +19,7 @@ namespace NMS_EnglishAlienWordsMod_Avalonia
 		{
 			InitializeComponent();	
 			
-			DataContext = AppProperties.SettingsModel;
+			DataContext = SettingsModel;
 		}
 
 		#region Window Events
@@ -31,13 +27,9 @@ namespace NMS_EnglishAlienWordsMod_Avalonia
 		protected override void OnOpened(EventArgs e)
 		{
 			base.OnOpened(e);
-
 			if (Design.IsDesignMode) return; //skip logic if in design mode
 		
-			InitializeDebugTools();
-			CreateErrorDialogHost();
-			InitializeViewModel();
-			SetWindowMinSize();
+			InitializeEverything();
 			this.Loaded += OnLoadedAsync;
 		
 		}
@@ -56,9 +48,7 @@ namespace NMS_EnglishAlienWordsMod_Avalonia
 			}
 		}
 
-		#endregion Window Events
-
-		//Essential settings category filter
+		//. Essential settings category filter
 		private void OnCustomPropertyDescriptorFilter(object sender, RoutedEventArgs args)
 		{
 			if (args is CustomPropertyDescriptorFilterEventArgs { TargetObject: SettingsObject} e)
@@ -70,10 +60,20 @@ namespace NMS_EnglishAlienWordsMod_Avalonia
 				e.Handled = true;
 			}
 		}
+		#endregion Window Events
 
 		#region Initialization Methods
+		//. Initializes everything. What do you mean it's not how you name methods??
+		private void InitializeEverything()
+		{
+			InitializeDebugTools();
+			CreateErrorDialogHost();
+			InitializeViewModel();
+			SetWindowMinSize();
+			ClearConsole();
+		}
 
-		// Adding Error Dialog to main grid
+		//. Adding Error Dialog to main grid
 		private void CreateErrorDialogHost()
 		{
 			var host = new ReactiveDialogHost
@@ -105,8 +105,16 @@ namespace NMS_EnglishAlienWordsMod_Avalonia
 
 		private void SetWindowMinSize()
 		{
-			this.MinWidth = 485; //may be calculated, но мне лень
-			this.MinHeight = 110;
+			//may be calculated, но мне лень
+			this.MinWidth = 485;
+			this.MinHeight = 183;
+		}
+
+		private void ClearConsole()
+		{
+			#if  !DEBUG
+			Console.Markdown = "";
+			#endif
 		}
 
 		#endregion Initialization Methods
@@ -142,16 +150,19 @@ namespace NMS_EnglishAlienWordsMod_Avalonia
 						_vm.IsDownloadingMbinc = false;
 					}
 
-				// После скачивания можно автоматически продолжать создание мода или оставлять для следующего клика
-				return;
-			}
-				//? downloaded
-				//: check if No Mans Sky Path is valid
-				//: Unpack 
+					return;
+				}
+
+				Mod.Create();
+
 			} catch (Exception ex) {
 				_vm.IsDownloadingMbinc = false;
 				SingleActionDialog dialog  = new() { Message = $"Error: {ex.Message}", ButtonText = "Ok" };
-			}			
+				await dialog.ShowAsync();
+			}
+			finally {
+				Console.Markdown = CurrentState.MessageBuffer.GetAndClear();
+			}
 		}
 
 		private void btnSettings_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
@@ -167,6 +178,11 @@ namespace NMS_EnglishAlienWordsMod_Avalonia
 
 		#endregion ControlsEventHandlers
 
+		#region Window methods
+
+
+
+		#endregion Window methods
 		private VersionItem MbincSelectedVersion => ((cbMBINCompilerVersion.SelectedItem) as VersionItem);
 			
 	}
