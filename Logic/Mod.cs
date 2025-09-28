@@ -257,6 +257,8 @@ namespace NMS_EnglishAlienWordsMod_Avalonia.Logic
 			
 					await LogProcessAsync(process, 30);
 
+					
+					if (!AppGlobals.CurrentSettings.CleanMbinsAfterConverting) return;
 					//: Clean up .mbin files after unpacking
 					var mbinFiles = Directory.GetFiles(TargetDirectoryPath, "*.mbin", SearchOption.AllDirectories);
 					foreach (var file in mbinFiles)
@@ -265,6 +267,9 @@ namespace NMS_EnglishAlienWordsMod_Avalonia.Logic
 			}
 		}
 
-
+		private static class XmlComposer
+		{
+			//. Not implemented yet
+		}
 	}
 }
