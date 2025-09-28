@@ -30,6 +30,12 @@
 			</ResourceDictionary.ThemeDictionaries>
 		</ResourceDictionary>
 	</Window.Resources>
+	<UserControl.Styles>
+		<Style Selector="apc|PropertyGrid TextBlock">
+			<Setter Property="TextWrapping" Value="Wrap"/>
+		</Style>
+	</UserControl.Styles>
+	
 	<Design.DataContext>
 		<!-- This only sets the DataContext for the previewer in an IDE,
 		 to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
@@ -38,38 +44,43 @@
 	
 
 
-	<StackPanel>
-	<!-- Warning banner -->
+	<DockPanel LastChildFill="True">
+		<!-- Warning banner -->
 		<Border Name="WarningBanner"
-                Background="{DynamicResource WarningBackgroundBrush}"
-                BorderBrush="{DynamicResource WarningBorderBrush}"
-                BorderThickness="1"
-                CornerRadius="4"
-                Margin="10,10,10,20"
-                Padding="12">
+				DockPanel.Dock="Top"
+				Background="{DynamicResource WarningBackgroundBrush}"
+				BorderBrush="{DynamicResource WarningBorderBrush}"
+				BorderThickness="1"
+				CornerRadius="4"
+				Margin="10,10,10,20"
+				Padding="12">
 			<Grid ColumnDefinitions="Auto,*">
 				<!-- Warning Icon -->
 				<fa:SymbolIcon Symbol="ImportantFilled"
-                              Foreground="{DynamicResource WarningIconBrush}"
-                              FontSize="20"/>
+							  Foreground="{DynamicResource WarningIconBrush}"
+							  FontSize="20"/>
 				<!-- Warning Text -->
 				<TextBlock Grid.Column="1"
-                           Text="Warning! Changing these parameters may and will cause errors. Use only if program needs adjustments and doesn't work with default parameters."
-                           TextWrapping="Wrap"
-                           VerticalAlignment="Center"
-                           Foreground="{DynamicResource WarningTextBrush}"
-                           FontWeight="Medium"
-                           Margin="8,0,0,0"/>
+						   Text="Warning! Changing these parameters may and will cause errors. Use only if program needs adjustments and doesn't work with default parameters."
+						   TextWrapping="Wrap"
+						   VerticalAlignment="Center"
+						   Foreground="{DynamicResource WarningTextBrush}"
+						   FontWeight="Medium"
+						   Margin="8,0,0,0"/>
 			</Grid>
 		</Border>
-	<!-- Settings -->
-		<apc:PropertyGrid x:Name="SettingsGrid" 
-						  IsTitleVisible="False"
-						  IsCategoryVisible="False"
-                          NameWidth="200"
-                          Margin="10"
-                          IsQuickFilterVisible="False"
-						  CustomPropertyDescriptorFilter="OnCustomPropertyDescriptorFilter"
-                          DataContext="{Binding Target}"/>
-	</StackPanel>
+
+		<!-- Settings -->
+		<ScrollViewer HorizontalScrollBarVisibility="Disabled"
+					  VerticalScrollBarVisibility="Auto">
+			<apc:PropertyGrid x:Name="SettingsGrid"
+							  IsTitleVisible="False"
+							  IsCategoryVisible="True"
+							  NameWidth="200"
+							  Margin="10"
+							  IsQuickFilterVisible="False"
+							  CustomPropertyDescriptorFilter="OnCustomPropertyDescriptorFilter"
+							  DataContext="{Binding Target}"/>
+		</ScrollViewer>
+	</DockPanel>
 </UserControl>

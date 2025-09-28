@@ -38,12 +38,12 @@ namespace NMS_EnglishAlienWordsMod_Avalonia.Windows
 								  MbinCompilerManager.IsDownloaded(SelectedVersion.VersionName) ? "Create mod" : "Download MBINCompiler";
 		public bool ButtonActive => SelectedVersion != null && isGamePathValid;
 		private bool isGamePathValid => !Validator.TryValidateProperty(
-		Logic.App.CurrentSettings.NoMansSkyGamePath,
-        new ValidationContext(Logic.App.CurrentSettings) { MemberName = nameof(Logic.App.CurrentSettings.NoMansSkyGamePath) },
+		Logic.AppGlobals.CurrentSettings.NoMansSkyGamePath,
+        new ValidationContext(Logic.AppGlobals.CurrentSettings) { MemberName = nameof(Logic.AppGlobals.CurrentSettings.NoMansSkyGamePath) },
         new List<ValidationResult>());
 
 
-		public SettingsObject Settings  => Logic.App.CurrentSettings;
+		public SettingsObject Settings  => Logic.AppGlobals.CurrentSettings;
 
 		private int _progress;
 		public int Progress
@@ -216,7 +216,7 @@ namespace NMS_EnglishAlienWordsMod_Avalonia.Windows
 					AddOrUpdateVersion(
 						new VersionItem(
 					release.TagName,
-					release.Assets.Where(a => a.Name.EndsWith(Logic.App.CurrentSettings.MbinCompilerAssetName)).FirstOrDefault()?.BrowserDownloadUrl ?? string.Empty,
+					release.Assets.Where(a => a.Name.EndsWith(Logic.AppGlobals.CurrentSettings.MbinCompilerAssetName)).FirstOrDefault()?.BrowserDownloadUrl ?? string.Empty,
 					AvailabilityStatus.NotDownloaded
 						)
 					);
@@ -227,8 +227,8 @@ namespace NMS_EnglishAlienWordsMod_Avalonia.Windows
 			}
 			catch (Exception ex) {
 				SingleActionDialog dialog = new() { Message = $"Error getting MBINCompiler versions: {ex.Message}", ButtonText = "Ok" };
-				Logic.App.ErrorWindow = dialog;
-				Logic.App.MessageBuffer.AddLine(ex);
+				Logic.AppGlobals.ErrorWindow = dialog;
+				Logic.AppGlobals.MessageBuffer.AddLine(ex);
 			}
 			finally {
 				IsLoadingVersionList = false; //. UI spinner off

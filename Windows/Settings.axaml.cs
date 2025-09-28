@@ -12,9 +12,10 @@ public partial class Settings : Window
 	public Settings()
 	{
 		InitializeComponent();
-		DataContext = Logic.App.SettingsModel;
+		DataContext = Logic.AppGlobals.SettingsModel;
 		SettingsGrid.DefaultOptionsButton.IsVisible = false;
 		SetWindowMinSize();
+		InitializeDebugTools();
 	}
 
 	// Display only GeneratorSettings category
@@ -22,10 +23,11 @@ public partial class Settings : Window
 	{
 		if (args is CustomPropertyDescriptorFilterEventArgs { TargetObject: SettingsObject} e)
 		{
-			if (e.PropertyDescriptor.Category == "GeneratorSettings") {
-				e.IsVisible = true;
-			} else {
+			if (AppGlobals.HiddenSettingsWindowCategories
+				.Contains(e.PropertyDescriptor.Category))  {
 				e.IsVisible = false;
+			} else {
+				e.IsVisible = true;
 			}
 			e.Handled = true;
 		}
@@ -34,7 +36,14 @@ public partial class Settings : Window
 	{
 		//probably may be calculated, но мне лень
 		this.MinWidth = 655;
-		this.MinHeight = 520;
+		this.MinHeight = 400;
+	}
+
+	private void InitializeDebugTools()
+	{
+		#if DEBUG
+		this.AttachDevTools();
+		#endif
 	}
 	
 }

@@ -9,7 +9,6 @@ using System;
 using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
-using static NMS_EnglishAlienWordsMod_Avalonia.Logic.App;
 using static NMS_EnglishAlienWordsMod_Avalonia.Windows.MainWindowViewModel;
 
 namespace NMS_EnglishAlienWordsMod_Avalonia
@@ -22,7 +21,7 @@ namespace NMS_EnglishAlienWordsMod_Avalonia
 		{
 			InitializeComponent();	
 			
-			DataContext = SettingsModel;
+			DataContext = AppGlobals.SettingsModel;
 		}
 
 		#region Window Events
@@ -122,7 +121,7 @@ namespace NMS_EnglishAlienWordsMod_Avalonia
 
 		#endregion Initialization Methods
 
-		#region ControlsEventHandlers
+		#region Controls Event Handlers
 		private void btnMBINC_CheckUpdates_Click(object? sender, RoutedEventArgs e)
 		{
 			_vm.UpdateReleasesOnlineAsync();
@@ -145,7 +144,7 @@ namespace NMS_EnglishAlienWordsMod_Avalonia
 				if (!string.IsNullOrEmpty(report.Message))
 					_vm.ProgressText = report.Message;
 
-				var chunk = MessageBuffer.GetAndClear();
+				var chunk = AppGlobals.MessageBuffer.GetAndClear();
 				if (!string.IsNullOrEmpty(chunk))
 					Console.Markdown += chunk;
 
@@ -171,28 +170,29 @@ namespace NMS_EnglishAlienWordsMod_Avalonia
 					}
 					return;
 				}
+				AppGlobals.Mbinc = new MbinCompilerManager { Version = MbincSelectedVersion.VersionName };
 
-			//### Creating mod
+				//### Creating mod
 				modCreation = Mod.Create(progress, _cts.Token);
 
 			} catch (Exception ex) {
 				_vm.IsDownloadingMbinc = false;
-				MessageBuffer.AddLine(ex);
-				Logic.App.ErrorWindow = new() { Message = $"Error: {ex.Message}", ButtonText = "Ok" };
+				AppGlobals.MessageBuffer.AddLine(ex);
+				AppGlobals.ErrorWindow = new() { Message = $"Error: {ex.Message}", ButtonText = "Ok" };
 			}
 			finally {
 				try {
 					await modCreation;
 				}
 				catch (OperationCanceledException) {
-					MessageBuffer.AddLine("Cancelled");
+					AppGlobals.MessageBuffer.AddLine("Cancelled");
 				}
 				catch (Exception ex) {
-					MessageBuffer.AddLine($"Error: {ex.Message}");
+					AppGlobals.MessageBuffer.AddLine($"Error: {ex.Message}");
 				}
-				Console.Markdown += MessageBuffer.GetAndClear();
+				Console.Markdown += AppGlobals.MessageBuffer.GetAndClear();
 
-				ShowError();
+				AppGlobals.ShowError();
 			}
 		}
 

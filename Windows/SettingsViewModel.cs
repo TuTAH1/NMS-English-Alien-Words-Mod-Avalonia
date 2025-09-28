@@ -52,6 +52,8 @@ namespace NMS_EnglishAlienWordsMod_Avalonia.Windows
 			changedFilelistJson,
 			[EnumDisplayName("unpacking bin files to temp directory")]
 			UnpackBin,
+			[EnumDisplayName("converting mbin files to xml")]
+			UnpackMbins,
 			[EnumDisplayName("finishing creating the mod")]
 			Never
 		}
@@ -64,25 +66,23 @@ namespace NMS_EnglishAlienWordsMod_Avalonia.Windows
 
 		public string NoMansSkyGamePath { get; set; }
 
-		[Category("GeneratorSettings")]
+		[Category("HGPAK tool")]
 		[DisplayName("Target Pak's Path")]
 		[Description("Path to the folder, containing target pak file.")]
 		public string PakTargetPath { get; set; } = "GAMEDATA\\PCBANKS\\";
 
-		[Category("GeneratorSettings")]
+		[Category("HGPAK tool")]
 		[DisplayName("Target Pak's Name")]
 		[Description("Name of pak file containing localization files (LANGUAGE folder).")]
 		public string PakTargetName { get; set; } = "NMSARC.MetadataEtc.pak";
-
-		[Category("GeneratorSettings")]
-		[DisplayName("MBIN Compiler asset name")]
-		[Description("Name of the asset, containing MBIN Compiler executable for your system (in Github page → Releases → Assets).")]
+		[Category("HGPAK tool")]
+		[DisplayName("Full Target Pak's Path")]
+		[Description("Full path to the pak file containing localization files (LANGUAGE folder).")]
+		[ReadOnly(true)]
 		public string GetPakTargetFullPath()  =>
 			 Path.Combine(NoMansSkyGamePath, PakTargetPath, PakTargetName);  
-		
-		public string MbinCompilerAssetName { get; set; } = "MBINCompiler.exe";
 		private string _languagesRegex;
-		[Category("GeneratorSettings")]
+		[Category("HGPAK tool")]
 		[DisplayName("Languages .mbin files Regex")]
 		[Description("Regular expression for finding LANGUAGE .MBIN files in the  pak. Not case-sensitive")]  
 		public string languagesRegex 
@@ -90,13 +90,30 @@ namespace NMS_EnglishAlienWordsMod_Avalonia.Windows
 			get => _languagesRegex ?? $@"LANGUAGE\/NMS_(LOC|UPDATE)\d{{1,2}}_{TargetLanguage}\.MBIN";
 			set => _languagesRegex = value;
 		}
-		
-		[Category("GeneratorSettings")]
+
+		[Category("Mbin compiler")]
+		[DisplayName("MBIN Compiler asset name")]
+		[Description("Name of the asset, containing MBIN Compiler executable for your system (in Github page → Releases → Assets).")]
+		public string MbinCompilerAssetName { get; set; } = "MBINCompiler.exe";
+		[Category("Mbin compiler")]
+		[DisplayName("MBIN Compiler versions path")]
+		[Description("Path to the folder containing mbin files to unpack (HGPAK tool output folder)")]
+		public string MbinTargetDirectoryPath => Path.Combine(Environment.CurrentDirectory,"Content","EXTRACTED\\language");
+		[Category("Mbin compiler")]
+		[DisplayName("Clean mbin files after converting")]
+		[Description("If true, deletes .mbin files after converting them to .xml files")]
+		public bool CleanMbinsAfterConverting { get; set; } = true;
+
+		[Category("Debug")]
+		[DisplayName("Stop creating mod after")]
+		[Description("Stops the process after specified step.")] 
+		public DebugStopPoint StopAfter { get; set; } = DebugStopPoint.Never;
+		[Category("Miscellaneous")]
 		[DisplayName("Target Language")]
 		[Description("Language that will be taken as source of alien language words. Must be English")]  
 		public string TargetLanguage  { get; set; } = "English";
 
-		[Category("GeneratorSettings")]
+		[Category("Miscellaneous")]
 		[DisplayName("Languages")]
 		[Description("List of languages that will be included in the mod, except English")]
 		public List<string> Languages { get; set; } = new() {
@@ -117,10 +134,7 @@ namespace NMS_EnglishAlienWordsMod_Avalonia.Windows
 			"Japanese"
 		};
 		
-		[Category("GeneratorSettings")]
-		[DisplayName("Stop creating mod after")]
-		[Description("Stops the process after specified step.")] 
-		public DebugStopPoint StopAfter { get; set; } = DebugStopPoint.Never;
+	
 		
 		
 		

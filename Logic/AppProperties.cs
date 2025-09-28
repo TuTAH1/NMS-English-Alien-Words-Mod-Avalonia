@@ -9,13 +9,14 @@ using System.Threading.Tasks;
 
 namespace NMS_EnglishAlienWordsMod_Avalonia.Logic
 {
-	public static partial class App
+	public static partial class AppGlobals
 	{
 		public static SettingsViewModel SettingsModel = new();
 		public static SettingsObject CurrentSettings => SettingsModel.Target;
 		//public static State CurrentState = new();
 		public static SingleActionDialog? ErrorWindow {private get; set;} = null;
 		//. Showing and nullifiing error window. Don't need to be awaited.
+		internal static MbinCompilerManager Mbinc = null;
 		public static async Task ShowError(SingleActionDialog? ErrorDialog = null)
 		{
 			if (ErrorDialog!=null) ErrorWindow = ErrorDialog;
@@ -23,6 +24,11 @@ namespace NMS_EnglishAlienWordsMod_Avalonia.Logic
 			await ErrorWindow.ShowAsync();
 			ErrorWindow = null;
 		}
+
+		public static readonly List<string> HiddenSettingsWindowCategories = new()
+		{
+			"Essential"
+		};
 
 		public static class MessageBuffer { 
 			private static string _text = "";

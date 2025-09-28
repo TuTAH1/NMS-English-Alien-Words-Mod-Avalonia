@@ -10,7 +10,7 @@ namespace NMS_EnglishAlienWordsMod_Avalonia.Logic
 		public string? Message { get; set; }
 	}
 
-	public static partial class App
+	public static partial class AppGlobals
 	{
 		public static class ProgressContext
 		{

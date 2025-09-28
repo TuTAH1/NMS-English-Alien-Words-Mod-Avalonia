@@ -11,11 +11,16 @@ using FileMode = System.IO.FileMode;
 
 namespace NMS_EnglishAlienWordsMod_Avalonia.Logic
 {
+	/// <summary>
+	/// Manages MBINCompiler versions: downloading, checking local versions, paths. Do not include mod-specific logic here.
+	/// </summary>
 	internal class MbinCompilerManager
 	{
 		public static string MbinCompilerPath = "MbinCompilers\\";
-		public static string MbinCompilerAssetName = App.CurrentSettings.MbinCompilerAssetName;
-		public string versionName;
+		public static string MbinCompilerAssetName = AppGlobals.CurrentSettings.MbinCompilerAssetName;
+		public required string Version;
+		public string ExePath => $"{MbinCompilerPath}{Version}\\{MbinCompilerAssetName}";
+
 		public static async Task DownloadAsync(string versionName, string downloadUri)
 		{
 			try
