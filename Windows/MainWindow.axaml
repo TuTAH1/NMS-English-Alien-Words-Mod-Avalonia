@@ -17,7 +17,7 @@
 
 
 		
-		Title="NMS English Alien Words Mod" Width="800" Height="450">
+		Title="{Binding AppName}" Width="800" Height="450">
 
 	<Window.Resources>
 				<!-- Ресурсы для тем, использующие системные кисти FluentAvalonia -->
@@ -134,7 +134,7 @@
 				<Grid Grid.Row="2" x:Name="gProgress">
 					<StackPanel Orientation="Vertical">
 						<Label x:Name="lbProgress" Content="{Binding ProgressText}" HorizontalAlignment="Center" Foreground="Blue" IsVisible="{Binding IsProgressbarVisible}"/>
-						<ProgressBar x:Name="ProgressBar" Margin="5" Height="20" IsVisible="{Binding IsProgressbarVisible}" Value="{Binding Progress}" Maximum="200" >
+						<ProgressBar x:Name="ProgressBar" Margin="5" Height="20" IsVisible="{Binding IsProgressbarVisible}" Value="{Binding Progress}" Maximum="200">
 						<ProgressBar.Transitions>
 							<Transitions>
 								<DoubleTransition Property="Value" Duration="0:0:0.1" Easing="CubicEaseInOut"/>

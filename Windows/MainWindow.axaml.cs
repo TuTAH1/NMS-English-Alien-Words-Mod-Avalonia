@@ -179,6 +179,7 @@ namespace NMS_EnglishAlienWordsMod_Avalonia
 				_vm.IsDownloadingMbinc = false;
 				AppGlobals.MessageBuffer.AddLine(ex);
 				AppGlobals.ErrorWindow = new() { Message = $"Error: {ex.Message}", ButtonText = "Ok" };
+
 			}
 			finally {
 				try {
@@ -192,7 +193,7 @@ namespace NMS_EnglishAlienWordsMod_Avalonia
 				}
 				Console.Markdown += AppGlobals.MessageBuffer.GetAndClear();
 
-				AppGlobals.ShowError();
+				await Task.Run(async () => {await AppGlobals.ShowError();});
 			}
 		}
 

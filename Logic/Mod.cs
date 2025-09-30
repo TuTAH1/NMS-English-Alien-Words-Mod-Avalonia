@@ -1,11 +1,8 @@
-﻿using Newtonsoft.Json;
-using NMS_EnglishAlienWordsMod_Avalonia.Windows;
+﻿using NMS_EnglishAlienWordsMod_Avalonia.Windows;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -13,7 +10,7 @@ namespace NMS_EnglishAlienWordsMod_Avalonia.Logic
 {
 	
 
-	internal class Mod
+	internal partial class Mod
 	{
 		static string _languagesRegex = AppGlobals.CurrentSettings.languagesRegex.ToLower();
 		static string[] _languagesList;
@@ -22,15 +19,15 @@ namespace NMS_EnglishAlienWordsMod_Avalonia.Logic
 
 		//private string[] SetLanguagesList() => _languagesList??= GetLanguagesList();
 		//private string[] GetLanguagesList() => File.ReadAllLines(languagesListPath);
-		static string _pakPath = AppGlobals.CurrentSettings.GetPakTargetFullPath();
-		private static async Task AddProgressMessage(string message = null, int increment = 0, int? percent = null)
+		static string _pakPath => AppGlobals.CurrentSettings.GetPakTargetFullPath();
+		private static async Task AddProgressMessage(string? message = null, int increment = 0, int? percent = null)
 		{
 			if (message !=null) {
 				AppGlobals.MessageBuffer.AddText("## ");
 				AppGlobals.MessageBuffer.AddLine(message, AppGlobals.MessageBuffer.MessageType.Good);
 			}
 
-			// Репортим в текущий контекст, если он задан
+			// Report to current context
 			var progress = AppGlobals.ProgressContext.Current;
 			if (progress == null) return;
 
@@ -69,6 +66,16 @@ namespace NMS_EnglishAlienWordsMod_Avalonia.Logic
 				await MbinCompiler.UnpackAllMbins();
 				await AddProgressMessage("MBIN files converted to XML", 2);
 				if (AppGlobals.CurrentSettings.StopAfter <= SettingsObject.DebugStopPoint.UnpackMbins) return;
+
+				await AddProgressMessage("Starting alien word extraction...");
+				var dictionary = await XmlComposer.ExtractAlienWordsAsync();
+
+				AppGlobals.MessageBuffer.AddLine("Starting mxml generation...");
+				var mxmlContent = await XmlComposer.GenerateMxmlFileAsync(dictionary);
+
+				AppGlobals.MessageBuffer.AddLine("Processing completed", AppGlobals.MessageBuffer.MessageType.Good);
+
+				await XmlComposer.SaveMxmlToFileAsync(mxmlContent);
 			}
 					
 		}
@@ -116,160 +123,5 @@ namespace NMS_EnglishAlienWordsMod_Avalonia.Logic
 			if (!string.IsNullOrEmpty(error))
 				AppGlobals.MessageBuffer.AddLine(error, AppGlobals.MessageBuffer.MessageType.Error);
 		}
-		
-
-		/// <summary>
-		/// Wrapper for HGPakTool.exe functionality
-		/// Unpacks needed English language .mbin files from the specified .pak file by specified languagesRegex
-		/// </summary>
-		private static class HgpakTool
-		{
-			static string toolPath = "HGPakTool.exe";
-			static string workingDir = "Content";
-			static string toolFullPath = Path.Combine(workingDir, toolPath);
-			static string filelistJsonPath = $"{workingDir}/filenames.json";
-			static string filteredFilelistJsonName = $"FilteredFilenames.json";
-			static ProcessStartInfo toolStartInfo = new ProcessStartInfo()
-			{
-				FileName = toolFullPath,
-				WorkingDirectory = workingDir,
-				RedirectStandardOutput = true,
-				RedirectStandardError = true,
-				UseShellExecute = false
-			};
-
-			/// <summary>
-			/// List the contents of the specified .pak
-			/// </summary>
-			/// <returns></returns>
-			/// <exception cref="FileNotFoundException"></exception>
-			public static async Task ListPakContents()
-			{
-				await Task.Run(async () => 
-				{
-					if(!File.Exists(toolFullPath))
-						throw new FileNotFoundException("HGPakTool not found.");
-				
-					toolStartInfo.Arguments = $"-L \"{_pakPath}\"";
-					var process = Process.Start(toolStartInfo)!;
-			
-					await LogProcessAsync(process, 5);
-				});
-			}
-
-			/// <summary>
-			/// Create a <b>filteredFilenames.json file</b> list containing only files that match the specified language regex, using the existing <b>filenames.json</b> file.
-			/// </summary>
-			/// <returns></returns>
-			/// <exception cref="FileNotFoundException">filenames.json not found</exception>
-			/// <exception cref="NullReferenceException">filenames.json wasn't deserialized correctly</exception>
-
-			/// <exception cref="Exception"></exception>
-			public static async Task CreateFilteredJsonFilelist()
-			{
-				await Task.Run(async () => 
-				{
-					if (!File.Exists(filelistJsonPath))
-						await ListPakContents();
-        
-					if (!File.Exists(filelistJsonPath) && !File.Exists(filteredFilelistJsonName))
-						throw new FileNotFoundException("filenames.json wasn't created by HGPakTool. Try creating filteredFilenames.json manually");
-        
-					try {
-						await AddProgressMessage(null, 2);
-            
-						var json = await File.ReadAllTextAsync(filelistJsonPath);
-						var files = JsonConvert.DeserializeObject<Dictionary<string, List<string>>>(json);
-						var pakPath = files.Keys.First();
-						var filesOfThePak = files[pakPath];
-            
-						if(filesOfThePak == null)
-							throw new NullReferenceException("filesOfThePak is null");
-            
-						await AddProgressMessage(null, 3);
-            
-						List<string> filteredFiles = filesOfThePak.Where(file => 
-							Regex.IsMatch(file, _languagesRegex)).ToList();
-						files[pakPath] = filteredFiles;
-            
-						await AddProgressMessage(null, 3);
-            
-						await File.WriteAllTextAsync(filteredFilelistJsonName, JsonConvert.SerializeObject(files, Formatting.Indented));
-					}
-					catch (Exception ex) {
-						throw new Exception("Error while creating filteredFilenames.json", ex);
-					}
-					finally {
-						if(File.Exists(filelistJsonPath))
-							File.Delete(filelistJsonPath);
-					}
-				});
-			}
-
-			/// <summary>
-			/// Unpack .mbin files from the specified .pak file, only ones that listed in the <b>filteredFilenames.json</b> file
-			/// </summary>
-			/// <returns></returns>
-			/// <exception cref="FileNotFoundException">HGPakTool or filteredFilenames.json</exception>
-			public static async Task UnpackBin()
-			{
-				await Task.Run(async () => 
-				{
-					if(!File.Exists(toolFullPath))
-						throw new FileNotFoundException("HGPakTool not found.");
-					if(!File.Exists(filteredFilelistJsonName))
-						throw new FileNotFoundException("filteredFilenames.json not found. Can't unpack files without it.");
-
-					toolStartInfo.Arguments = $"-j {filteredFilelistJsonName} -U \"{_pakPath}\"";
-					var process = Process.Start(toolStartInfo)!;
-			
-					await LogProcessAsync(process, 10);
-				});
-			}
-		}
-		/// <summary>
-		/// Wrapper for MBINCompiler functionality
-		/// unpaks all .mbin files in the specified target directory to .xml files... that's all. I don't know why did I created this class just for 1 func
-		/// </summary>
-		private static class MbinCompiler
-		{
-			public static string TargetDirectoryPath => Path.Combine(Environment.CurrentDirectory,"Content","EXTRACTED\\language");
-			private static ProcessStartInfo toolStartInfo = new ProcessStartInfo()
-			{
-				FileName = AppGlobals.Mbinc!.ExePath,
-				WorkingDirectory = TargetDirectoryPath,
-				RedirectStandardOutput = true,
-				RedirectStandardError = true,
-				UseShellExecute = false
-			};
-			public static async Task UnpackAllMbins()
-			{
-				await Task.Run(async () => 
-				{
-					if(!File.Exists(toolStartInfo.FileName))
-						throw new FileNotFoundException("MBINCompiler not found.");
-				
-					//? Check if there's mbin files in specified location
-					if(!Directory.Exists(TargetDirectoryPath) || !Directory.EnumerateFiles(TargetDirectoryPath, "*.mbin", SearchOption.AllDirectories).Any())
-						throw new FileNotFoundException("No .mbin files found to unpack. Make sure you unpacked the pak file with HGPakTool first.");
-					toolStartInfo.Arguments = $"{TargetDirectoryPath} --input-format=MBIN"; //TODO: can be moved to settings, but it requires making a method for replacing keywords with settings variables 
-					var process = Process.Start(toolStartInfo)!;
-			
-					await LogProcessAsync(process, 30);
-
-					
-					if (!AppGlobals.CurrentSettings.CleanMbinsAfterConverting) return;
-					//: Clean up .mbin files after unpacking
-					var mbinFiles = Directory.GetFiles(TargetDirectoryPath, "*.mbin", SearchOption.AllDirectories);
-					foreach (var file in mbinFiles)
-						File.Delete(file);
-				});
-			}
-		}
-
-		private static class XmlComposer
-		{
-			//. Not implemented yet
-		}
-	}
+}
 }

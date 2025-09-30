@@ -1,19 +1,18 @@
+
 using Avalonia.Controls;
-using Avalonia.Media;
+using Avalonia.Data.Converters;
 using AvaloniaDialogs.Views;
-using CommunityToolkit.Mvvm;
 using NMS_EnglishAlienWordsMod_Avalonia.Logic;
-using Octokit;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using Titanium;
 
@@ -30,20 +29,20 @@ namespace NMS_EnglishAlienWordsMod_Avalonia.Windows
 		}
 
 		#region Field and properties
+		public string AppName => AppGlobals.AppName;
 
 		public Action<string>? ShowErrorMessage;
-
 		public string CreateButtonText => IsDownloadingMbinc ? "Downloading..." :
-								  SelectedVersion == null ? "Select MBINCompiler version" :
-								  MbinCompilerManager.IsDownloaded(SelectedVersion.VersionName) ? "Create mod" : "Download MBINCompiler";
+										  SelectedVersion == null ? "Select MBINCompiler version" :
+										  MbinCompilerManager.IsDownloaded(SelectedVersion.VersionName) ? "Create mod" : "Download MBINCompiler";
 		public bool ButtonActive => SelectedVersion != null && isGamePathValid;
 		private bool isGamePathValid => !Validator.TryValidateProperty(
-		Logic.AppGlobals.CurrentSettings.NoMansSkyGamePath,
-        new ValidationContext(Logic.AppGlobals.CurrentSettings) { MemberName = nameof(Logic.AppGlobals.CurrentSettings.NoMansSkyGamePath) },
-        new List<ValidationResult>());
+		AppGlobals.CurrentSettings.NoMansSkyGamePath,
+		new ValidationContext(AppGlobals.CurrentSettings) { MemberName = nameof(AppGlobals.CurrentSettings.NoMansSkyGamePath) },
+		new List<ValidationResult>());
 
 
-		public SettingsObject Settings  => Logic.AppGlobals.CurrentSettings;
+		public SettingsObject Settings  => AppGlobals.CurrentSettings;
 
 		private int _progress;
 		public int Progress
@@ -64,7 +63,7 @@ namespace NMS_EnglishAlienWordsMod_Avalonia.Windows
 		public string ProgressText
 		{
 			get => _progressText;
-		    set
+			set
 			{
 				if (_progressText != value)
 				{
@@ -73,6 +72,24 @@ namespace NMS_EnglishAlienWordsMod_Avalonia.Windows
 				}
 			}
 		}
+		public enum ProgressSuccessState
+		{
+			Unset,
+			Success,
+			Warning,
+			Error
+		}
+		private ProgressSuccessState _progressState = ProgressSuccessState.Unset;
+		public ProgressSuccessState ProgressState
+		{
+			get => _progressState;
+			set
+			{
+				_progressState = value;
+				PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ProgressState)));
+			}
+		}
+
 
 		public bool IsProgressbarVisible => Progress > 0;
 
@@ -192,7 +209,7 @@ namespace NMS_EnglishAlienWordsMod_Avalonia.Windows
 			}
 		}
 
-		
+
 
 
 		// Manages the content of cbMBINCompilerVersion combobox, serialization, interface-only. Release contents version and assets download link
@@ -216,7 +233,7 @@ namespace NMS_EnglishAlienWordsMod_Avalonia.Windows
 					AddOrUpdateVersion(
 						new VersionItem(
 					release.TagName,
-					release.Assets.Where(a => a.Name.EndsWith(Logic.AppGlobals.CurrentSettings.MbinCompilerAssetName)).FirstOrDefault()?.BrowserDownloadUrl ?? string.Empty,
+					release.Assets.Where(a => a.Name.EndsWith(AppGlobals.CurrentSettings.MbinCompilerAssetName)).FirstOrDefault()?.BrowserDownloadUrl ?? string.Empty,
 					AvailabilityStatus.NotDownloaded
 						)
 					);
@@ -227,8 +244,8 @@ namespace NMS_EnglishAlienWordsMod_Avalonia.Windows
 			}
 			catch (Exception ex) {
 				SingleActionDialog dialog = new() { Message = $"Error getting MBINCompiler versions: {ex.Message}", ButtonText = "Ok" };
-				Logic.AppGlobals.ErrorWindow = dialog;
-				Logic.AppGlobals.MessageBuffer.AddLine(ex);
+				AppGlobals.ErrorWindow = dialog;
+				AppGlobals.MessageBuffer.AddLine(ex);
 			}
 			finally {
 				IsLoadingVersionList = false; //. UI spinner off

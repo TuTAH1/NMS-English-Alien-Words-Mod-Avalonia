@@ -10,6 +10,7 @@
 	- [x] In markdown style
 	- [x] Add exception description (and recursive inner exception handling) in console
 - [ ] Add remove MBIN compiler version button
+- [0] Add Validation for English/Alien WordRegex and capture group number
 
 # Functionality
 - [x] Unpack specific game PAK file using HGPAK tool
@@ -19,8 +20,9 @@
 		- [x] get filelist json
 		- [x] make new filelist json using regex
 		- [x] unback bin using new filelist json
-	- [ ] Unpack all .mbin files with mbinCompiler
-- [ ] Search for words in English text files, 
+	- [x] Unpack all .mbin files with mbinCompiler
+- [x] Search for words in English text files
+- [x] Generate and save mod mxml file 
 
 - [x] Add editable languages list
 - [x] Download MBIN compiler when clicking Create

@@ -24,6 +24,8 @@ namespace NMS_EnglishAlienWordsMod_Avalonia.Logic
 			await ErrorWindow.ShowAsync();
 			ErrorWindow = null;
 		}
+		public static string ModName = "English Alien Words";
+		public static string AppName = "No Man's Sky  English Alien Words  Mod Creator";
 
 		public static readonly List<string> HiddenSettingsWindowCategories = new()
 		{
