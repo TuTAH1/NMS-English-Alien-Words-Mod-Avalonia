@@ -23,7 +23,8 @@ namespace NMS_EnglishAlienWordsMod_Avalonia.Logic
 				WorkingDirectory = TargetDirectoryPath,
 				RedirectStandardOutput = true,
 				RedirectStandardError = true,
-				UseShellExecute = false
+				UseShellExecute = false,
+				CreateNoWindow = true
 			};
 			public static async Task UnpackAllMbins()
 			{

@@ -94,6 +94,7 @@ namespace NMS_EnglishAlienWordsMod_Avalonia.Logic
 				StringBuilder wordBlocksBuilder = new StringBuilder();
 				int totalWords = AlienToEnglishDictionary.Count;
 				int processedWords = 0;
+				int wordsForIncrement = totalWords / 50;
 
 				try {
 					foreach (var pair in AlienToEnglishDictionary) {
@@ -121,8 +122,11 @@ namespace NMS_EnglishAlienWordsMod_Avalonia.Logic
 						wordBlocksBuilder.AppendLine(wordBlock);
 
 						processedWords++;
-						int increment = totalWords > 0 ? 50 / totalWords : 0;
-						await AddProgressMessage(null, increment);
+
+						if (wordsForIncrement > 0 && processedWords % wordsForIncrement == 0) {
+							await AddProgressMessage(null, 1);
+						}
+
 					}
 
 					// Create final mxml file using template
@@ -139,6 +143,7 @@ namespace NMS_EnglishAlienWordsMod_Avalonia.Logic
 			internal static async Task SaveMxmlToFileAsync(string MxmlContent)
 			{
 				string filePath = Path.Combine(AppGlobals.CurrentSettings.NoMansSkyModsPath, AppGlobals.CurrentSettings.ModFileName);
+				Directory.CreateDirectory(AppGlobals.CurrentSettings.NoMansSkyModsPath);
 				if (string.IsNullOrEmpty(MxmlContent)) {
 					AppGlobals.MessageBuffer.AddLine("No content to save", AppGlobals.MessageBuffer.MessageType.Warn);
 					return;

@@ -10,6 +10,8 @@
 		xmlns:conv="using:NMS_EnglishAlienWordsMod_Avalonia.Windows.Converters"
 		xmlns:apc="clr-namespace:Avalonia.PropertyGrid.Controls;assembly=Avalonia.PropertyGrid"
 		xmlns:md="https://github.com/whistyun/Markdown.Avalonia"
+		xmlns:styling="using:Avalonia.Styling"
+		xmlns:vm="clr-namespace:NMS_EnglishAlienWordsMod_Avalonia.Windows"
 		
 		mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 		x:Class="NMS_EnglishAlienWordsMod_Avalonia.MainWindow"
@@ -35,7 +37,37 @@
 			</ResourceDictionary.ThemeDictionaries>
 		</ResourceDictionary>
 		<conv:EnumEqualsConverter x:Key="EnumEq"/>
+		<SolidColorBrush x:Key="ProgressUnsetColor">Blue</SolidColorBrush>
+		<SolidColorBrush x:Key="ProgressSuccessColor">#4CAF50</SolidColorBrush>
+		<SolidColorBrush x:Key="ProgressWarningColor">#FFC107</SolidColorBrush>
+		<SolidColorBrush x:Key="ProgressErrorColor">#F44336</SolidColorBrush>
 	</Window.Resources>
+
+	<Window.Styles>
+		
+		<!--MBINCompilerVersion Droplist variants-->
+		<Style Selector="TextBlock.MBINCompilerVersion.downloaded">
+			<Setter Property="Foreground" Value="Green"/>
+		</Style>
+		<Style Selector="TextBlock.MBINCompilerVersion.localonly">
+			<Setter Property="Foreground" Value="Blue"/>
+		</Style>
+	
+        <!-- ProgressBar -->
+        <Style Selector="ProgressBar.stateful-progress">
+            <Setter Property="Foreground" Value="{StaticResource ProgressUnsetColor}"/>
+        </Style>
+        <Style Selector="ProgressBar.stateful-progress.success">
+            <Setter Property="Foreground" Value="{StaticResource ProgressSuccessColor}"/>
+        </Style>
+        <Style Selector="ProgressBar.stateful-progress.warning">
+            <Setter Property="Foreground" Value="{StaticResource ProgressWarningColor}"/>
+        </Style>
+        <Style Selector="ProgressBar.stateful-progress.error">
+            <Setter Property="Foreground" Value="{StaticResource ProgressErrorColor}"/>
+        </Style>
+    </Window.Styles>
+	
 	
 		<Grid>
 		
@@ -87,18 +119,10 @@
 									  SelectedItem="{Binding SelectedVersion, Mode=TwoWay}">
 										<ComboBox.ItemTemplate>
 											<DataTemplate>
-												<TextBlock Text="{Binding VersionName}"
+												<TextBlock Classes="MBINCompilerVersion" Text="{Binding VersionName}"
 													Classes.downloaded="{Binding FileAvailabilityStatus, Converter={StaticResource EnumEq}, ConverterParameter=Downloaded}"
 													Classes.notdownloaded="{Binding FileAvailabilityStatus, Converter={StaticResource EnumEq}, ConverterParameter=NotDownloaded}"
 													Classes.localonly="{Binding FileAvailabilityStatus, Converter={StaticResource EnumEq}, ConverterParameter=LocalOnly}">
-													<TextBlock.Styles>
-														<Style Selector="TextBlock.downloaded">
-															<Setter Property="Foreground" Value="Green"/>
-														</Style>
-														<Style Selector="TextBlock.localonly">
-															<Setter Property="Foreground" Value="Blue"/>
-														</Style>
-													</TextBlock.Styles>
 												</TextBlock>
 											</DataTemplate>
 										</ComboBox.ItemTemplate>
@@ -133,12 +157,17 @@
 				<!--Hidden progressbar-->
 				<Grid Grid.Row="2" x:Name="gProgress">
 					<StackPanel Orientation="Vertical">
-						<Label x:Name="lbProgress" Content="{Binding ProgressText}" HorizontalAlignment="Center" Foreground="Blue" IsVisible="{Binding IsProgressbarVisible}"/>
-						<ProgressBar x:Name="ProgressBar" Margin="5" Height="20" IsVisible="{Binding IsProgressbarVisible}" Value="{Binding Progress}" Maximum="200">
-						<ProgressBar.Transitions>
-							<Transitions>
-								<DoubleTransition Property="Value" Duration="0:0:0.1" Easing="CubicEaseInOut"/>
-							</Transitions>
+						<Label x:Name="lbProgress" Content="{Binding ProgressText}" HorizontalAlignment="Center" IsVisible="{Binding IsProgressbarVisible}"/>
+						<ProgressBar Classes="stateful-progress" x:Name="ProgressBar" Margin="5" Height="20"
+				 IsVisible="{Binding IsProgressbarVisible}" Value="{Binding Progress}" Maximum="180"
+				 Classes.success="{Binding ProgressState, Converter={StaticResource EnumEq}, ConverterParameter={x:Static vm:ProgressSuccessState.Success}}"
+				 Classes.warning="{Binding ProgressState, Converter={StaticResource EnumEq}, ConverterParameter={x:Static vm:ProgressSuccessState.Warning}}"
+				 Classes.error="{Binding ProgressState, Converter={StaticResource EnumEq}, ConverterParameter={x:Static vm:ProgressSuccessState.Error}}">
+							<ProgressBar.Transitions>
+								<Transitions>
+									<DoubleTransition Property="Value" Duration="0:0:0.1" Easing="CubicEaseInOut"/>
+									<BrushTransition Property="Foreground" Duration="0:0:0.3"/>
+								</Transitions>
 							</ProgressBar.Transitions>
 						</ProgressBar>
 					</StackPanel>

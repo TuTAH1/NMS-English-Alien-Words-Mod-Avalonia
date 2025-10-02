@@ -35,7 +35,16 @@ namespace NMS_EnglishAlienWordsMod_Avalonia.Logic
 			{
 				Message = message,
 				Increment = increment,
-				Percent = percent
+				Percent = percent,
+				SuccessState = AppGlobals.MessageBuffer.HighestMessageType switch
+				{
+					null => ProgressSuccessState.Unset,
+					AppGlobals.MessageBuffer.MessageType.Info => ProgressSuccessState.Unset,
+					AppGlobals.MessageBuffer.MessageType.Good => ProgressSuccessState.Success,
+					AppGlobals.MessageBuffer.MessageType.Warn => ProgressSuccessState.Warning,
+					AppGlobals.MessageBuffer.MessageType.Error => ProgressSuccessState.Error,
+					_ => ProgressSuccessState.Unset
+				}
 			};
 
 			progress.Report(report);

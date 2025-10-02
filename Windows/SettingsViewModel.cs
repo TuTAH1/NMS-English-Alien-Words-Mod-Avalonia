@@ -141,7 +141,7 @@ namespace NMS_EnglishAlienWordsMod_Avalonia.Windows
 		[PathBrowsable(PathBrowsableType.Directory)]
 		public string NoMansSkyModsPath
 		{
-			get => _noMansSkyModPath ?? Path.Combine(NoMansSkyGamePath, $"GAMEDATA\\GAMEDATAS\\MODS\\{AppGlobals.ModName}");
+			get => _noMansSkyModPath ?? Path.Combine(NoMansSkyGamePath, $"GAMEDATA\\MODS\\{AppGlobals.ModName}");
 			set => _noMansSkyModPath = value;
 		}
 		private string _noMansSkyModPath;
@@ -225,17 +225,17 @@ namespace NMS_EnglishAlienWordsMod_Avalonia.Windows
 		[Category("Xml composer")]
 		[DisplayName("Alien words regex")]
 		[Description("Regular expression for finding alien words in English xml files.")] // species: BUI, EXP, TRA, WAR
-		public string AlienWordRegex { get; set; } = @"			<Property name=""Id"" value=""(?!ATLAS_(STATION|NAME))(BUI_[A-Z]*|EXP_[A-Z]*|TRA_[A-Z]*|WAR_[A-Z]*|ATLAS_[A-Z]*)""";
+		public string AlienWordRegex { get; set; } = @"			<Property name=""Id"" value=""(?!((ATLAS|BUI|EXP|TRA|WAR)_NAME|ATLAS_STATION))(BUI_[A-Z]*|EXP_[A-Z]*|TRA_[A-Z]*|WAR_[A-Z]*|ATLAS_[A-Z]*)""";
 		[Category("Xml composer")]
 		[DisplayName("Capture group")]
 		[Description("Number of capture group in Alien words regex that contains the alien word itself")]
-		public int AlienWordCaptureGroupNumber { get; set; } = 1;
+		public int AlienWordCaptureGroupNumber { get; set; } = 3;
 
 		[ValidateRegex]
 		[Category("Xml composer")]
 		[DisplayName("English words regex")]
 		[Description("Regular expression for finding English translation for alien words above")]
-		public string EnglishWordRegex { get; set; } = @"			<Property name=""English"" value=""([a-z])"""; //todo: English can be replaced with variable TargetLanguage, but it's actually no sense of it. What did I even create TargetLanguate for?
+		public string EnglishWordRegex { get; set; } = @"			<Property name=""English"" value=""([a-z]*)"""; //todo: English can be replaced with variable TargetLanguage, but it's actually no sense of it. What did I even create TargetLanguate for?
 		[Category("Xml composer")]
 		[DisplayName("Capture group")]
 		[Description("Number of capture group in English words regex that contains the English word itself")]
@@ -264,7 +264,7 @@ namespace NMS_EnglishAlienWordsMod_Avalonia.Windows
 		public string WordBlockTemplate { get; set; } =
 @"		<Property name=""Table"" value=""TkLocalisationEntry"">
 			<Property name=""Id"" value=""{AlienWord}"" />
-			{OtherLanguages}
+{OtherLanguages}
 		</Property>";
 
 		/// <summary>

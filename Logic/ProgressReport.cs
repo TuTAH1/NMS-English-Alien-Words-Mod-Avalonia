@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NMS_EnglishAlienWordsMod_Avalonia.Windows;
+using System;
 using System.Threading;
 
 namespace NMS_EnglishAlienWordsMod_Avalonia.Logic
@@ -8,6 +9,7 @@ namespace NMS_EnglishAlienWordsMod_Avalonia.Logic
 		public int? Percent { get; set; }
 		public int? Increment { get; set; }
 		public string? Message { get; set; }
+		public ProgressSuccessState SuccessState { get; set; } = ProgressSuccessState.Unset;
 	}
 
 	public static partial class AppGlobals

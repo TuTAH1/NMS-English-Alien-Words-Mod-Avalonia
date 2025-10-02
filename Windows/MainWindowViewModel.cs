@@ -1,6 +1,3 @@
-
-using Avalonia.Controls;
-using Avalonia.Data.Converters;
 using AvaloniaDialogs.Views;
 using NMS_EnglishAlienWordsMod_Avalonia.Logic;
 using System;
@@ -8,7 +5,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -19,6 +15,13 @@ using Titanium;
 
 namespace NMS_EnglishAlienWordsMod_Avalonia.Windows
 {
+	public enum ProgressSuccessState
+	{
+		Unset,
+		Success,
+		Warning,
+		Error
+	}
 
 	public class MainWindowViewModel : INotifyPropertyChanged
 	{
@@ -26,6 +29,13 @@ namespace NMS_EnglishAlienWordsMod_Avalonia.Windows
 		{
 			// Если нужно, можно инициализировать коллекции, флаги и прочее
 			VersionList = new ObservableCollection<VersionItem>();
+		}
+
+		public event PropertyChangedEventHandler? PropertyChanged;
+
+		protected void OnPropertyChanged([CallerMemberName] string? propertyName = null)
+		{
+			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 		}
 
 		#region Field and properties
@@ -72,24 +82,19 @@ namespace NMS_EnglishAlienWordsMod_Avalonia.Windows
 				}
 			}
 		}
-		public enum ProgressSuccessState
-		{
-			Unset,
-			Success,
-			Warning,
-			Error
-		}
+
 		private ProgressSuccessState _progressState = ProgressSuccessState.Unset;
 		public ProgressSuccessState ProgressState
 		{
 			get => _progressState;
 			set
 			{
-				_progressState = value;
-				PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ProgressState)));
+				if (_progressState != value) {
+					_progressState = value;
+					OnPropertyChanged(nameof(ProgressState));
+				}
 			}
 		}
-
 
 		public bool IsProgressbarVisible => Progress > 0;
 
@@ -170,12 +175,6 @@ namespace NMS_EnglishAlienWordsMod_Avalonia.Windows
 		}
 		#endregion Version droplist
 
-		public event PropertyChangedEventHandler? PropertyChanged;
-
-		protected void OnPropertyChanged([CallerMemberName] string? propertyName = null)
-		{
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-		}
 
 		//mbinc check versions status for [version combobox]'s spinner
 		private bool _isLoadingVersionList;

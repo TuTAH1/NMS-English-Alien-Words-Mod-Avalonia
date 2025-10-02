@@ -34,8 +34,10 @@ namespace NMS_EnglishAlienWordsMod_Avalonia.Logic
 
 		public static class MessageBuffer { 
 			private static string _text = "";
-			private static string _newLine = "\r\n";
+			private static string _newLine = "\n\n";
 			private static string _standardNewLine = "\n";
+			public static MessageType? HighestMessageType = null;
+
 			static void AddText(string text, string color = "white")
 			{
 				_text += $"%{{color:{color}}}{text}%";
@@ -57,7 +59,7 @@ namespace NMS_EnglishAlienWordsMod_Avalonia.Logic
 				return temp;
 			}
 					
-			public enum MessageType { Info, Warn, Error, Good }
+			public enum MessageType { Info, Good, Warn, Error }
 			public static void AddText(string message, MessageType type = MessageType.Info)
 			{
 				if (type == MessageType.Info)
@@ -68,6 +70,8 @@ namespace NMS_EnglishAlienWordsMod_Avalonia.Logic
 						MessageType.Error => "red",
 						MessageType.Good => "green",
 						_ => "white" } );
+
+				if (HighestMessageType == null || type > HighestMessageType) HighestMessageType = type;
 			}
 			public static void AddLine(string message, MessageType type = MessageType.Info)
 			{
@@ -75,19 +79,29 @@ namespace NMS_EnglishAlienWordsMod_Avalonia.Logic
 				_text += _standardNewLine;
 			}
 
-			public static void AddLine(Exception exception) => 
-				AddLine(ExceptionToMarkdown(exception), MessageType.Error);
+			public static void AddLine(Exception exception) 
+			{
+				_text += ExceptionToMarkdown(exception);
+				if (HighestMessageType == null || MessageType.Error > HighestMessageType) HighestMessageType = MessageType.Error;
+			}
 
+			/// <summary>
+			/// Can't work with colors
+			/// </summary>
+			/// <param name="exception"></param>
+			/// <returns></returns>
 			private static string ExceptionToMarkdown(Exception exception)
 			{
 				 return $@"
 <details>
 <summary>{exception.Message}</summary>
-	<details>
-	<summary>Stack Trace</summary>
-	{exception.StackTrace}
-	</details>
-	{(exception.InnerException != null ? $"<details><summary>Inner Exception</summary>{ExceptionToMarkdown(exception.InnerException)}</details>" : "")}
+<details>
+<summary>Stack Trace</summary>
+```cs
+{exception.StackTrace}
+```
+</details>
+{(exception.InnerException != null ? $"<details><summary>Inner Exception</summary>{ExceptionToMarkdown(exception.InnerException)}</details>" : "")}
 </details>
 ";
 

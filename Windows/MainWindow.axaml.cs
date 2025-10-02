@@ -15,13 +15,11 @@ namespace NMS_EnglishAlienWordsMod_Avalonia
 {
 	public partial class MainWindow : Window
 	{
-		private MainWindowViewModel _vm;
+		private MainWindowViewModel _vm = new();
 
 		public MainWindow()
 		{
-			InitializeComponent();	
-			
-			DataContext = AppGlobals.SettingsModel;
+			InitializeComponent();
 		}
 
 		#region Window Events
@@ -68,9 +66,9 @@ namespace NMS_EnglishAlienWordsMod_Avalonia
 		//. Initializes everything. What do you mean it's not how you name methods??
 		private async Task InitializeEverything()
 		{
+			InitializeViewModel();
 			InitializeDebugTools();
 			CreateErrorDialogHost();
-			InitializeViewModel();
 			SetWindowMinSize();
 			ClearConsole();
 		}
@@ -99,7 +97,6 @@ namespace NMS_EnglishAlienWordsMod_Avalonia
 
 		private void InitializeViewModel()
 		{
-			_vm = new MainWindowViewModel();
 			DataContext = _vm;
 			_vm.IsDownloadingMbinc = false;
 			_vm.IsLoadingVersionList = false;
@@ -112,12 +109,6 @@ namespace NMS_EnglishAlienWordsMod_Avalonia
 			this.MinHeight = 183;
 		}
 
-		private void ClearConsole()
-		{
-			//#if  !DEBUG
-			Console.Markdown = "";
-			//#endif
-		}
 
 		#endregion Initialization Methods
 
@@ -130,24 +121,21 @@ namespace NMS_EnglishAlienWordsMod_Avalonia
 		private CancellationTokenSource? _cts;
 		private async void ButtonCreate_Click(object? sender, RoutedEventArgs e)
 		{
-			Console.Markdown = "";
 			_cts = new CancellationTokenSource();
 			Task modCreation = Task.CompletedTask;
+			ClearConsole();
 
 			var progress = new Progress<ProgressReport>(report =>
 			{
 				if (report.Percent.HasValue)
 					_vm.Progress = report.Percent.Value;
 				else if (report.Increment.HasValue)
-					_vm.Progress = Math.Clamp(_vm.Progress + report.Increment.Value, 0, 100);
+					_vm.Progress = Math.Clamp(_vm.Progress + report.Increment.Value, 0, (int)ProgressBar.Maximum);
 
 				if (!string.IsNullOrEmpty(report.Message))
 					_vm.ProgressText = report.Message;
 
-				var chunk = AppGlobals.MessageBuffer.GetAndClear();
-				if (!string.IsNullOrEmpty(chunk))
-					Console.Markdown += chunk;
-
+				UpdateConsole();
 			});
 
 			try {
@@ -163,7 +151,7 @@ namespace NMS_EnglishAlienWordsMod_Avalonia
 						await MbinCompilerManager.DownloadAsync(MbincSelectedVersion.VersionName, MbincSelectedVersion.DownloadUri);
 					}
 					catch(Exception ex) {
-						_vm.ShowErrorMessage?.Invoke($"Failed to download MBINCompiler: {ex.Message}");
+						ConsoleWriteError(ex);
 					}
 					finally {
 						_vm.IsDownloadingMbinc = false;
@@ -177,7 +165,7 @@ namespace NMS_EnglishAlienWordsMod_Avalonia
 
 			} catch (Exception ex) {
 				_vm.IsDownloadingMbinc = false;
-				AppGlobals.MessageBuffer.AddLine(ex);
+				ConsoleWriteError(ex);
 				AppGlobals.ErrorWindow = new() { Message = $"Error: {ex.Message}", ButtonText = "Ok" };
 
 			}
@@ -186,14 +174,23 @@ namespace NMS_EnglishAlienWordsMod_Avalonia
 					await modCreation;
 				}
 				catch (OperationCanceledException) {
-					AppGlobals.MessageBuffer.AddLine("Cancelled");
+					AppGlobals.MessageBuffer.AddLine("Cancelled", AppGlobals.MessageBuffer.MessageType.Error);
 				}
 				catch (Exception ex) {
-					AppGlobals.MessageBuffer.AddLine($"Error: {ex.Message}");
+					ConsoleWriteError(ex);
 				}
-				Console.Markdown += AppGlobals.MessageBuffer.GetAndClear();
+				UpdateConsole();
 
 				await Task.Run(async () => {await AppGlobals.ShowError();});
+				_vm.ProgressText = AppGlobals.MessageBuffer.HighestMessageType switch
+				{
+					null => "Done",
+					AppGlobals.MessageBuffer.MessageType.Info => "Completed",
+					AppGlobals.MessageBuffer.MessageType.Good => "Completed successfully",
+					AppGlobals.MessageBuffer.MessageType.Warn => "Completed with warnings",
+					AppGlobals.MessageBuffer.MessageType.Error => "Error occurred",
+					_ => "Done"
+				};
 			}
 		}
 
@@ -212,7 +209,34 @@ namespace NMS_EnglishAlienWordsMod_Avalonia
 
 		#region Window methods
 
+		/// <summary>
+		/// Updates the console with new messages from the message buffer and adjusts the progress state based on the highest message type.
+		/// </summary>
+		public void UpdateConsole()
+		{
+			var chunk = AppGlobals.MessageBuffer.GetAndClear();
+			if (!string.IsNullOrEmpty(chunk))
+				Console.Markdown += chunk;
 
+			_vm.ProgressState = AppGlobals.MessageBuffer.HighestMessageType switch
+			{
+				AppGlobals.MessageBuffer.MessageType.Good => ProgressSuccessState.Success,
+				AppGlobals.MessageBuffer.MessageType.Warn => ProgressSuccessState.Warning,
+				AppGlobals.MessageBuffer.MessageType.Error => ProgressSuccessState.Error,
+				_ => ProgressSuccessState.Unset
+			};
+		}
+
+		public void ClearConsole()
+		{
+			Console.Markdown = "";
+			AppGlobals.MessageBuffer.HighestMessageType = null;
+		}
+
+		public void ConsoleWriteError(Exception ex)
+		{
+			AppGlobals.MessageBuffer.AddLine(ex);
+		}
 
 		#endregion Window methods
 		private VersionItem MbincSelectedVersion => ((cbMBINCompilerVersion.SelectedItem) as VersionItem);
