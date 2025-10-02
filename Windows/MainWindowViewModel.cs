@@ -5,12 +5,14 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Titanium;
+using Tmds.DBus.Protocol;
 
 
 namespace NMS_EnglishAlienWordsMod_Avalonia.Windows
@@ -29,6 +31,14 @@ namespace NMS_EnglishAlienWordsMod_Avalonia.Windows
 		{
 			// Если нужно, можно инициализировать коллекции, флаги и прочее
 			VersionList = new ObservableCollection<VersionItem>();
+			Settings.PropertyChanged += Settings_PropertyChanged;
+		}
+
+		private void Settings_PropertyChanged(object? sender, PropertyChangedEventArgs e)
+		{
+			if (e.PropertyName == nameof(Settings.NoMansSkyGamePath)) {
+				OnPropertyChanged(nameof(ButtonEnabled));
+			}
 		}
 
 		public event PropertyChangedEventHandler? PropertyChanged;
@@ -45,15 +55,24 @@ namespace NMS_EnglishAlienWordsMod_Avalonia.Windows
 		public string CreateButtonText => IsDownloadingMbinc ? "Downloading..." :
 										  SelectedVersion == null ? "Select MBINCompiler version" :
 										  MbinCompilerManager.IsDownloaded(SelectedVersion.VersionName) ? "Create mod" : "Download MBINCompiler";
-		public bool ButtonActive => SelectedVersion != null && isGamePathValid;
-		private bool isGamePathValid => !Validator.TryValidateProperty(
-		AppGlobals.CurrentSettings.NoMansSkyGamePath,
-		new ValidationContext(AppGlobals.CurrentSettings) { MemberName = nameof(AppGlobals.CurrentSettings.NoMansSkyGamePath) },
-		new List<ValidationResult>());
+		public bool ButtonEnabled => SelectedVersion != null && (isGamePathValid || !MbinCompilerManager.IsDownloaded(SelectedVersion.VersionName));
+		private bool isGamePathValid
+		{
+			get
+			{
+				var results = new List<ValidationResult>();
+				bool isValid = Validator.TryValidateProperty(
+					Settings.NoMansSkyGamePath,
+					new ValidationContext(Settings) { MemberName = nameof(Settings.NoMansSkyGamePath) },
+					results);
+
+				return isValid;
+			}
+		}
 
 
 		public SettingsObject Settings  => AppGlobals.CurrentSettings;
-
+		
 		private int _progress;
 		public int Progress
 		{
@@ -63,7 +82,7 @@ namespace NMS_EnglishAlienWordsMod_Avalonia.Windows
 				if (_progress != value)
 				{
 					_progress = value;
-					OnPropertyChanged(nameof(Progress));
+					OnPropertyChanged();
 					OnPropertyChanged(nameof(IsProgressbarVisible));
 				}
 			}
@@ -78,7 +97,7 @@ namespace NMS_EnglishAlienWordsMod_Avalonia.Windows
 				if (_progressText != value)
 				{
 					_progressText = value;
-					OnPropertyChanged(nameof(ProgressText));
+					OnPropertyChanged();
 				}
 			}
 		}
@@ -91,7 +110,7 @@ namespace NMS_EnglishAlienWordsMod_Avalonia.Windows
 			{
 				if (_progressState != value) {
 					_progressState = value;
-					OnPropertyChanged(nameof(ProgressState));
+					OnPropertyChanged();
 				}
 			}
 		}
@@ -102,17 +121,18 @@ namespace NMS_EnglishAlienWordsMod_Avalonia.Windows
 
 
 		#region Version droplist
-		public ObservableCollection<VersionItem> VersionList { get; } = new();
-				private VersionItem _selectedVersion;
-		public VersionItem SelectedVersion
+		public ObservableCollection<VersionItem> VersionList { get; private set; } = new();
+		private VersionItem? _selectedVersion;
+		public VersionItem? SelectedVersion
 		{
 			get => _selectedVersion;
 			set
 			{
 				if (_selectedVersion != value) {
 					_selectedVersion = value;
-					OnPropertyChanged(nameof(SelectedVersion));
+					OnPropertyChanged();
 					OnPropertyChanged(nameof(CreateButtonText));
+					OnPropertyChanged(nameof(ButtonEnabled));
 				}
 			}
 		}
@@ -121,6 +141,7 @@ namespace NMS_EnglishAlienWordsMod_Avalonia.Windows
 			public string VersionName { get; set; }
 			public string DownloadUri { get; set; }
 			public AvailabilityStatus FileAvailabilityStatus { get; set; }
+			public bool CanBeDeleted => FileAvailabilityStatus is AvailabilityStatus.Downloaded or AvailabilityStatus.LocalOnly;
 
 			public VersionItem(string versionName, string downloadUri, AvailabilityStatus fileAvailabilityStatus)
 			{
@@ -133,17 +154,29 @@ namespace NMS_EnglishAlienWordsMod_Avalonia.Windows
 
 		public enum AvailabilityStatus
 		{
-			Unset, //. Just in case, should not be used
-			NotDownloaded, //. Version avaible on Github, not downloaded
-			Downloaded, //. Version avaible on Github, downloaded
-			LocalOnly, //. Version not avaible on Github, only locally
+			/// <summary>
+			/// Just in case, should not be used
+			/// </summary>
+			Unset,
+			/// <summary>
+			/// Version avaible on Github, but not locally (not downloaded)
+			/// </summary>
+			NotDownloaded,
+			/// <summary>
+			/// Version avaible on Github and locally (downloaded)
+			/// </summary>
+			Downloaded,
+			/// <summary>
+			/// Version not avaible on Github, only locally
+			/// </summary>
+			LocalOnly,
 		}
 
 		/// <summary>
 		/// Adds a new version or updates the availability status of an existing version.
 		/// </summary>
 		/// <param name="newItem"></param>
-		public void AddOrUpdateVersion(VersionItem newItem)
+		private void AddOrUpdateVersion(VersionItem newItem)
 		{
 			//if (VersionList == null) VersionList = new ObservableCollection<VersionItem>();
 
@@ -173,6 +206,41 @@ namespace NMS_EnglishAlienWordsMod_Avalonia.Windows
 
 			}
 		}
+
+		/// <summary>
+		/// Removes a version locally and handles corresponding UI updates.
+		/// </summary>
+		/// <param name="item">version that should be deleted. Should be VersionList's item</param>
+		/// <exception cref="Exception"></exception>
+		public void RemoveVersion(VersionItem item)
+		{
+			if (item == null || !item.CanBeDeleted) return;
+
+			var currentItem = VersionList.FirstOrDefault(item);
+			if (currentItem == null) throw new Exception("View model error: trying to delete a version that is not in the list");
+
+			try {
+				
+
+				MbinCompilerManager.DeleteVersion(item.VersionName);
+
+				//! Change availability status or remove from list
+				if (currentItem.FileAvailabilityStatus == AvailabilityStatus.Downloaded) //. if it's avaible online, it shouldn't be removed from list
+					currentItem.FileAvailabilityStatus = AvailabilityStatus.NotDownloaded;
+				else if(currentItem.FileAvailabilityStatus == AvailabilityStatus.LocalOnly)
+					VersionList.Remove(currentItem);
+				else
+					throw new Exception("View movel error: trying to delete a version that is not marked as existing");
+
+				RefreshReleasesAsync();
+
+				if (SelectedVersion == currentItem)
+					SelectedVersion = null;
+			}
+			catch (Exception ex) {
+				throw new Exception($"Error deleting MBINCompiler version {currentItem.VersionName}: {ex.Message}", ex);
+			}
+		}
 		#endregion Version droplist
 
 
@@ -186,7 +254,7 @@ namespace NMS_EnglishAlienWordsMod_Avalonia.Windows
 			{
 				if (_isLoadingVersionList != value) {
 					_isLoadingVersionList = value;
-					OnPropertyChanged(nameof(IsLoadingVersionList));
+					OnPropertyChanged();
 					OnPropertyChanged(nameof(CreateButtonText));
 				}
 			}
@@ -202,7 +270,7 @@ namespace NMS_EnglishAlienWordsMod_Avalonia.Windows
 			{
 				if (_isDownloadingMbinc != value) {
 					_isDownloadingMbinc = value;
-					OnPropertyChanged(nameof(IsDownloadingMbinc));
+					OnPropertyChanged();
 					OnPropertyChanged(nameof(CreateButtonText));
 				}
 			}
@@ -214,32 +282,37 @@ namespace NMS_EnglishAlienWordsMod_Avalonia.Windows
 		// Manages the content of cbMBINCompilerVersion combobox, serialization, interface-only. Release contents version and assets download link
 		#region Release management
 		private static string MBINCompilerReleasesFilePath = "MBINCompilerReleases.json";
-		public async Task GetReleasesAsync()
+		public async Task RefreshReleasesAsync(bool getUpdates = false)
 		{
-			await LoadReleasesFromFileAsync();
-			if (VersionList == null || VersionList.Count == 0) {
-				await UpdateReleasesOnlineAsync();
-			}
+			VersionList = new();
 
+			if(!getUpdates)
+				await LoadOnlineReleasesFromFileAsync();
+
+			if ( VersionList == null || VersionList.Count == 0)
+				await UpdateReleasesOnlineAsync();
+
+			await UpdateReleasesLocalAsync();
 		}
 		// Updates the list of MBINCompiler releases versions from GitHub and saves it to a local file.
-		public async Task UpdateReleasesOnlineAsync()
+		private async Task UpdateReleasesOnlineAsync()
 		{
 			IsLoadingVersionList = true; //. UI spinner on
 			try {
 				var releases = await GitHub.GetAllReleasesAsync("monkeyman192", "MBINCompiler"); //. get release list from GitHub
-				foreach (var release in releases) {
-					AddOrUpdateVersion(
-						new VersionItem(
-					release.TagName,
-					release.Assets.Where(a => a.Name.EndsWith(AppGlobals.CurrentSettings.MbinCompilerAssetName)).FirstOrDefault()?.BrowserDownloadUrl ?? string.Empty,
+				var versionItems = releases.Select(r => new VersionItem(
+					r.TagName,
+					r.Assets.Where(a => a.Name.EndsWith(Settings.MbinCompilerAssetName)).FirstOrDefault()?.BrowserDownloadUrl ?? string.Empty,
 					AvailabilityStatus.NotDownloaded
-						)
-					);
+					)).ToList();
+
+				await SaveOnlineReleasesToFileAsync(versionItems); //. save to local file
+
+				foreach (var versionItem in versionItems) {
+					AddOrUpdateVersion(versionItem);
 
 				}
 				OnPropertyChanged(nameof(VersionList)); //. notify UI of change
-				await SaveReleasesToFileAsync(); //. save to local file
 			}
 			catch (Exception ex) {
 				SingleActionDialog dialog = new() { Message = $"Error getting MBINCompiler versions: {ex.Message}", ButtonText = "Ok" };
@@ -250,8 +323,7 @@ namespace NMS_EnglishAlienWordsMod_Avalonia.Windows
 				IsLoadingVersionList = false; //. UI spinner off
 			}
 		}
-
-		public async Task UpdateReleasesLocalAsync()
+		private async Task UpdateReleasesLocalAsync()
 		{
 			List<VersionItem> localReleases = MbinCompilerManager.GetLocalVersions();
 			localReleases.ForEach(release => AddOrUpdateVersion(release));
@@ -266,18 +338,18 @@ namespace NMS_EnglishAlienWordsMod_Avalonia.Windows
 		};
 
 		// Saves the current list of releases to a local JSON file.
-		public async Task SaveReleasesToFileAsync()
+		private async Task SaveOnlineReleasesToFileAsync(List<VersionItem> versionItems)
 		{
-			if (VersionList == null || VersionList.Count == 0)
+			if (versionItems == null || versionItems.Count == 0)
 				return;
 
 
 			using FileStream createStream = File.Create(MBINCompilerReleasesFilePath, 4096, FileOptions.Asynchronous);
-			await JsonSerializer.SerializeAsync(createStream, VersionList, jsonSerializerOptions);
+			await JsonSerializer.SerializeAsync(createStream, versionItems, jsonSerializerOptions);
 		}
 
 		// Loads the list of releases from a local JSON file.
-		public async Task LoadReleasesFromFileAsync()
+		private async Task LoadOnlineReleasesFromFileAsync()
 		{
 			try 
 			{

@@ -5,18 +5,30 @@ The program for automatically making English Alien Words mod.
 
 # How to use
 
+- Download [lastest release](https://github.com/TuTAH1/NMS-English-Alien-Words-Mod-Avalonia/releases/latest)
+- Unpack archive to any folder
+- Run `NMS-English-Alien-Words-Mod-Avalonia.exe`
+- Choose lastest (or specific for your game version) mbin compiler version. Click `Download` button.
+- Set your game's path
+- Click `Create button`
+- Wait until it's done
+- Done. The mod is already created in `Mod` folder, you can play the game.
+
+# How to update the mod
+- In case if there's some drastic changes regarding alien localization happened, you can edit mod creation parametrs in the settings (as a user). I added as much user-controlled parametrs as possible.
+
 ## Third-party tools used
 
 - [HGPAK tool](https://github.com/monkeyman192/HGPAKtool) (exe version) - for packing/unpacking .pak files
 - [MBIN Compiler](https://github.com/monkeyman192/MBINCompiler) - for compiling/decompiling .mbin files
 
-Mod weren't be possible without these tools.
+Mod wouldn't be possible without these tools.
 
 ## Requirements
 - Windows x64
 - .Net 8.0
 
-## Nu get packages
+## NuGet packages
 - Avalonia `11.3.3`
 - Avalonia.Desktop `11.3.3`
 - Avalonia.Themes.Fluent `11.3.3`
@@ -33,6 +45,7 @@ Mod weren't be possible without these tools.
 - SharpZipLib `1.4.2`
 
 
-## Limitations
+## Limitations / Known Issues
 
 - HGPAK tool needs to be updated manually (by replacing .exe file). You can get one in No Mans Sky Modding Discord server.
+- MBINCompiler may lock access on some files or ask for rewrite (despite `--quite` flag and no console window), but it only happens on repeated mod-creation without deleting the temp files

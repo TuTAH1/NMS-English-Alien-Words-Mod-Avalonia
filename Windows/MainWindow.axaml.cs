@@ -7,8 +7,10 @@ using NMS_EnglishAlienWordsMod_Avalonia.Logic;
 using NMS_EnglishAlienWordsMod_Avalonia.Windows;
 using System;
 using System.Diagnostics;
+using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
+using Tmds.DBus.Protocol;
 using static NMS_EnglishAlienWordsMod_Avalonia.Windows.MainWindowViewModel;
 
 namespace NMS_EnglishAlienWordsMod_Avalonia
@@ -39,8 +41,7 @@ namespace NMS_EnglishAlienWordsMod_Avalonia
 		{
 			try
 			{
-				await _vm.UpdateReleasesLocalAsync();
-				await _vm.GetReleasesAsync();
+				await _vm.RefreshReleasesAsync();
 			}
 			catch(Exception ex)
 			{
@@ -113,9 +114,35 @@ namespace NMS_EnglishAlienWordsMod_Avalonia
 		#endregion Initialization Methods
 
 		#region Controls Event Handlers
-		private void btnMBINC_CheckUpdates_Click(object? sender, RoutedEventArgs e)
+		private async void btnMBINC_CheckUpdates_Click(object? sender, RoutedEventArgs e)
 		{
-			_vm.UpdateReleasesOnlineAsync();
+			await _vm.RefreshReleasesAsync(true);
+		}
+
+		private void btnMBINC_Delete_Click(object? sender, RoutedEventArgs e)
+		{
+			if (MbincSelectedVersion != null && MbinCompilerManager.IsDownloaded(MbincSelectedVersion.VersionName))
+			{
+				try
+				{
+					var selectedVersion = MbincSelectedVersion;
+					cbMBINCompilerVersion.SelectedItem = null;
+					_vm.RemoveVersion(selectedVersion);
+
+
+
+					MbinCompilerManager.DeleteVersion(selectedVersion.VersionName);
+					AppGlobals.MessageBuffer.AddLine($"Deleted MBINCompiler version {selectedVersion.VersionName}", AppGlobals.MessageBuffer.MessageType.Good);
+					UpdateConsole();
+					
+					ComboboxMBINCompilerVersion_SelectionChanged(null, null);
+				}
+				catch(Exception ex)
+				{
+					ConsoleWriteError(ex);
+					UpdateConsole();
+				}
+			}
 		}
 
 		private CancellationTokenSource? _cts;
@@ -149,6 +176,7 @@ namespace NMS_EnglishAlienWordsMod_Avalonia
 					try {
 						_vm.IsDownloadingMbinc = true;
 						await MbinCompilerManager.DownloadAsync(MbincSelectedVersion.VersionName, MbincSelectedVersion.DownloadUri);
+						_vm.RefreshReleasesAsync();
 					}
 					catch(Exception ex) {
 						ConsoleWriteError(ex);
@@ -158,7 +186,7 @@ namespace NMS_EnglishAlienWordsMod_Avalonia
 					}
 					return;
 				}
-				AppGlobals.Mbinc = new MbinCompilerManager { Version = MbincSelectedVersion.VersionName };
+		
 
 				//### Creating mod
 				modCreation = Mod.Create(progress, _cts.Token);
@@ -202,7 +230,7 @@ namespace NMS_EnglishAlienWordsMod_Avalonia
 
 		private void ComboboxMBINCompilerVersion_SelectionChanged(object? sender, SelectionChangedEventArgs e)
 		{
-			btnCreate.IsEnabled = MbincSelectedVersion != null;
+			AppGlobals.Mbinc = MbincSelectedVersion is null? null : new MbinCompilerManager { Version = MbincSelectedVersion.VersionName };
 		}
 
 		#endregion ControlsEventHandlers
@@ -212,7 +240,7 @@ namespace NMS_EnglishAlienWordsMod_Avalonia
 		/// <summary>
 		/// Updates the console with new messages from the message buffer and adjusts the progress state based on the highest message type.
 		/// </summary>
-		public void UpdateConsole()
+		private void UpdateConsole()
 		{
 			var chunk = AppGlobals.MessageBuffer.GetAndClear();
 			if (!string.IsNullOrEmpty(chunk))
@@ -227,13 +255,13 @@ namespace NMS_EnglishAlienWordsMod_Avalonia
 			};
 		}
 
-		public void ClearConsole()
+		private void ClearConsole()
 		{
 			Console.Markdown = "";
 			AppGlobals.MessageBuffer.HighestMessageType = null;
 		}
 
-		public void ConsoleWriteError(Exception ex)
+		private void ConsoleWriteError(Exception ex)
 		{
 			AppGlobals.MessageBuffer.AddLine(ex);
 		}

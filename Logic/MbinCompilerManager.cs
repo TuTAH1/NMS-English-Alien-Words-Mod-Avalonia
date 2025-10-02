@@ -71,5 +71,14 @@ namespace NMS_EnglishAlienWordsMod_Avalonia.Logic
 			}
 			return versions;
 		}
+
+		public static void DeleteVersion(string version)
+		{
+			string path = $"{MbinCompilerPath}{version}";
+			if (Directory.Exists(path))
+			{
+				Directory.Delete(path, true);
+			}
+		}
 	}
 }

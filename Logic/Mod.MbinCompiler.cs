@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Avalonia.Controls.Shapes;
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -16,7 +17,7 @@ namespace NMS_EnglishAlienWordsMod_Avalonia.Logic
 		/// </summary>
 		private static class MbinCompiler
 		{
-			public static string TargetDirectoryPath => AppGlobals.CurrentSettings.MbinTargetDirectoryPath;
+			internal static string TargetDirectoryPath => AppGlobals.CurrentSettings.MbinTargetDirectoryPath;
 			private static ProcessStartInfo toolStartInfo = new ProcessStartInfo()
 			{
 				FileName = AppGlobals.Mbinc!.ExePath,
@@ -26,7 +27,7 @@ namespace NMS_EnglishAlienWordsMod_Avalonia.Logic
 				UseShellExecute = false,
 				CreateNoWindow = true
 			};
-			public static async Task UnpackAllMbins()
+			internal static async Task UnpackAllMbins()
 			{
 				await Task.Run(async () => 
 				{
@@ -36,19 +37,24 @@ namespace NMS_EnglishAlienWordsMod_Avalonia.Logic
 					//? Check if there's mbin files in specified location
 					if(!Directory.Exists(TargetDirectoryPath) || !Directory.EnumerateFiles(TargetDirectoryPath, "*.mbin", SearchOption.AllDirectories).Any())
 						throw new FileNotFoundException("No .mbin files found to unpack. Make sure you unpacked the pak file with HGPakTool first.");
-					toolStartInfo.Arguments = AppGlobals.CurrentSettings.MbinCompilerCommand; //TODO: can be moved to settings, but it requires making a method for replacing keywords with settings variables 
+					toolStartInfo.Arguments = AppGlobals.CurrentSettings.MbinCompilerCommandTemplate
+												.Replace("{TargetDirectoryPath}", TargetDirectoryPath);
 					var process = Process.Start(toolStartInfo)!;
 			
 					await LogProcessAsync(process, 30);
 
-					
-					if (!AppGlobals.CurrentSettings.CleanMbinsAfterConverting) return;
-					//: Clean up .mbin files after unpacking
-					var mbinFiles = Directory.GetFiles(TargetDirectoryPath, "*.mbin", SearchOption.AllDirectories);
-					foreach (var file in mbinFiles)
-						File.Delete(file);
-					
+					CleanMbins();
 				});
+			}
+
+			internal static void CleanMbins(bool ignoreChecks = false)
+			{
+				if (!ignoreChecks && !AppGlobals.CurrentSettings.CleanMbinsAfterConverting) return;
+				//: Clean up .mbin files after unpacking
+				var mbinFiles = Directory.GetFiles(TargetDirectoryPath, "*.mbin", SearchOption.AllDirectories);
+				foreach (var file in mbinFiles)
+					 File.Delete(file);
+
 			}
 		}
 }

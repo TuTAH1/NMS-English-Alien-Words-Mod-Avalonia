@@ -156,6 +156,11 @@ namespace NMS_EnglishAlienWordsMod_Avalonia.Windows
 		//. For unpacking pak file
 
 		[Category("HGPAK tool")]
+		[DisplayName("Clean filelists")]
+		[Description("Removes filelist and filteredFilelist files after use")]
+
+		public bool CleanFilelists {get; set; } = true;
+		[Category("HGPAK tool")]
 		[DisplayName("Target Pak's Path")]
 		[Description("Path to the folder, containing target pak file.")]
 		public string PakTargetPath { get; set; } = "GAMEDATA\\PCBANKS\\";
@@ -199,9 +204,9 @@ namespace NMS_EnglishAlienWordsMod_Avalonia.Windows
 		[Category("Mbin compiler")]
 		[DisplayName("MBIN Compiler command template")]
 		[Description("Command line template for MBIN Compiler. {TargetDirectoryPath} will be replaced with actual path to the folder containing mbin files to unpack")]
-		public string MbinCompilerCommand 
+		public string MbinCompilerCommandTemplate 
 		{
-			get => _mbinCompilerCommand ?? "{TargetDirectoryPath} --input-format=MBIN --quiet";
+			get => _mbinCompilerCommand ?? "{TargetDirectoryPath} --input-format=MBIN --quite";
 			set => _mbinCompilerCommand = value;
 		}
 		private string _mbinCompilerCommand;
@@ -211,9 +216,9 @@ namespace NMS_EnglishAlienWordsMod_Avalonia.Windows
 		//. For creating mod files by analyzing .xml language files
 
 		[Category("Xml composer")]
-		[DisplayName("Clean all files after converting")]
-		[Description("If true, deletes all NomesEnalwomo files after creating a mod")]
-		public bool CleanAllFilesAfterConverting { get; set; } = true;
+		[DisplayName("Clean all mxml files after converting")]
+		[Description("If true, deletes all .mxml files after creating a mod")]
+		public bool CleanMxmlFiles { get; set; } = true;
 
 		[ValidateRegex]
 		[Category("Xml composer")]

@@ -153,11 +153,31 @@ namespace NMS_EnglishAlienWordsMod_Avalonia.Logic
 					await AddProgressMessage("Saving mxml file", 6);
 					await File.WriteAllTextAsync(filePath, MxmlContent);
 					AppGlobals.MessageBuffer.AddLine($"File saved successfully to {filePath}", AppGlobals.MessageBuffer.MessageType.Good);
+					CleanMxmlFiles();
 				}
 				catch (Exception ex) {
 					throw new Exception($"Failed to save file to {filePath}", ex);
 				}
 
+			}
+
+			//internal static void CleanFiles(bool ignoreChecks = false)
+			//{
+			//	if (!ignoreChecks && !AppGlobals.CurrentSettings.CleanMxmlFiles) return;
+
+			//	try {Titanium.IO.RemoveAll(Path.Combine(MbinCompiler.TargetDirectoryPath)); } catch (Exception) { }
+			//	try {MbinCompiler.CleanMbins(true); } catch (Exception) { }
+			//	try {HgpakTool.Clean(true); } catch (Exception) { }
+
+			//}
+
+			private static void CleanMxmlFiles(bool ignoreChecks = false)
+			{
+				if (!ignoreChecks && !AppGlobals.CurrentSettings.CleanMxmlFiles) return;
+
+				var mbinFiles = Directory.GetFiles(MbinCompiler.TargetDirectoryPath, "*.mbin", SearchOption.AllDirectories);
+				foreach (var file in mbinFiles)
+					File.Delete(file);
 			}
 		}
 	}

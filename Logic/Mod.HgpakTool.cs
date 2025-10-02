@@ -24,6 +24,7 @@ namespace NMS_EnglishAlienWordsMod_Avalonia.Logic
 			static string toolFullPath = Path.Combine(workingDir, toolPath);
 			static string filelistJsonPath = $"{workingDir}/filenames.json";
 			static string filteredFilelistJsonName = $"FilteredFilenames.json";
+			static string filteredFilelistJsonPath = $"{workingDir}/{filteredFilelistJsonName}";
 			static ProcessStartInfo toolStartInfo = new ProcessStartInfo()
 			{
 				FileName = toolFullPath,
@@ -39,7 +40,7 @@ namespace NMS_EnglishAlienWordsMod_Avalonia.Logic
 			/// </summary>
 			/// <returns></returns>
 			/// <exception cref="FileNotFoundException"></exception>
-			public static async Task ListPakContents()
+			internal static async Task ListPakContents()
 			{
 				await Task.Run(async () => 
 				{
@@ -61,7 +62,7 @@ namespace NMS_EnglishAlienWordsMod_Avalonia.Logic
 			/// <exception cref="NullReferenceException">filenames.json wasn't deserialized correctly</exception>
 
 			/// <exception cref="Exception"></exception>
-			public static async Task CreateFilteredJsonFilelist()
+			internal static async Task CreateFilteredJsonFilelist()
 			{
 				await Task.Run(async () => 
 				{
@@ -90,14 +91,13 @@ namespace NMS_EnglishAlienWordsMod_Avalonia.Logic
             
 						await AddProgressMessage(null, 3);
             
-						await File.WriteAllTextAsync(filteredFilelistJsonName, JsonConvert.SerializeObject(files, Formatting.Indented));
+						await File.WriteAllTextAsync(filteredFilelistJsonPath, JsonConvert.SerializeObject(files, Formatting.Indented));
 					}
 					catch (Exception ex) {
 						throw new Exception("Error while creating filteredFilenames.json", ex);
 					}
 					finally {
-						if(File.Exists(filelistJsonPath))
-							File.Delete(filelistJsonPath);
+						
 					}
 				});
 			}
@@ -107,20 +107,33 @@ namespace NMS_EnglishAlienWordsMod_Avalonia.Logic
 			/// </summary>
 			/// <returns></returns>
 			/// <exception cref="FileNotFoundException">HGPakTool or filteredFilenames.json</exception>
-			public static async Task UnpackBin()
+			internal static async Task UnpackBin()
 			{
 				await Task.Run(async () => 
 				{
 					if(!File.Exists(toolFullPath))
 						throw new FileNotFoundException("HGPakTool not found.");
-					if(!File.Exists(filteredFilelistJsonName))
+					if(!File.Exists(filteredFilelistJsonPath))
 						throw new FileNotFoundException("filteredFilenames.json not found. Can't unpack files without it.");
 
 					toolStartInfo.Arguments = $"-j {filteredFilelistJsonName} -U \"{_pakPath}\"";
 					var process = Process.Start(toolStartInfo)!;
 			
 					await LogProcessAsync(process, 10);
+
+					Clean();
 				});
+			}
+
+			internal static void Clean(bool ignoreChecks = false)
+			{
+				if (!ignoreChecks && !AppGlobals.CurrentSettings.CleanFilelists) return;
+
+				if (File.Exists(filelistJsonPath))
+					File.Delete(filelistJsonPath);
+
+				if (File.Exists(filteredFilelistJsonPath))
+					File.Delete(filteredFilelistJsonPath);
 			}
 		}
 }
