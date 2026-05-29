@@ -31,9 +31,9 @@ Mod wouldn't be possible without these tools.
 - Avalonia.Desktop `11.3.3`
 - Avalonia.Themes.Fluent `11.3.3`
 - Avalonia.Fonts.Inter `11.3.3`
-- Avalonia.Diagnostics `11.3.3` *(doesn't encluded in release build)*
+- Avalonia.Diagnostics `11.3.3` *(doesn't included in release build)*
 - AvaloniaDialogs `3.6.1`
-- bodong.Avalonia.PropertyGrid `11.3.3.2` *(Special thanks for this usefull lib that make creating settings interface almost automatic)*
+- bodong.Avalonia.PropertyGrid `11.3.3.2` *(Special thanks for this useful lib that make creating settings interface almost automatic)*
 - CommunityToolkit.Mvvm `8.4.0`
 - FluentAvaloniaUI `2.2.0`
 - LoadingIndicators.Avalonia `11.0.11.1`
