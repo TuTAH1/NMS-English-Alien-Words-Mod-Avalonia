@@ -1,8 +1,6 @@
 # NMS-English-Alien-Words-Mod-Avalonia
 The program for automatically making English Alien Words mod. 
 
-**WIP**
-
 # How to use
 
 - Download [lastest release](https://github.com/TuTAH1/NMS-English-Alien-Words-Mod-Avalonia/releases/latest)
